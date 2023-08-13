@@ -1,0 +1,33 @@
+ns#monthlyFee	monthly fee	200
+ns#monthlyFee	periodic charge	80
+ns#monthlyFee	routine cost	70
+ns#monthlyFee	regular payment	90
+ns#networkTraffic	data allowance	200
+ns#networkTraffic	data usage	200
+ns#networkTraffic	data limit	200
+ns#networkTraffic	internet volume	200
+ns#networkTraffic	internet data	200
+ns#networkTraffic	data options	200
+ns#networkTraffic	network data	200
+ns#networkTraffic	data volume	85
+ns#networkTraffic	internet usage	90
+ns#networkTraffic	bandwidth usage	75
+ns#exceedInternet	exceeding the network usage	200
+ns#exceedInternet	exceeding network usage	200
+ns#exceedInternet	surpass network limit	90
+ns#exceedInternet	breach data cap	80
+ns#exceedInternet	go beyond data allowance	75
+ns#hotspotTraffic	hotspot data	200
+ns#hotspotTraffic	hotspot data limit	200
+ns#hotspotTraffic	hotspot usage	90
+ns#hotspotTraffic	tethering data	85
+ns#hotspotTraffic	mobile hotspot volume	80
+ns#in-networkCall	intra-network calls	200
+ns#in-networkCall	intra-network call time	200
+ns#in-networkCall	within network calls	90
+ns#in-networkCall	calls within same network	80
+ns#in-networkCall	same network call duration	75
+ns#localCall	local call time 200
+ns#localCall	domestic call duration	85
+ns#localCall	call time within the region	75
+ns#localCall	local call duration	80

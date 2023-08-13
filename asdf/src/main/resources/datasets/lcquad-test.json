@@ -1,0 +1,1749 @@
+[
+  {
+    "_id": "0",
+    "corrected_question": "What is the duration of the fourG phone purchase 999 plan?",
+    "intermediary_question": "What is the <architect> of the <Marine Corps Air Station Kaneohe Bay> and <tenant> of the <New Sanno Hotel>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?duration WHERE {  <http://cht.data.org/fourg_purchase/999> <http://example.com/ns#duration> ?duration. }",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "1",
+    "corrected_question": "Could you please clarify the exceed internet amount of the fiveG single number 1399 plan?",
+    "intermediary_question": "What is the <faith> of the <political parties> whose <international> is <Muslim Brotherhood>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?exceed_internet WHERE {   <http://cht.data.org/fiveg_single-number/1399> <http://example.com/ns#exceed_internet> ?exceed_internet. }",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "2",
+    "corrected_question": "What is the discount of the fourG phone purchase 799 plan?",
+    "intermediary_question": "What is the <developed by> of the <Google Videos> and <written by> of the <Google Web Toolkit>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?discount WHERE { <http://cht.data.org/fourg_purchase/799> <http://example.com/ns#discount> ?discount. }",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "3",
+    "corrected_question": "How much is the data allowance in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <known for> of the <Sam Loyd> and <Eric Schiller>",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?item ?internet_Amount    WHERE {      ?item rdf:type <http://class.com/cl#fiveg_purchase>.      ?item :network_traffic ?internet_Amount.}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "4",
+    "corrected_question": "What are the hotspot data options in the fiveG phone purchase plan?",
+    "intermediary_question": "Is <Peter Piper Pizza> the <field of exercise> of <Pizza>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?item ?hotspot    WHERE {      ?item rdf:type <http://class.com/cl#fiveg_purchase>.      ?item :hotspot_traffic ?hotspot.    }",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "5",
+    "corrected_question": "What services are included in the in-network calls of the fiveG phone purchase plan?",
+    "intermediary_question": "Who is the <associated band> of the <Joe Pass> and <Artist> of the <Dream Dancing (album)>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?item ?incall    WHERE {      ?item rdf:type <http://class.com/cl#fiveg_purchase>.      ?item :in-network_call ?incall.    }",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "6",
+    "corrected_question": "What is the local call amount of the fourG single number 999 plan?",
+    "intermediary_question": "What is the <office holder> whose <deputies> are <Neil Brown (Australian politician)> and <Andrew Peacock>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?local_call WHERE {  <http://cht.data.org/fourg_single-number/999> <http://example.com/ns#local_call> ?local_call. }",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "7",
+    "corrected_question": "Does fiveG single number 1199 plan have fourG high speed unlimit of exceed internet?",
+    "intermediary_question": "What is the <national origin> of the <Focke-Wulf Fw 260> and <Start + Flug H-101>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   ASK WHERE {<http://cht.data.org/fiveg_single-number/1199> <http://example.com/ns#exceed_internet> \"4g_high_speed_unlimit\".}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "8",
+    "corrected_question": "What is the approximate monthly fee for the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <television show> whose <producer> is <Stephen E. Ambrose> and <writer> is <Erik Jendresen>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?item ?monthlyFee    WHERE {      ?item rdf:type <http://class.com/cl#fiveg_purchase>.      ?item :monthly_fee ?monthlyFee.}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "9",
+    "corrected_question": "Does fiveG single number 1199 plan have fourG high speed unlimit of exceed internet?",
+    "intermediary_question": "What is the <Artist> of the <Women in the Garden> and <L'Enfant a la tasse>",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  ASK WHERE {<http://cht.data.org/fiveg_single-number/1199> <http://example.com/ns#exceed_internet> \"4g_high_speed_unlimit\".}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "10",
+    "corrected_question": "How much is the data allowance in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <race> of the <War Of Attrition (horse)> and <Fergie Sutherland>",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?item ?internet_Amount    WHERE {      ?item rdf:type <http://class.com/cl#fiveg_purchase>.      ?item :network_traffic ?internet_Amount. }",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "11",
+    "corrected_question": "What are the hotspot data options in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <television show> whose <Artist> is <Christopher Franke> and <network> is <Prime Time Entertainment Network>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?hotspot WHERE {  ?item rdf:type <http://class.com/cl#fiveg_purchase>.  ?item :hotspot_traffic ?hotspot.}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "12",
+    "corrected_question": "Are the in-network calls in the fiveG phone purchase plan unlimited?",
+    "intermediary_question": "How many other <battles> are there of the <military people> whose <battles> is <World War II> ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?incall WHERE {  ?item rdf:type <http://class.com/cl#fiveg_purchase>.  ?item :in-network_call ?incall.}",
+    "sparql_template_id": 111
+  },
+  {
+    "_id": "13",
+    "corrected_question": "Are the local calls in the fiveG phone purchase plan free?",
+    "intermediary_question": "What are the <television shows> whose <network>'s <parent organisation> is <Comcast>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?city_phone WHERE {  ?item rdf:type <http://class.com/cl#fiveg_purchase>.  ?item :local_call ?city_phone.}",
+    "sparql_template_id": 6
+  },
+  {
+    "_id": "14",
+    "corrected_question": "Which plan costs monthly fee 399 dollars?",
+    "intermediary_question": "Is <Colorado> the <placeofburial> of <William H. Blanchard>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?plan WHERE {  ?plan <http://example.com/ns#monthly_fee> \"399\". }",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "15",
+    "corrected_question": "What is the monthly fee for the fiveG single number plan?",
+    "intermediary_question": "What is the <kind of music> of the <Battle Chess> and <sport> of the <Vishwajyot High School>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?monthlyFee WHERE {  ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :monthly_fee ?monthlyFee.    } ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "16",
+    "corrected_question": "How much is the data allowance in the fiveG single number plan?",
+    "intermediary_question": "What is the <state> of Channel District ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?internet_amount WHERE {      ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :network_traffic ?internet_amount.} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "17",
+    "corrected_question": "What are the hotspot data options in the fiveG single number plan?",
+    "intermediary_question": "Whose <missions> are <Apollo 11> and <Gemini 8>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?hotspot WHERE {  ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :hotspot_traffic ?hotspot.}",
+    "sparql_template_id": 7
+  },
+  {
+    "_id": "18",
+    "corrected_question": "What services are included in the in-network calls of the fiveG single number plan?",
+    "intermediary_question": "What is the total number of other <tenant> of the <stadia> whose <tenant> is <Raptors 905>?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?incall WHERE {   ?item rdf:type <http://class.com/cl#fiveg_single-number>.   ?item :in-network_call ?incall.}",
+    "sparql_template_id": 111
+  },
+  {
+    "_id": "19",
+    "corrected_question": "What is the network traffic of the fourG single number internet traffic 7GB?",
+    "intermediary_question": "What is the <Location> of Dzogchen Ponlop Rinpoche ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?network_traffic WHERE {  <http://cht.data.org/fourg_single-number_internet_traffic/7GB> <http://example.com/ns#network_traffic> ?network_traffic. } ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "20",
+    "corrected_question": "What is the bonus talk fee of the fiveG single number bonus 500GB?",
+    "intermediary_question": "What is the <stockholder> of the <road tunnels> whose <operator> is <Massachusetts Department of Transportation>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?bonus_talk_fee WHERE {  <http://cht.data.org/fiveg_single-number_bonus/500GB> <http://example.com/ns#bonus_talk_fee> ?bonus_talk_fee. } ",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "21",
+    "corrected_question": "What is the approximate monthly fee for the fiveG single number plan?",
+    "intermediary_question": "What is the <awards> of the <person> who is the <film director> of <Saraband> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?monthlyFee WHERE {  ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :monthly_fee ?monthlyFee.    }",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "22",
+    "corrected_question": "How much is the data allowance in the fiveG single number plan?",
+    "intermediary_question": "What is the <alma mater> of the <owl> whose <vice president> is <Enrique Jos Varona> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?internet_amount WHERE {      ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :network_traffic ?internet_amount.} ",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "23",
+    "corrected_question": "What are the hotspot data options in the fiveG single number plan?",
+    "intermediary_question": "What is the <route end> of Birmingham and Oxford Junction Railway ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?hotspot WHERE {  ?item rdf:type <http://class.com/cl#fiveg_single-number>.  ?item :hotspot_traffic ?hotspot.}",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "24",
+    "corrected_question": "Are the in-network calls in the fiveG single number plan unlimited?",
+    "intermediary_question": "What is the <origin> of the <grapes> whose <species> is <Vitis vinifera>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?incall WHERE {   ?item rdf:type <http://class.com/cl#fiveg_single-number>.   ?item :in-network_call ?incall.}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "25",
+    "corrected_question": "Are the local calls in the fiveG single number plan free?",
+    "intermediary_question": "What is the total number of <people> whose <kids>'s <deathplace> is <Indiana>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?city_phone WHERE {      ?item rdf:type <http://class.com/cl#fiveg_single-number>.   ?item :local_call ?city_phone.}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "26",
+    "corrected_question": "What is the out call amount of the fourG single number 1399 plan?",
+    "intermediary_question": "What is the <military branch> of the <William French Smith> and <branch> of the <Pierre R. Graham>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?out_call WHERE {  <http://cht.data.org/fourg_single-number/1399> <http://example.com/ns#out_call> ?out_call. } ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "27",
+    "corrected_question": "What is the monthly fee for the fourG phone purchase?",
+    "intermediary_question": "What is the <river> whose <source> is <Lake Ontario>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?item ?monthly_fee    WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.      ?item :monthly_fee ?monthly_fee.    }",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "28",
+    "corrected_question": "What are the data options for the fourG phone purchase?",
+    "intermediary_question": "What is the <location city> of the <Denver Broncos> and <place of birth> of the <Steven Clark Cunningham>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?internet_amount WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.   ?item :network_traffic ?internet_amount.} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "29",
+    "corrected_question": "What services are included in the in-network calls of the fourG phone purchase?",
+    "intermediary_question": "What is the <religion> of the <person> who is the <founded> of <Emel (magazine)> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?item ?incall    WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.      ?item :in-network_call ?incall.    }",
+    "sparql_template_id": 303
+  },
+  {
+    "_id": "30",
+    "corrected_question": "What does the local calls in the fourG phone purchase mean?",
+    "intermediary_question": "Whose <managerclubss> are <England national under-20 football team> and <England national under-21 football team>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?city_phone WHERE {  ?item rdf:type <http://class.com/cl#fourg_purchase>.  ?item :local_call ?city_phone.}",
+    "sparql_template_id": 7
+  },
+  {
+    "_id": "31",
+    "corrected_question": "What is the VOLTE information of the fiveG single number 2699 plan?",
+    "intermediary_question": "How many <cities> are there of the <sea> which is the <lake inflows> of <Fig Tree Bay> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?VOLTE WHERE {  <http://cht.data.org/fiveg_single-number/2699> <http://example.com/ns#VOLTE> ?VOLTE.}",
+    "sparql_template_id": 403
+  },
+  {
+    "_id": "32",
+    "corrected_question": "What is the approximate monthly fee for the fourG phone purchase?",
+    "intermediary_question": "Is <The Bahamas> the <archipelago> of <Blue Lagoon Island>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?item ?monthly_fee    WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.      ?item :monthly_fee ?monthly_fee.    }",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "33",
+    "corrected_question": "What are the data options for the fourG phone purchase?",
+    "intermediary_question": "What is the <movie> whose <distributed by> is <RKO Pictures> and <music composer> is <Bernard Herrmann>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?internet_amount WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.   ?item :network_traffic ?internet_amount.} ",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "34",
+    "corrected_question": "Are the in-network calls in the fourG phone purchase unlimited?",
+    "intermediary_question": "Is <One Israel> the <merged into party> of <New Way (Israel)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT ?item ?incall    WHERE {      ?item rdf:type <http://class.com/cl#fourg_purchase>.      ?item :in-network_call ?incall.    }",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "35",
+    "corrected_question": "Are the local calls in the fourG phone purchase free?",
+    "intermediary_question": "Count the number of <pole driver> of the <Grand Prixes> whose <first driver> is <Damon Hill>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?city_phone WHERE {  ?item rdf:type <http://class.com/cl#fourg_purchase>.  ?item :local_call ?city_phone.}",
+    "sparql_template_id": 405
+  },
+  {
+    "_id": "36",
+    "corrected_question": "What is the VIP type of the fiveG purchase hotspot traffic 90GB?",
+    "intermediary_question": "List the <born in> of the <jockey (horse racer)s> whose <race> is <Dubai World Cup>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?vip WHERE {  <http://cht.data.org/fiveg_purchase_hotspot_traffic/90GB> <http://example.com/ns#vip> ?vip. }",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "37",
+    "corrected_question": "What is the monthly fee for the fourG single number plan?",
+    "intermediary_question": "What is the <is owned by> of the <newspaper> whose <is founded by> is <Jawaharlal Nehru> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?monthly_fee WHERE {  ?item rdf:type <http://class.com/cl#fourg_single-number>.  ?item :monthly_fee ?onthly_fee.}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "38",
+    "corrected_question": "What is the exceed internet of the fiveG single number 1799 plan?",
+    "intermediary_question": "What is the <destinations> of the <airlines> whose <headquarters> is <United Kingdom>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>    SELECT ?exceed_internet WHERE {  <http://cht.data.org/fiveg_single-number/1799> <http://example.com/ns#exceed_internet> ?exceed_internet. }",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "39",
+    "corrected_question": "Does fiveG single number 1799 plan have free VOLTE service?",
+    "intermediary_question": "What is the <magazine> whose <founded by> is <Ralph J. Gleason>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {<http://cht.data.org/fiveg_single-number/1799> <http://example.com/ns#VOLTE> \"free\". }",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "40",
+    "corrected_question": "What is the monthly fee of the fourG single number 599 plan?",
+    "intermediary_question": "Is <Seattle> the <Ship builder> of <USS Marmora (IX-189)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?monthly_fee WHERE {  <http://cht.data.org/fourg_single-number/599> <http://example.com/ns#monthly_fee> ?monthly_fee. }",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "41",
+    "corrected_question": "What is the approximate monthly fee for the fourG single number plan?",
+    "intermediary_question": "Is <Tirana> the <largest city> of <Albania>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?monthly_fee WHERE {  ?item rdf:type <http://class.com/cl#fourg_single-number>.  ?item :monthly_fee ?onthly_fee.}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "42",
+    "corrected_question": "Are the in-network calls in the fourG single number plan unlimited?",
+    "intermediary_question": "What is the <location city> of the <beverage> which is the <related> of <Barq's> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  SELECT ?item ?in_call    WHERE {      ?item rdf:type <http://class.com/cl#fourg_single>.      ?item :in_call ?in_call.    }",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "43",
+    "corrected_question": "Are the local calls in the fourG single number plan free?",
+    "intermediary_question": "What is the <birth place> of the <astronaut> whose <mission> is <Vostok programme> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT ?item ?city_phone WHERE {  ?item rdf:type <http://class.com/cl#fourg_single-number>.  ?item :local_call ?city_phone.}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "44",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "What is the <birth place> of the <astronaut> whose <mission> is <Vostok programme> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE { ?instance rdf:type <http://class.com/cl#fiveg_phone>;:monthly_fee ?a. FILTER (xsd:integer(?a) = 500)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "45",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 50GB?",
+    "intermediary_question": "What is the <debutteam> of Whitey Wistert ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "46",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a network data limit equal to 10GB?",
+    "intermediary_question": "What is the <major shrine> of the <monarches> whose <successor> is <Dragimir of Travunia and Zachlumia>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "47",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 20GB?",
+    "intermediary_question": "How many <television shows> are there whose <channel> is <Fox Broadcasting Company>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 20)}",
+    "sparql_template_id": 401
+  },
+  {
+    "_id": "48",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call limit equal to 3 minutes?",
+    "intermediary_question": "What is the <river> whose <mouth locations> are <Arctic Ocean> and <Laptev Sea>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;      :incall ?incall.  FILTER (xsd:integer(?incall) = 3)}",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "49",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call limit equal to 20 minutes?",
+    "intermediary_question": "What are the <military conflicts> whose <commander>'s <primeminister> is <Chung Il-kwon>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#>  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>  ASK WHERE {      ?instance rdf:type <http://class.com/cl#fiveg_purchase>;               :local_call ?city_phone.      FILTER (xsd:integer(?city_phone) = 20)    }",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "50",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 999 dollars?",
+    "intermediary_question": "What is the <place of birth> of the <cleric> whose <PLACE OF DEATH> is <Bryn Mawr Hospital> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 999)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "51",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What is the <faith> of the <Ajith Perera> and <religious affiliation> of the <Neungin High School>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "52",
+    "corrected_question": "Does the fiveG phone purchase plan have a network data option equal to 30GB?",
+    "intermediary_question": "What are the <military people> whose <military unit>'s <role> is <Air interdiction>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 6
+  },
+  {
+    "_id": "53",
+    "corrected_question": "Does the fiveG phone purchase plan have an unlimited hotspot data option?",
+    "intermediary_question": "Who are the <current members> of Insects vs Robots?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :hotspot_traffic ?hotspot.  FILTER (?hotspot = \"unlimit\")} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "54",
+    "corrected_question": "Does the fiveG phone purchase plan have a free in-network call option?",
+    "intermediary_question": "Is <Croatia> the <source mountain> of <Ombla>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (?incall = \"free\")}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "55",
+    "corrected_question": "Does the fiveG phone purchase plan have a local call option equal to 150-minute?",
+    "intermediary_question": "Who is the <person> whose <home town> is <Greater Napanee>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "56",
+    "corrected_question": "Does the fiveG phone purchase plan have an option equals to 2700 dollars?",
+    "intermediary_question": "What is the <PLACE OF DEATH> of the <Edwin Adams (politician)> and <POB> of the <William A. Purtell>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "57",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to  250GB?",
+    "intermediary_question": "What is the <nationalteam> of Trn Vit Hng ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "58",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 180 minutes?",
+    "intermediary_question": "What is the <designed by> of the <RENFE Class 333> and <owned by> of the <Renaissance Center>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 180)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "59",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What is the <university attended> of Joshua A. Siegel ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "60",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "What is the total number of <books> whose <writers>'s <notable work> is <Novelas ejemplares>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "61",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 70GB?",
+    "intermediary_question": "What is the <river> whose <mouth place> is <Essex>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 70)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "62",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 5 minutes?",
+    "intermediary_question": "What is the <division> of the <companies> whose <foundation place> is <Taiwan>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 5)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "63",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 60 minutes?",
+    "intermediary_question": "Is <Tim Gunn> the <Guests> of <Sunrise (How I Met Your Mother)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 60)}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "64",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "What is the <university> of the <Stanford Cardinal> and <institution> of the <Gerald Reaven>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "65",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 90GB?",
+    "intermediary_question": "What is the <nearest city> of David W. Brown House ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 90)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "66",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 15 minutes?",
+    "intermediary_question": "What is the <debutteam> of Deion Sanders ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 15)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "67",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What are the <nearest city> of Fountain Lake Farm?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "68",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 2700 dollars?",
+    "intermediary_question": "Who are the <characters> of Batman Live?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "69",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "Who are the <artists> whose <training> is <San Francisco Art Institute>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "70",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 300 minutes?",
+    "intermediary_question": "What is the <owning organisation> of the <Ford Kansas City Assembly Plant> and <builder> of the <Ford Y-block engine>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 300)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "71",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What is the <country> whose <currency> is <Aureus>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "72",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "What are the <awards received> of A. Peter Dewey?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "73",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 30GB?",
+    "intermediary_question": "How many <television shows> are there whose <network>'s <sister station> is <Cartoonito> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "74",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 900 minutes?",
+    "intermediary_question": "What is the <software> whose <developer> is <John Fanning (businessman)>?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 900)} ",
+    "sparql_template_id": 1
+  },
+  {
+    "_id": "75",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 30 minutes?",
+    "intermediary_question": "Count the number of <awarded> in <Muhammad Yunus>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 30)}",
+    "sparql_template_id": 102
+  },
+  {
+    "_id": "76",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "What is the <associated acts> of the <Bands> whose <label> is <Motown>?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "77",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 20GB?",
+    "intermediary_question": "What is the <writers> of the <musical> whose <composer> is <Emil  Dean  Zoghby>> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 20)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "78",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 3 minutes?",
+    "intermediary_question": "Give me a count of <military units> whose <garrison> is <Arlington County, Virginia>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 3)}",
+    "sparql_template_id": 401
+  },
+  {
+    "_id": "79",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 20 minutes?",
+    "intermediary_question": "What is the <faith> of Kwai Chang Caine ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 20)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "80",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 999 dollars?",
+    "intermediary_question": "Who is the <person> whose <relativess> are <Kelly Osbourne> and <Ozzy Osbourne>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 999)}",
+    "sparql_template_id": 7
+  },
+  {
+    "_id": "81",
+    "corrected_question": "Is there an option for unlimited hotspot data in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <houses> of the <legislature> which is the <leader title> of <Pullaiahgaripalli> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :hotspot ?hotspot.  FILTER contains(?hotspot , \"unlimit\")}",
+    "sparql_template_id": 303
+  },
+  {
+    "_id": "82",
+    "corrected_question": "Is there an option for free in-network calls in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <serving railway line> of the <Daund Junction railway station> and <Recorded> of the <99 (2009 film)>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :in-network_call ?incall.  FILTER (?incall = \"free\")} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "83",
+    "corrected_question": "Is there an option for local calls equal to 150 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What are the <ethnicity> of Riley Reid?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "84",
+    "corrected_question": "Is there an option with a monthly fee equal to 2700 dollars in the fiveG phone purchase plan?",
+    "intermediary_question": "What are the <television shows> whose <company>'s <subsidiary> is <Viacom Productions>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "85",
+    "corrected_question": "Is there an option with a hotspot data limit equal to 250GB in the fiveG phone purchase plan?",
+    "intermediary_question": "Whose <leaders> are <Giuseppe Bertello> and <Pietro Parolin>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "86",
+    "corrected_question": "Is there an option with a local call time equal to 180 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <university> whose <campus> is <Mount Moosilauke>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 180)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "87",
+    "corrected_question": "Is there an option with a local call time equal to 500 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "How many <faith> are there of the <ethnic group> which is the <style of architecture> of <Sanggar Agung> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 403
+  },
+  {
+    "_id": "88",
+    "corrected_question": "Is there an option with a monthly fee equal to 1200 dollars in the fiveG phone purchase plan?",
+    "intermediary_question": "Give me a count of <companies> whose <programming language> is <C++>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 101
+  },
+  {
+    "_id": "89",
+    "corrected_question": "Is there an option with a hotspot data limit equal to 70GB in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <garrison> of the <Western Naval Command> and <line> of the <Vadodara Junction railway station>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 70)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "90",
+    "corrected_question": "Is there an option with an in-network call time equal to 5 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <shareholder> of the <soccer club> which is the <currentclub> of <Steve Holland (footballer)> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 5)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "91",
+    "corrected_question": "Is there an option with a local call time equal to 60 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <stadium> of the <201415 Panionios G.S.S. season> and <cities> of the <Mediterranean Sea>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 60)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "92",
+    "corrected_question": "Is there an option with a monthly fee equals to 1200 dollars in the fiveG phone purchase plan?",
+    "intermediary_question": "Is <West Germany> the <Recorded> of <Don't Bring Me Down>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "93",
+    "corrected_question": "Is there an option with a hotspot data limit equal to 90GB in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <city> of the <rivers> whose <source place> is <Montauk State Park>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 90)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "94",
+    "corrected_question": "Is there an option with an in-network call time equal to 15 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "How many <political ideology> are there of the <political party> which is the <political party> of <Boonchu Rojanastien> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 15)}",
+    "sparql_template_id": 403
+  },
+  {
+    "_id": "95",
+    "corrected_question": "Is there an option with a local call time equal to 150 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What are the <hubs> of PLUS Expressways?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "96",
+    "corrected_question": "Is there an option with a monthly fee equal to 2700 dollars in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <movie> whose <music> is <Geoffrey Burgon> and <distributor> is <Cinema International Corporation>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "97",
+    "corrected_question": "Is there an option with a hotspot data limit equal to 250G in the fiveG phone purchase plan?",
+    "intermediary_question": "Is <Politics> the <main interests> of <Henry David Thoreau>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "98",
+    "corrected_question": "Is there an option with an in-network call time equal to 300 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <company> whose <key people> is <Dennis Muilenburg> and <products> is <Boeing CH-47 Chinook>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 300)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "99",
+    "corrected_question": "Is there an option with a local call time equal to 500 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <country> whose <leader> is <Giuseppe Bertello>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "100",
+    "corrected_question": "Is there an option with a monthly fee equals to 500 dollars in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <writer> of the <single> which is the <subsequent work> of <One Day at a Time (Em's Version)> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "101",
+    "corrected_question": "Is there an option with a hotspot data limit equal to 30GB in the fiveG phone purchase plan?",
+    "intermediary_question": "What are the <television shows> whose <network> is <NBC> and <company> is <Paramount Television>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "102",
+    "corrected_question": "Is there an option with an in-network call time equal to 900 minutesIn in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <fictional character> whose <voice>'s <animator> is <Hardie Gramatky>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 900)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "103",
+    "corrected_question": "Is there an option with a local call time equal to 30 minutes in the fiveG phone purchase plan?",
+    "intermediary_question": "What is the <designed by> of the <Language Integrated Query> and <license> of the <MSX BASIC>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 30)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "104",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500?",
+    "intermediary_question": "What are the other <architect> of the <stadia> whose <architect> is <Louis D. Astorino>>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 11
+  },
+  {
+    "_id": "105",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 20GB?",
+    "intermediary_question": "Who are the <astronauts> whose <type> is <NASA>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 20)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "106",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 3 minutes?",
+    "intermediary_question": "What is the <ingredient> of the <Blodpalt> and <Kaszanka>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 3)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "107",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 20 minutes?",
+    "intermediary_question": "Who is the <person> whose <partner> is <Rob Patterson>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 20)}",
+    "sparql_template_id": 1
+  },
+  {
+    "_id": "108",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 999?",
+    "intermediary_question": "How many <leader name> are there of the <city> which is the <city > of <Ganges> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 999)}",
+    "sparql_template_id": 103
+  },
+  {
+    "_id": "109",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with unlimited hotspot data?",
+    "intermediary_question": "What is the <tenants> of Heinz Field ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :hotspot ?hotspot.  FILTER contains(?hotspot , \"unlimit\")} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "110",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with free in-network calls?",
+    "intermediary_question": "What is the <architect> of the <Marine Corps Air Station Kaneohe Bay> and <branch> of the <Burnet R. Maybank>",
+    "sparql_query": "  PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :in-network_call ?incall.  FILTER (?incall = \"free\")} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "111",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What <movies>'s <screenplay> is <Akiva Goldsman>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "112",
+    "corrected_question": "Does the fiveG phone purchase plan have an option of monthly fee that is equal to 2700 dollars?",
+    "intermediary_question": "What is the total number of <television shows> whose <related>'s <artistic genre> is <Fantasy television>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "113",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <commander> of the <Battle of Fort Stephenson> and <Battle of the Thames>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "114",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 180 minutes?",
+    "intermediary_question": "How many <developer> are there, of the <video games> whose <composer> is <Gerard Marino> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 105
+  },
+  {
+    "_id": "115",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What is the <sea> whose <citiess> are <Rostock> and <Kaliningrad>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "116",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "What is the <television show> whose <developer> is <Brian Graden> and <voices> is <Isaac Hayes>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "117",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 70GB?",
+    "intermediary_question": "What is the <die from> of the <owl> which is the <child> of <Stevens Thomson Mason (Virginia)> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 70)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "118",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 5 minutes?",
+    "intermediary_question": "Is <Inland Empire> the <city-served> of <Ontario International Airport>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 5)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "119",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 60 minutes?",
+    "intermediary_question": "Is <Semnani languages> the <Languages> of <Iran>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 60)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "120",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equals to 1200 dollars?",
+    "intermediary_question": "What is the <Nickname> of the <owl> which is the <home stadium> of <Angels Toru> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "121",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 90GB?",
+    "intermediary_question": "What is the <television show> whose <executive producer> is <Douglas Netter>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 90)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "122",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 15 minutes?",
+    "intermediary_question": "What is the <relation> of the <person> who is the <relation> of <Jared Kushner> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 15)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "123",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What are the other <doctoral students> of the <scientists> whose <doctoral students> is <John Bowlby>>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 311
+  },
+  {
+    "_id": "124",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 2700 dollars?",
+    "intermediary_question": "What is the <series> of the <book> whose <previous work> is <Blade Runner 2: The Edge of Human> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "125",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <city > of The Ultimate Fighter: Team Rousey vs. Team Tate ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "126",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 300 minutes?",
+    "intermediary_question": "What is the <territory> of Sino-French War ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 300)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "127",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What <person>'s <marriage partner> is <Daniel Gibson>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 1
+  },
+  {
+    "_id": "128",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "What is the <political party> of the <office holder> who is the <has kid> of <Jawaharlal Nehru> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "129",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 30GB?",
+    "intermediary_question": "What is the <river> whose <source> is <Shannon Pot> and <mouth location> is <Limerick>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "130",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 900 minutes?",
+    "intermediary_question": "What is the <organisation> whose <purposes> are <Environmentalism> and <Peace>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 900)}",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "131",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 30 minutes?",
+    "intermediary_question": "What is the total number of other <name> of the <Sports team members> whose <name> is <Matt  Williams ( New  Zealand footballer)>>?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 30)}",
+    "sparql_template_id": 111
+  },
+  {
+    "_id": "132",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500?",
+    "intermediary_question": "Count the <belongs to> of the <race horses> whose <awards> is <Timeform>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 405
+  },
+  {
+    "_id": "133",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 20GB?",
+    "intermediary_question": "What is the <religious affiliation> of the <office holders> whose <profession> is <Diplomacy>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 20)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "134",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 3 minutes?",
+    "intermediary_question": "What are the <baseball teams> whose <stockholder>'s <co-founder> is <Guggenheim family>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 3)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "135",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 20 minutes?",
+    "intermediary_question": "Is <John Muir> the <person that first ascented a mountain> of <Mount Hoffmann>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 20)}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "136",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 999?",
+    "intermediary_question": "What is the <known for> of the <medician> whose <work institutions> is <Western Pennsylvania Hospital> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 999)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "137",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with unlimited hotspot data?",
+    "intermediary_question": "What is the <country> of the <publisher> whose <co-founder> is <Panos Ioannides> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :hotspot ?hotspot.  FILTER contains(?hotspot , \"unlimit\")}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "138",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with free in-network calls?",
+    "intermediary_question": "What is the <first team> of the <1967 Mexican Grand Prix> and <is owned by> of the <Dagenham wind turbines>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :in-network_call ?incall.  FILTER (?incall = \"free\")} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "139",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What is the <education> of the <Sidney Catlin Partridge> and <alma mater> of the <Lisa Brummel>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "140",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee that is equal to 2700 dollars?",
+    "intermediary_question": "What is the <sport> of the <schools> whose <city> is <Kharghar>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "141",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <ethnic group> of the <Riley Reid> and <state of origin> of the <Holmes Colbert>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "142",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 180 minutes?",
+    "intermediary_question": "Is <John Boehner> the <incumbent> of <United States House of Representatives elections in Ohio, 2010>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 180)}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "143",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What is the <american football Team> whose <location city> is <O.co Coliseum>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "144",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "How many <non-fiction subject> of the <books> whose <publisher> is <Doubleday (publisher)>, are there ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 105
+  },
+  {
+    "_id": "145",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 70GB?",
+    "intermediary_question": "What is the <founded> of the <Congress of Industrial Organizations> and <city > of the <Pittsburgh Steelers>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 70)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "146",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 5 minutes?",
+    "intermediary_question": "What is the <home town> of the <office holder> whose <official residence> is <Martha's Vineyard> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 5)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "147",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 60 minutes?",
+    "intermediary_question": "What is the <sea> whose <cities> is <Kaliningrad> and <outflow> is <Danish straits>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 60)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "148",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "Who is the <team manager> of 200607 Middlesbrough F.C. season ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "149",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 90GB?",
+    "intermediary_question": "What is the <location city> of the <american football Team> which is the <debut team> of <Lee Robinson (American football)> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 90)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "150",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 15 minutes?",
+    "intermediary_question": "What is the <owner> of the <bank> which is the <owned by> of <Bloomberg Radio> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 15)}",
+    "sparql_template_id": 303
+  },
+  {
+    "_id": "151",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What is the <architect> of McKechnie Field ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "152",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 2700 dollars?",
+    "intermediary_question": "Who is the <coach> of 201213 Marquette Golden Eagles men's basketball team ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "153",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <region> of the <Miluk language> and <Cayuse language>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "154",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 300 minutes?",
+    "intermediary_question": "What is the <Governor> of the <Winston Bryant> and <President> of the <Carl Stokes>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 300)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "155",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "What is the <athletics> of the <PATTS College of Aeronautics> and <field> of the <Jon Speelman>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "156",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "What is the <Home Stadium> of the <soccer clubs> whose <coach> is <Justine  Omojong>>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "157",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 30GB?",
+    "intermediary_question": "What is the <predecessor> of the <automobile> which is the <related> of <Oldsmobile 88> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "158",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 900 minutes?",
+    "intermediary_question": "What is the <royalty> whose <parent> is <Ptolemy XII Auletes> and <consort> is <Ptolemy XIII Theos Philopator>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 900)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "159",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 30 minutes?",
+    "intermediary_question": "What is the <television show> whose <theme music composer> is <Primus (band)> and <voices> is <Isaac Hayes>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 30)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "160",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500?",
+    "intermediary_question": "What is the <chancellor> of the <university> whose <campus> is <Woodlane, New Jersey> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "161",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 20GB?",
+    "intermediary_question": "What is the <mountain> whose <parent mountain peak>'s <located in area> is <State of Mexico>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 20)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "162",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 3 minutes?",
+    "intermediary_question": "What is the <ingredient> of Blodpalt ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 3)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "163",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 20 minutes?",
+    "intermediary_question": "What is the <developed by> of the <GNOWSYS> and <GNU TeXmacs>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 20)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "164",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 999?",
+    "intermediary_question": "List the <region served> of the <organisations> which are <Trade association>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 999)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "165",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with unlimited hotspot data?",
+    "intermediary_question": "Is <Malaysia> the <assembly> of <Hyundai Lavita>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :hotspot ?hotspot.  FILTER contains(?hotspot , \"unlimit\")}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "166",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with free in-network calls?",
+    "intermediary_question": "Who is the <music> of Tonight's the Night (2003 musical) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :in-network_call ?incall.  FILTER (?incall = \"free\")} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "167",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "How many <owls> whose <made by>'s <products> is <Mass media> are there?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 106
+  },
+  {
+    "_id": "168",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee that equal to 2700 dollars?",
+    "intermediary_question": "What is the <honours> of the <race horses> whose <trainer> is <Bert S. Michell>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "169",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <settlement> whose <leader name>'s <affiliation> is <Christen-Democratisch en Vlaams>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 6
+  },
+  {
+    "_id": "170",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 180 minutes?",
+    "intermediary_question": "What is the <nationality> of the <Viveka Babajee> and <nationality> of the <Ronny Vencatachellum>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 180)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "171",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "Is <Ulsan> the <assembly> of <Hyundai Lavita>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "172",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "What is the <affiliation> of the <Elections> whose <leader> is <Y. S. Rajasekhara Reddy>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "173",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 70GB?",
+    "intermediary_question": "What is the <source> of the <owl> whose <left tributary> is <Krapanski Potok> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 70)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "174",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 5 minutes?",
+    "intermediary_question": "What are the other <notable commanders> of the <owls> whose <notable commanders> is <Paul Hausser>>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 5)}",
+    "sparql_template_id": 11
+  },
+  {
+    "_id": "175",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 60 minutes?",
+    "intermediary_question": "What is the <source> of Raa (river) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 60)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "176",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 1200 dollars?",
+    "intermediary_question": "Is <Tahiti> the <city-served> of <Fa'a' International Airport>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 1200)}",
+    "sparql_template_id": 152
+  },
+  {
+    "_id": "177",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 90GB?",
+    "intermediary_question": "Who is the <producer> of Frampton's Camel ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 90)}",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "178",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 15 minutes?",
+    "intermediary_question": "Who is the <director> of Lennon Legend: The Very Best of John Lennon (DVD) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 15)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "179",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 150 minutes?",
+    "intermediary_question": "What is the <political party> of the <Arun Chandra Guha> and <Indira Gandhi>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 150)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "180",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 2700 dollars?",
+    "intermediary_question": "What is the <origin> of Svetlana Navasardyan ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 2700)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "181",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 250GB?",
+    "intermediary_question": "What is the <alma mater> of the <scientist> whose <known for> is <Rational analysis> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 250)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "182",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 300 minutes?",
+    "intermediary_question": "Who is the <belongs to> of Chelsea F.C. ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 300)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "183",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 500 minutes?",
+    "intermediary_question": "How many <working for> are there in <Don R. Berlin>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 500)}",
+    "sparql_template_id": 102
+  },
+  {
+    "_id": "184",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a monthly fee equal to 500 dollars?",
+    "intermediary_question": "How many <movies> are there whose <music>'s <home town> is <Volos> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :monthly_fee ?monthly_fee. FILTER (xsd:integer(?monthly_fee) = 500)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "185",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a hotspot data limit equal to 30GB?",
+    "intermediary_question": "What is the <Location> of the <Stagecoach, Colorado> and <Peetz Table Wind Energy Center>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type<http://class.com/cl#fiveg_purchase>;   :hotspot_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\") AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "186",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an in-network call time equal to 900 minutes?",
+    "intermediary_question": "What is the <fictional character> whose <relatives> is <Huey, Dewey, and Louie> and <species> is <American Pekin duck>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>; :in-network_call ?incall.    FILTER (xsd:integer(?incall) = 900)}",
+    "sparql_template_id": 308
+  },
+  {
+    "_id": "187",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a local call time equal to 30 minutes?",
+    "intermediary_question": "What is the <owner> of the <website> which is the <label> of <Seed Eight> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :local_call ?city_phone.  FILTER (xsd:integer(?city_phone) = 30)}",
+    "sparql_template_id": 303
+  },
+  {
+    "_id": "188",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 600GB?",
+    "intermediary_question": "What is the <land> of Sierra del Merendn ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "189",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with internet data equal to 600GB?",
+    "intermediary_question": "What is the <border> of the <valleys> whose <municipality> is <Crook County, Oregon>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "190",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What is the <university> of Vanderbilt Commodores ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "191",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 100GB?",
+    "intermediary_question": "Whose <relativess> are <Clan McDuck> and <Huey, Dewey, and Louie>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 100)}",
+    "sparql_template_id": 7
+  },
+  {
+    "_id": "192",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 200GB?",
+    "intermediary_question": "Who are the <musical artists> whose <label> is <Colpix Records>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 200)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "193",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 150GB?",
+    "intermediary_question": "Who is the <person that first ascented a mountain> of the <Cathedral Peak (California)> and <Mount Hoffmann>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "194",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 600GB?",
+    "intermediary_question": "What is the <currency> of the <owls> whose <capital> is <Podgorica>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "195",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 50GB?",
+    "intermediary_question": "How many other <home stadium> are there of the <soccer club seasons> whose <home stadium> is <Luzhniki Stadium> ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 111
+  },
+  {
+    "_id": "196",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 10GB?",
+    "intermediary_question": "What is the <training> of William Anthony (artist) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "197",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 50GB?",
+    "intermediary_question": "Who is the <Composer> of the <Motorpsycho Nitemare> and <composed by> of the <The Times They Are a-Changin' (musical)>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "198",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data limit equal to 10GB?",
+    "intermediary_question": "What is the <river> whose <source location> is <Dowra>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "199",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What is the <denomination> of the <president> who is the <leader> of <Mongolian legislative election, 2004> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "200",
+    "corrected_question": "Does the fiveG phone purchase plan offer an option with internet data equal to 30GB?",
+    "intermediary_question": "What is the total number of <television shows> whose <network>'s <key person> is <Steve Burke (businessman)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 106
+  },
+  {
+    "_id": "201",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 600GB?",
+    "intermediary_question": "What is the <municipality> of Homestead Grays Bridge ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "202",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 600GB?",
+    "intermediary_question": "What is the <denomination> of the <politician> whose <alma mater> is <Yokohama National University> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 305
+  },
+  {
+    "_id": "203",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "Who is the <narrated> of The Incredible Hulk (1982 TV series) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "204",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 100GB?",
+    "intermediary_question": "What is the <sport> of the <schools> whose <language> is <Swahili language>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 100)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "205",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 200GB?",
+    "intermediary_question": "What is the <main interests> of the <Philip Novak> and <type> of the <Vesak>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 200)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "206",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 150GB?",
+    "intermediary_question": "Give the total number of <ethnic groups> whose <Languages>'s <family> is <Anglo-Frisian languages>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "207",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 600GB?",
+    "intermediary_question": "What is the <area> of the <Tar Heel Sports Network> and <official residence> of the <Michael Nichols (photographer)>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "208",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 50GB?",
+    "intermediary_question": "What is the <settlement> whose <neighboring municipalitiess> are <Cologny> and <Lancy>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 307
+  },
+  {
+    "_id": "209",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 10GB?",
+    "intermediary_question": "How many <Artist> are there, of the <artworks> whose <museum> is <So Paulo Museum of Art> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 405
+  },
+  {
+    "_id": "210",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 50GB?",
+    "intermediary_question": "What is the <command structure> of the <VP-8> and <VP-10>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "211",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data limit equal to 10GB?",
+    "intermediary_question": "What is the <used money> of the <French Southern and Antarctic Lands> and <product> of the <Karafarin Bank>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "212",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "Give me the total number of <membership> of the <organisations> whose <membership> is <Azerbaijan>.",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 111
+  },
+  {
+    "_id": "213",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 30GB?",
+    "intermediary_question": "What is the <content licence> of MSX BASIC ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "214",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 600GB?",
+    "intermediary_question": "Who is the <fictional character> whose <series> is <Spy Kids (franchise)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 1
+  },
+  {
+    "_id": "215",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with internet data equal to 600GB?",
+    "intermediary_question": "Who are the <comics characters> whose <creators> is <Paul Dini>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "216",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "Who is the <is owned by> of Victoria (ship) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "217",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 100GB?",
+    "intermediary_question": "What is the <place of birth> of the <religious> whose <successor> is <Sevan Ross> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 100)}",
+    "sparql_template_id": 5
+  },
+  {
+    "_id": "218",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 200GB?",
+    "intermediary_question": "What is the <owned by> of the <Ted Williams Tunnel> and <Leonard P. Zakim Bunker Hill Memorial Bridge>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 200)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "219",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data equal to 150GB?",
+    "intermediary_question": "What is the <region> of the <school> which is the <rival> of <Somerset Berkley Regional High School> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 303
+  },
+  {
+    "_id": "220",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 600GB?",
+    "intermediary_question": "Give me a count of <soccer managers> whose <nationalteam> is <Spain national football team>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 401
+  },
+  {
+    "_id": "221",
+    "corrected_question": "Does the fiveG phone purchase plan have an option that exceeds a data limit equal to 50GB?",
+    "intermediary_question": "What is the <alma mater> of the <Henry Morton Dexter> and <Jack McGregor>",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 15
+  },
+  {
+    "_id": "222",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data usage equal to 10GB?",
+    "intermediary_question": "What are the <companies> whose <foundation place>'s <governing body> is <Dallas>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "223",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 50GB?",
+    "intermediary_question": "Count the <associated musical artist> of the <musical artists> whose <label> is <EMI>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 405
+  },
+  {
+    "_id": "224",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data limit equal to 10GB?",
+    "intermediary_question": "What is the <purpose> of New Zealand Chess Federation ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "225",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What is the total number of <television shows> whose <company>'s <subsidiary> is <Big Ticket Entertainment>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 406
+  },
+  {
+    "_id": "226",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with internet data equal to 30GB?",
+    "intermediary_question": "What is the <operated by> of Twin Cities 400 ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "227",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 600GB?",
+    "intermediary_question": "What is the <authority> of the <Maine School of Science and Mathematics> and <restingplace> of the <Charles A. Boutelle>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "228",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with iinternet data equal to 600GB?",
+    "intermediary_question": "Give me a count of <royalties> whose <buried in> is <Rome>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 401
+  },
+  {
+    "_id": "229",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "How many <location> are there, of the <religiouss> whose <title> is <Marja'> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 405
+  },
+  {
+    "_id": "230",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 100GB?",
+    "intermediary_question": "List the <soccer players> whose <currentclub>'s <ground> is <Stoke-on-Trent>.",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 100)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "231",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 200GB?",
+    "intermediary_question": "What are the <country> of Pioneer Corporation?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 200)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "232",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 150GB?",
+    "intermediary_question": "What is the <President> of the <Carl Stokes> and <president> of the <Wyche Fowler>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "233",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 600GB?",
+    "intermediary_question": "Is <God Save the Queen> the <national anthem> of <United Kingdom>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "234",
+    "corrected_question": "Does the fiveG phone purchase plan have an option that exceeds a data limit equal to 50GB?",
+    "intermediary_question": "What are the <movies> whose <language> is <Swedish language>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)}",
+    "sparql_template_id": 301
+  },
+  {
+    "_id": "235",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data usage equal to 10GB?",
+    "intermediary_question": "Is <Booker T (wrestler)> the <trainer> of <Christina Crawford (wrestler)>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 151
+  },
+  {
+    "_id": "236",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 50GB?",
+    "intermediary_question": "What is the <used money> of Kerguelen Islands ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "237",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet data limit equal to 10GB?",
+    "intermediary_question": "What are the <musicals> whose <music>'s <label> is <Sony Music Entertainment>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 306
+  },
+  {
+    "_id": "238",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What are the <owls> whose <major shrine>'s <leader name> is <Justin Trudeau>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 6
+  },
+  {
+    "_id": "239",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with internet data equal to 30GB?",
+    "intermediary_question": "What is the <main interests> of the <philosopher> who is the <past members> of <Senser> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 30)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "240",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 600GB?",
+    "intermediary_question": "What is the <leader name> of Hackweiser ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "241",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with internet data equal to 600GB?",
+    "intermediary_question": "What is the <city> of the <radio station> which is the <sister station> of <KTXY> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "242",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 150GB?",
+    "intermediary_question": "What is the <POB> of the <senator> who is the <successor> of <Hank Brown> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "243",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 100GB?",
+    "intermediary_question": "What is the <constituency> of the <Jonas Gahr Stre> and <born at> of the <Sverre Krogh Sundb>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 100)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "244",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data limit equal to 200GB?",
+    "intermediary_question": "What is the <battle> of the <Stephen Urban> and <battles> of the <Ali Habib Mahmud>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 200)} ",
+    "sparql_template_id": 16
+  },
+  {
+    "_id": "245",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 150GB?",
+    "intermediary_question": "What is the <religious affiliation> of Katyayana (Buddhist) ?",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 150)} ",
+    "sparql_template_id": 2
+  },
+  {
+    "_id": "246",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with an internet volume equal to 600GB?",
+    "intermediary_question": "What is the <born at> of the <engineer> who is the <manufactured by> of <Esnault-Pelterie R.E.P. 1> ?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 600)}",
+    "sparql_template_id": 3
+  },
+  {
+    "_id": "247",
+    "corrected_question": "Does the fiveG phone purchase plan have an option that exceeds a data limit equal to 50GB?",
+    "intermediary_question": "What <soccer managers>'s <managerclubs> is <England national under-21 football team>",
+    "sparql_query": " PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 50)} ",
+    "sparql_template_id": 1
+  },
+  {
+    "_id": "248",
+    "corrected_question": "Does the fiveG phone purchase plan have an option with a data usage equal to 10GB?",
+    "intermediary_question": "What is the <military conflict> whose <commanders> are <John McEwen> and <Phm Vn ng>?",
+    "sparql_query": "PREFIX : <http://example.com/ns#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> ASK WHERE {  ?instance rdf:type <http://class.com/cl#fiveg_purchase>;  :network_traffic ?amount.  BIND(STRBEFORE(?amount,\"GB\")AS ?cleanAmount)  FILTER (xsd:decimal(?cleanAmount) = 10)}",
+    "sparql_template_id": 307
+  }
+]
+
+
+
+
