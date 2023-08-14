@@ -99,7 +99,7 @@ public class EDG {
     public EDG(String question) {
         this();
         // sysout2
-        System.out.println("==Sysout2==");
+        System.out.println("\n==Sysout2==");
 
         try {
             // sysout2-1

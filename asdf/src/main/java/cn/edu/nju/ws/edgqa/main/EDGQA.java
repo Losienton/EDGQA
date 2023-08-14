@@ -291,7 +291,7 @@ public class EDGQA extends QASystem {
                 System.out.println("====================================");
 
                 LogUtil.printlnDebug("queryLog", "Golden sparql: " + goldenSparql);
-                // System.out.println("Golden sparql: " + goldenSparql);
+
                 LogUtil.printlnInfo("queryLog",
                         "SparqlGenerator list: " + questionSolver.getSubQuerySparqlMap().get(0));
                 // System.out.println("SparqlGenerator list: " +
