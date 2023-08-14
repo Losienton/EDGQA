@@ -40,7 +40,6 @@ import java.util.concurrent.ExecutorService;
  */
 public class EDGQA extends QASystem {
 
-
     /**
      * The question solver main function
      *
@@ -79,25 +78,29 @@ public class EDGQA extends QASystem {
         long startTime = System.currentTimeMillis(); // for timing
         String isTrain = QAArgs.isIsTraining() ? "train" : "test";
 
-        String logFileName = getLogFileName();  // get log file name
+        String logFileName = getLogFileName(); // get log file name
         LogUtil.addWriter("queryLog", "query_logs/query_log_" + isTrain + "_" + logFileName + ".txt", true);
 
         CumulativeIRMetrics cumulativeIRMetrics = new CumulativeIRMetrics(); // precision, recall, micro F1, macro F1
-        CumulativeIRMetrics qaldCumulativeIRMetrics = new CumulativeIRMetrics(); // QALD precision, recall, micro F1, QALD macro F1
+        CumulativeIRMetrics qaldCumulativeIRMetrics = new CumulativeIRMetrics(); // QALD precision, recall, micro F1,
+                                                                                 // QALD macro F1
         JSONArray dataArray;
         dataArray = getDataArray();
-        LogUtil.printlnInfo("queryLog", "System initialization time: " + (System.currentTimeMillis() - startTime) + " ms");
+        LogUtil.printlnInfo("queryLog",
+                "System initialization time: " + (System.currentTimeMillis() - startTime) + " ms");
         assert dataArray != null;
         List<String> questionList = null;
 
         // the QA process is here
-        answerQuestions(startTime, cumulativeIRMetrics, qaldCumulativeIRMetrics, dataArray, 0, dataArray.length(), questionList);
+        answerQuestions(startTime, cumulativeIRMetrics, qaldCumulativeIRMetrics, dataArray, 0, dataArray.length(),
+                questionList);
 
-        LogUtil.printlnInfo("queryLog", "QuestionSolver total time: " + (System.currentTimeMillis() - startTime) + " ms");
+        LogUtil.printlnInfo("queryLog",
+                "QuestionSolver total time: " + (System.currentTimeMillis() - startTime) + " ms");
 
         QASystem.postProcess();
         LogUtil.printlnInfo("queryLog", "query generation finished");
-        LogUtil.closeAllWriters();  // close the file writers
+        LogUtil.closeAllWriters(); // close the file writers
     }
 
     /**
@@ -136,17 +139,24 @@ public class EDGQA extends QASystem {
     private static JSONArray getDataArray() {
         JSONArray sparqlArray = null;
         if (QAArgs.getDataset() == DatasetEnum.LC_QUAD) {
-            //
+            // sysout1
+            System.out.println("\n==Sysout1==");
+            System.out.println("getDataset() == DatasetEnum.LC_QUAD\n");
+
             if (QAArgs.isIsTraining()) {
-                sparqlArray = new JSONArray(FileUtil.readFileAsString("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/lcquad-train.json"));
+                sparqlArray = new JSONArray(FileUtil
+                        .readFileAsString("/home/r11921A18/EDGQA/asdf/src/main/resources/datasets/lcquad-train.json"));
             } else {
-                sparqlArray = new JSONArray(FileUtil.readFileAsString("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/lcquad-test.json"));
+                sparqlArray = new JSONArray(FileUtil
+                        .readFileAsString("/home/r11921A18/EDGQA/asdf/src/main/resources/datasets/lcquad-test.json"));
             }
         } else if (QAArgs.getDataset() == DatasetEnum.QALD_9) {
             if (QAArgs.isIsTraining()) {
-                sparqlArray = new JSONArray(FileUtil.readFileAsString("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/qald-9-train-en.json"));
+                sparqlArray = new JSONArray(FileUtil.readFileAsString(
+                        "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/qald-9-train-en.json"));
             } else {
-                sparqlArray = new JSONArray(FileUtil.readFileAsString("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/qald-9-test-en.json"));
+                sparqlArray = new JSONArray(FileUtil.readFileAsString(
+                        "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/qald-9-test-en.json"));
             }
         }
         return sparqlArray;
@@ -186,12 +196,16 @@ public class EDGQA extends QASystem {
      * @param startTime           system start time
      * @param cumulativeIRMetrics evaluation metrics
      * @param sparqlArray         the array of sparql
-     * @param quesIdBegin         the beginning of the question id interval [begin, end)
+     * @param quesIdBegin         the beginning of the question id interval [begin,
+     *                            end)
      * @param quesIdEnd           the end of the question id interval [begin, end)
-     * @param questionList        the list of questions to be answered, default: null
+     * @param questionList        the list of questions to be answered, default:
+     *                            null
      * @throws IOException the IO exception
      */
-    private static void answerQuestions(long startTime, CumulativeIRMetrics cumulativeIRMetrics, CumulativeIRMetrics QALDcumulativeIRMetrics, JSONArray sparqlArray, int quesIdBegin, int quesIdEnd, List<String> questionList) throws IOException {
+    private static void answerQuestions(long startTime, CumulativeIRMetrics cumulativeIRMetrics,
+            CumulativeIRMetrics QALDcumulativeIRMetrics, JSONArray sparqlArray, int quesIdBegin, int quesIdEnd,
+            List<String> questionList) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("MM_dd_HH_mm");
         String isTrain = QAArgs.isIsTraining() ? "train" : "test";
         if (questionList != null && !questionList.isEmpty()) {
@@ -230,11 +244,12 @@ public class EDGQA extends QASystem {
                 goldenSparql = quesJSONObj.getString("sparql_query");
 
                 try {
-                    goldenSparql = Preprocessor.rewriteQALDSparql(goldenSparql);  // rewrite sparql for qald
+                    goldenSparql = Preprocessor.rewriteQALDSparql(goldenSparql); // rewrite sparql for qald
                     Query goldenQuery = QueryFactory.create(goldenSparql, Syntax.syntaxARQ);
                     goldenAnswer.addAll(KBUtil.getQueryStringResult(goldenQuery)); // the golden answers
                 } catch (Exception e) {
-                    System.out.println("[WARN] " + QAArgs.getDatasetName() + " question: " + quesIdx + " sparql exception, the golden answer will be used");
+                    System.out.println("[WARN] " + QAArgs.getDatasetName() + " question: " + quesIdx
+                            + " sparql exception, the golden answer will be used");
                     quesJSONObj.getJSONArray("answers").toList().forEach(o -> goldenAnswer.add(o.toString()));
                 }
             }
@@ -242,7 +257,7 @@ public class EDGQA extends QASystem {
             assert question != null;
             // filter by question list
             if (questionList != null && !questionList.isEmpty()) {
-                if (!questionList.contains(questionProcess(question))) {  // not in the list, continue
+                if (!questionList.contains(questionProcess(question))) { // not in the list, continue
                     System.out.println("question pass " + question);
                     continue;
                 }
@@ -260,15 +275,27 @@ public class EDGQA extends QASystem {
                 edg = new EDG(question); // generate the EDG
                 Timer.totalEDGGenTime += (System.currentTimeMillis() - startEDGGenTime);
 
+                // sysout7
+                System.out.println("\n==Sysout7== QuestionSolver");
                 questionSolver = new QuestionSolver(question, serialNumber, edg);
-                //System.out.println("ready to get answers");
+
+                // sysout8
+                System.out.println("====================================");
+                System.out.println("==Sysout8== Start predictedAnswer");
+                System.out.println("====================================");
                 predictedAnswer.addAll(questionSolver.solveQuestion()); // generate our answers here
-                //System.out.println("finished getting answers");
+
+                // sysoutX
+                System.out.println("====================================");
+                System.out.println("==SysoutX== Finished predictedAnswer");
+                System.out.println("====================================");
 
                 LogUtil.printlnDebug("queryLog", "Golden sparql: " + goldenSparql);
-                //System.out.println("Golden sparql: " + goldenSparql);
-                LogUtil.printlnInfo("queryLog", "SparqlGenerator list: " + questionSolver.getSubQuerySparqlMap().get(0));
-                //System.out.println("SparqlGenerator list: " + questionSolver.getSubQuerySparqlMap().get(0));
+                // System.out.println("Golden sparql: " + goldenSparql);
+                LogUtil.printlnInfo("queryLog",
+                        "SparqlGenerator list: " + questionSolver.getSubQuerySparqlMap().get(0));
+                // System.out.println("SparqlGenerator list: " +
+                // questionSolver.getSubQuerySparqlMap().get(0));
 
                 Map<Integer, List<SparqlGenerator>> subQuerySparqlMap = questionSolver.getSubQuerySparqlMap();
 
@@ -283,10 +310,11 @@ public class EDGQA extends QASystem {
                         List<TwoTuple<SparqlGenerator, Double>> subQueryScoreList = new ArrayList<>();
                         for (SparqlGenerator spg : sparqlGeneratorList) {
                             if (entityID == 0) {
-                                List<String> partialAnswer = KBUtil.getQueryStringResult(QueryFactory.create(spg.toSparql()));
+                                List<String> partialAnswer = KBUtil
+                                        .getQueryStringResult(QueryFactory.create(spg.toSparql()));
                                 IRMetrics metrics = Evaluator.getMetrics(partialAnswer, goldenAnswer);
                                 double f1 = metrics.getMicroF1();
-                                //scoreList.add(score);
+                                // scoreList.add(score);
                                 subQueryScoreList.add(new TwoTuple<>(spg, f1));
                             } else {
                                 List<TwoTuple<SparqlGenerator, Double>> twoTuples = subQueryScoreMap.get(0);
@@ -310,14 +338,15 @@ public class EDGQA extends QASystem {
 
                 quesJSONObj.put("sub queries", subQuerySparqlMap);
 
-                /*if (edg.getNumNode() <= 2) {
-                    LogUtil.printlnInfo("edgErrLog", "Question " + quesIdx + ":" + question);
-                }*/
+                /*
+                 * if (edg.getNumNode() <= 2) {
+                 * LogUtil.printlnInfo("edgErrLog", "Question " + quesIdx + ":" + question);
+                 * }
+                 */
             } catch (Exception e) {
                 LogUtil.printlnError("queryLog", "Question " + quesIdx + " exception: answer generation");
                 e.printStackTrace();
             }
-
 
             if (goldenAnswer.size() <= 1000) {
                 LogUtil.printlnInfo("queryLog", "Golden Answer: " + goldenAnswer);
@@ -342,9 +371,10 @@ public class EDGQA extends QASystem {
                 localIRMetrics = Evaluator.getMetrics(predictedAnswer, goldenAnswer);
             }
             LogUtil.printlnInfo("queryLog", localIRMetrics.toString());
-            //System.out.println( localIRMetrics.toString());
+            // System.out.println( localIRMetrics.toString());
 
-            computeMetrics(startTime, cumulativeIRMetrics, QALDcumulativeIRMetrics, quesIdx, questionStartTime, sparqlTemplateId, goldenSparql, edg, localIRMetrics, localQALDIRMetrics);
+            computeMetrics(startTime, cumulativeIRMetrics, QALDcumulativeIRMetrics, quesIdx, questionStartTime,
+                    sparqlTemplateId, goldenSparql, edg, localIRMetrics, localQALDIRMetrics);
 
         }
     }
@@ -363,16 +393,15 @@ public class EDGQA extends QASystem {
             String intermediateQuestion = null;
             int template = -1;
             List<String> goldenAnswer = new ArrayList<>();
-            String goldenSparql = quesJSONObj.getString("sparql_query");  // golden sparql
+            String goldenSparql = quesJSONObj.getString("sparql_query"); // golden sparql
             goldenSparql = goldenSparql.replaceAll(" COUNT\\(", " COUNT(DISTINCT "); // count distinct
             System.out.println(goldenSparql);
 
             if (QAArgs.getDataset() == DatasetEnum.LC_QUAD) {
                 serialNumber = quesJSONObj.getInt("_id");
-                question = quesJSONObj.getString("corrected_question");  // the original question
+                question = quesJSONObj.getString("corrected_question"); // the original question
                 template = quesJSONObj.getInt("sparql_template_id");
                 intermediateQuestion = quesJSONObj.getString("intermediary_question");
-
 
                 // generate gold answer from golden sparql
                 Query goldenQuery = QueryFactory.create(goldenSparql, Syntax.syntaxARQ);
@@ -383,11 +412,12 @@ public class EDGQA extends QASystem {
                 question = quesJSONObj.getString("question");
 
                 try {
-                    goldenSparql = Preprocessor.rewriteQALDSparql(goldenSparql);  // rewrite sparql for qald
+                    goldenSparql = Preprocessor.rewriteQALDSparql(goldenSparql); // rewrite sparql for qald
                     Query goldenQuery = QueryFactory.create(goldenSparql, Syntax.syntaxARQ);
                     goldenAnswer.addAll(KBUtil.getQueryStringResult(goldenQuery)); // the golden answers
                 } catch (Exception e) {
-                    System.out.println("[WARN] " + QAArgs.getDatasetName() + " question: " + quesIdx + " sparql exception, the golden answer will be used");
+                    System.out.println("[WARN] " + QAArgs.getDatasetName() + " question: " + quesIdx
+                            + " sparql exception, the golden answer will be used");
                     quesJSONObj.getJSONArray("answers").toList().forEach(o -> goldenAnswer.add(o.toString()));
                 }
             }
@@ -395,7 +425,6 @@ public class EDGQA extends QASystem {
             assert question != null;
             EDG edg = null;
             QuestionSolver questionSolver = null;
-
 
             // generate answers based on EDG
             try {
@@ -412,7 +441,7 @@ public class EDGQA extends QASystem {
                 for (int i = 0; i < Math.min(sparqlList.size(), 30); i++) {
                     SparqlGenerator spg = sparqlList.get(i);
                     List<SparqlGenerator> tempList = spg.expandQueryWithDbpOrDbo();
-                    //System.out.println("TempList:"+tempList);
+                    // System.out.println("TempList:"+tempList);
 
                     List<String> ans = new ArrayList<>();
                     for (SparqlGenerator sparqlGenerator : tempList) {
@@ -471,7 +500,13 @@ public class EDGQA extends QASystem {
         bfw1.close();
     }
 
-    private static void computeMetrics(long startTime, CumulativeIRMetrics cumulativeIRMetrics, CumulativeIRMetrics QALDcumulativeIRMetrics, int quesIdx, long questionStartTime, int sparqlTemplateId, String goldenSparql, EDG edg, IRMetrics localIRMetrics, IRMetrics localQALDIRMetrics) {
+    private static void computeMetrics(long startTime, CumulativeIRMetrics cumulativeIRMetrics,
+            CumulativeIRMetrics QALDcumulativeIRMetrics, int quesIdx, long questionStartTime, int sparqlTemplateId,
+            String goldenSparql, EDG edg, IRMetrics localIRMetrics, IRMetrics localQALDIRMetrics) {
+
+        // sysoutx
+        System.out.println("\n==Sysoutx== computeMetrics");
+
         cumulativeIRMetrics.addSample(localIRMetrics);
         if (QAArgs.getDataset() == DatasetEnum.QALD_9) {
             QALDcumulativeIRMetrics.addSample(localQALDIRMetrics);
@@ -483,25 +518,32 @@ public class EDGQA extends QASystem {
             LogUtil.printlnInfo("queryLog", "QALD Cumulative metrics, " + QALDcumulativeIRMetrics.toQALDString());
         }
 
-        LogUtil.printlnInfo("queryLog", "Current question consumed time: " + (System.currentTimeMillis() - questionStartTime) + " ms, average: "
-                + QAArgs.decimalFormat.format((double) (System.currentTimeMillis() - startTime) / curQuesNum)
-                + " ms/ques, entity detection: " + QAArgs.decimalFormat.format((double) Timer.totalEntityLinkingTime / curQuesNum)
-                + " ms/ques (linking tool: " + QAArgs.decimalFormat.format((double) Timer.totalEntityLinkingToolTime / curQuesNum)
-                + " ms/ques), relation detection: " + QAArgs.decimalFormat.format((double) Timer.totalRelationLinkingTime / curQuesNum)
-                + " ms/ques (similarity: " + QAArgs.decimalFormat.format((double) Timer.totalSimilarityTime / curQuesNum)
-                + " ms/ques), EDG generation: " + QAArgs.decimalFormat.format((double) Timer.totalEDGGenTime / curQuesNum)
-                + " ms/ques");  // timing
+        LogUtil.printlnInfo("queryLog",
+                "Current question consumed time: " + (System.currentTimeMillis() - questionStartTime) + " ms, average: "
+                        + QAArgs.decimalFormat.format((double) (System.currentTimeMillis() - startTime) / curQuesNum)
+                        + " ms/ques, entity detection: "
+                        + QAArgs.decimalFormat.format((double) Timer.totalEntityLinkingTime / curQuesNum)
+                        + " ms/ques (linking tool: "
+                        + QAArgs.decimalFormat.format((double) Timer.totalEntityLinkingToolTime / curQuesNum)
+                        + " ms/ques), relation detection: "
+                        + QAArgs.decimalFormat.format((double) Timer.totalRelationLinkingTime / curQuesNum)
+                        + " ms/ques (similarity: "
+                        + QAArgs.decimalFormat.format((double) Timer.totalSimilarityTime / curQuesNum)
+                        + " ms/ques), EDG generation: "
+                        + QAArgs.decimalFormat.format((double) Timer.totalEDGGenTime / curQuesNum)
+                        + " ms/ques"); // timing
         LogUtil.printlnInfo("queryLog", Evaluator.getEntityLinkingMetricsStr());
         LogUtil.printlnInfo("queryLog", Evaluator.getRelationLinkingMetricsStr());
         LogUtil.printlnInfo("queryLog", Evaluator.getTypeLinkingMetricsStr());
-        LogUtil.println("queryLog", "===============================================");
+        LogUtil.println("queryLog", "===================================END===================================");
     }
 
     private static int getPredictedTripleNum(EDG edg) {
         int res;
         if (edg.getQueryType() == QueryType.JUDGE) {
             res = 1;
-        } else res = edg.getNumDescriptiveNode();
+        } else
+            res = edg.getNumDescriptiveNode();
         return res;
     }
 
@@ -541,7 +583,8 @@ public class EDGQA extends QASystem {
             CumulativeIRMetrics cumulativeIRMetrics = new CumulativeIRMetrics();
             CumulativeIRMetrics QALDcumulativeIRMetrics = new CumulativeIRMetrics();
             try {
-                answerQuestions(System.currentTimeMillis(), cumulativeIRMetrics, QALDcumulativeIRMetrics, sparqlArray, quesIdx, quesIdx + 1, null);
+                answerQuestions(System.currentTimeMillis(), cumulativeIRMetrics, QALDcumulativeIRMetrics, sparqlArray,
+                        quesIdx, quesIdx + 1, null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -594,11 +637,11 @@ public class EDGQA extends QASystem {
         System.out.println("[INFO] Using cache: " + QAArgs.isUsingLinkingCache());
         System.out.println("[INFO] Reranking: " + QAArgs.isReRanking());
 
-        //EDG init
+        // EDG init
         EDG.init(dataset);
-        //KBUtil init
+        // KBUtil init
         KBUtil.init(dataset);
-        //Detector init
+        // Detector init
         Detector.init(dataset);
 
         if (QAArgs.getGoldenLinkingMode() == GoldenMode.FILTERING) {

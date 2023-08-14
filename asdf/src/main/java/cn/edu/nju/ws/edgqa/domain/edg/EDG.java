@@ -23,7 +23,6 @@ import java.util.stream.IntStream;
 import static cn.edu.nju.ws.edgqa.domain.beans.TreeNode.*;
 import static cn.edu.nju.ws.edgqa.domain.staticres.WordList.*;
 
-
 /**
  * KB-independent Entity Description Graph for Question Understanding
  */
@@ -99,10 +98,17 @@ public class EDG {
      */
     public EDG(String question) {
         this();
+        // sysout2
+        System.out.println("==Sysout2==");
+
         try {
+            // sysout2-1
+            System.out.println("==Sysout2-1== construct normal");
             construct(question);
+
         } catch (Exception e) {
-            System.out.println("其實根本EDG就沒走那麼多複雜的東西");
+            // sysout2-2
+            System.out.println("==Sysout2-2== construct FlattenEDG");
             constructFlattenEDG(question);
         }
     }
@@ -132,7 +138,7 @@ public class EDG {
     public static EDG fromDecomposition(JSONObject o) {
         EDG edg = new EDG();
         edg.question = o.getString("corrected_question");
-        //edg.question = o.getString("question");
+        // edg.question = o.getString("question");
 
         // Common root by default
         Node rootNode = edg.createNode(Node.NODE_TYPE_ROOT);
@@ -285,8 +291,8 @@ public class EDG {
      * @param treeNode the syntactic tree corresponding to this description node
      */
     public static void ComputeNodeStartEnd(Node node, TreeNode treeNode) {
-        node.setStart(TreeNode.getFirstLeaf(treeNode).index);//set start
-        node.setEnd(getLastLeaf(treeNode).index + 1);//set end
+        node.setStart(TreeNode.getFirstLeaf(treeNode).index);// set start
+        node.setEnd(getLastLeaf(treeNode).index + 1);// set end
         if (getFirstLeaf(treeNode).index <= node.getStart() && getLastLeaf(treeNode).index >= node.getEnd() - 1) {
             String tempString = TreeNode.selectLeafByIndex(treeNode, node.getStart(), node.getEnd());
             tempString = tempString.replace("-LRB-", "(").replace("-RRB-", ")");
@@ -300,17 +306,20 @@ public class EDG {
      * e.g., What country is Mount Everest in?
      *
      * @param treeNode a syntax tree
-     * @return if the PP in the syntax tree contains only one preposition, true; false otherwise
+     * @return if the PP in the syntax tree contains only one preposition, true;
+     *         false otherwise
      */
     public static boolean IsPPOnlyIN(TreeNode treeNode) {
-        if ((treeNode.data.equals("SQ ")) && treeNode.children.size() == 3 && treeNode.children.get(2).data.equals("PP ")) {
+        if ((treeNode.data.equals("SQ ")) && treeNode.children.size() == 3
+                && treeNode.children.get(2).data.equals("PP ")) {
             treeNode = treeNode.children.get(2);
             if (treeNode.children.size() == 1) {
                 if (treeNode.getFirstChild().data.startsWith("IN")) {
                     return true;
                 }
             }
-        } else if (treeNode.data.equals("PP ") && treeNode.children.size() == 1 && treeNode.children.get(0).data.startsWith("IN")) {
+        } else if (treeNode.data.equals("PP ") && treeNode.children.size() == 1
+                && treeNode.children.get(0).data.startsWith("IN")) {
 
             return true;
         } else if (treeNode.data.equals("VP ")) {
@@ -471,20 +480,20 @@ public class EDG {
     }
 
     private void initializeMembers() {
-        nodes = new Node[MAX_SIZE];                         // node array
-        edges = new Edge[MAX_SIZE][MAX_SIZE];               // edge matrix
-        for (int i = 0; i < edges.length; i++) {            //initialize NoEdge
+        nodes = new Node[MAX_SIZE]; // node array
+        edges = new Edge[MAX_SIZE][MAX_SIZE]; // edge matrix
+        for (int i = 0; i < edges.length; i++) { // initialize NoEdge
             for (int j = 0; j < edges[0].length; j++) {
                 edges[i][j] = new Edge();
             }
         }
 
-        numNode = 0;                                        // the number of nodes
-        numEntity = 0;                                      // number of entity blocks
-        question = null;                                    // the natural language question
-        syntaxTreeText = null;                              // the text of syntax treeNode
-        syntaxTreeNode = null;                                  // syntax treeNode
-        entityMap = new HashMap<>();                        // long entity map
+        numNode = 0; // the number of nodes
+        numEntity = 0; // number of entity blocks
+        question = null; // the natural language question
+        syntaxTreeText = null; // the text of syntax treeNode
+        syntaxTreeNode = null; // syntax treeNode
+        entityMap = new HashMap<>(); // long entity map
     }
 
     private void constructFlattenEDG(String question) {
@@ -512,6 +521,9 @@ public class EDG {
         // origin question
         System.out.println("Original Question: " + question);
         // pre process the question
+
+        // sysout3
+        System.out.println("\n==Sysout3== Preprocessing");
         this.question = Preprocessor.preProcessQuestion(question);
         System.out.println("Question after preprocess: " + this.question);
 
@@ -519,11 +531,15 @@ public class EDG {
         if (this.entityMap == null) {
             this.entityMap = new LinkedHashMap<>(); // key:<e1> value: Obama
         }
-        taggedQuestion = LinkingTool.recognizeLongEntity(this.question, this.entityMap, EDG.KB);
 
+        // sysout5
+        System.out.println("\n==Sysout5== taggedQuestion");
+        taggedQuestion = LinkingTool.recognizeLongEntity(this.question, this.entityMap, EDG.KB);
         System.out.println("TaggedQuestion: " + taggedQuestion);
 
         // generate syntax treeNode of taggedQuestion
+        // sysout6
+        System.out.println("\n==Sysout6== NLPUtil");
         this.syntaxTreeText = NLPUtil.getSyntaxTree(taggedQuestion);
         this.syntaxTreeNode = createTree(this.syntaxTreeText);
         System.out.println(NLPUtil.transferParentheses(this.syntaxTreeText));
@@ -531,21 +547,21 @@ public class EDG {
         // parse the syntaxTree, generate nodes and edges
         Sent(this.syntaxTreeNode);
 
-        //count the number of entityBlock
+        // count the number of entityBlock
         CountEntityBlock();
-        //generate nodeTree for each description node
+        // generate nodeTree for each description node
         GenerateNodeTree();
-        //generate nodeStr for each description node
+        // generate nodeStr for each description node
         GenerateString();
-        //replace refer span by #entity{i}
+        // replace refer span by #entity{i}
         ProcessRefer();
-        //some post processing
+        // some post processing
         PostProcess();
-        //long entity back replace
+        // long entity back replace
         BackReplaceLongE();
-        //trim nodeStr
+        // trim nodeStr
         TrimNode();
-        //final check
+        // final check
         FinalCheck();
         // make a copy of node str
         BackupNodeStr();
@@ -590,7 +606,8 @@ public class EDG {
                 nodeStr = nodeStr.replace("-LRB- ", "(")
                         .replace(" -RRB-", ")").trim();
 
-                // processing wrong identification due to syntax tree wrong identification for list query
+                // processing wrong identification due to syntax tree wrong identification for
+                // list query
                 Matcher matcher = Pattern.compile("(?i)(^(list) (.*))").matcher(nodeStr);
                 if (matcher.matches()) {
                     nodeStr = matcher.group(3).trim();
@@ -631,9 +648,13 @@ public class EDG {
      */
     private void GenerateNodeTree() {
         for (int nodeIdx = 0; nodeIdx < numNode; nodeIdx++) {
-            if (nodes[nodeIdx].getNodeType() == Node.NODE_TYPE_VERB || nodes[nodeIdx].getNodeType() == Node.NODE_TYPE_NON_VERB) {
-                nodes[nodeIdx].setTree(TreeNode.getAncestor(syntaxTreeNode, nodes[nodeIdx].getStart(), nodes[nodeIdx].getEnd()));
-                while (nodes[nodeIdx].getTree() != null && nodes[nodeIdx].getTree().children.size() == 1) { // if node has only one child
+            if (nodes[nodeIdx].getNodeType() == Node.NODE_TYPE_VERB
+                    || nodes[nodeIdx].getNodeType() == Node.NODE_TYPE_NON_VERB) {
+                nodes[nodeIdx].setTree(
+                        TreeNode.getAncestor(syntaxTreeNode, nodes[nodeIdx].getStart(), nodes[nodeIdx].getEnd()));
+                while (nodes[nodeIdx].getTree() != null && nodes[nodeIdx].getTree().children.size() == 1) { // if node
+                                                                                                            // has only
+                                                                                                            // one child
                     nodes[nodeIdx].setTree(nodes[nodeIdx].getTree().children.get(0));
                 }
             }
@@ -646,7 +667,7 @@ public class EDG {
     private void GenerateString() {
         for (int i = 0; i < numNode; i++) {
             if (nodes[i].getNodeType() == Node.NODE_TYPE_VERB || nodes[i].getNodeType() == Node.NODE_TYPE_NON_VERB) {
-                //already has nodeStr, pass
+                // already has nodeStr, pass
                 if (nodes[i].getStr() != null && !nodes[i].getStr().equals("")) {
                     continue;
                 }
@@ -734,7 +755,8 @@ public class EDG {
     }
 
     /**
-     * post process, including implicit entity detection, conjunction process, remove redundant refer, etc
+     * post process, including implicit entity detection, conjunction process,
+     * remove redundant refer, etc
      */
     private void PostProcess() {
 
@@ -765,7 +787,7 @@ public class EDG {
             Node node = nodes[i];
             if (node.getNodeType() >= Node.NODE_TYPE_VERB) {
 
-                //remove some punctuations
+                // remove some punctuations
                 String tempString = node.getStr().trim()
                         .replaceAll("\\?$", "")
                         .replaceAll("\\.$", "")
@@ -777,42 +799,44 @@ public class EDG {
                 String nodeStr = node.getStr();
 
                 if (KB != KBEnum.Freebase) { // only for DBpedia
-                    //some regex rules to detect implicit entity to be referred
+                    // some regex rules to detect implicit entity to be referred
 
-                    //apposite led by comma
+                    // apposite led by comma
                     Matcher matcher1 = Pattern.compile("(?i)((.*), (which|who|where|whose) (.*))").matcher(nodeStr);
                     if (matcher1.matches()) {
                         System.out.println("[DEBUG] Matching Matcher1:" + nodeStr);
 
-                        //split a desNode
+                        // split a desNode
                         Node desNode = createNode(Node.NODE_TYPE_VERB);
                         desNode.setStr(matcher1.group(4));
                         edges[findEntityNodeID(node)][desNode.getNodeID()].setEdgeType(Edge.TYPE_VERB);
 
-                        //modify the origin nodeStr
+                        // modify the origin nodeStr
                         node.setStr(matcher1.group(2));
 
                     }
 
-                    //(the xxx) whose xx's aaa is bbb
-                    Matcher matcher2 = Pattern.compile("(?i)((.*)whose (.*)('s|s') ((.*) (is|was|were|are) (.*)))").matcher(nodeStr);
+                    // (the xxx) whose xx's aaa is bbb
+                    Matcher matcher2 = Pattern.compile("(?i)((.*)whose (.*)('s|s') ((.*) (is|was|were|are) (.*)))")
+                            .matcher(nodeStr);
                     if (matcher2.matches()) {
                         System.out.println("[DEBUG] Matching Matcher2:" + nodeStr);
 
-                        //create a new entity, set the refer edge
+                        // create a new entity, set the refer edge
                         Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                         edges[node.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_REFER);
                         edges[node.getNodeID()][entityNode.getNodeID()].setEnd(node.getEnd());
-                        edges[node.getNodeID()][entityNode.getNodeID()].setStart(node.getEnd() - matcher2.group(5).trim().split(" ").length);
+                        edges[node.getNodeID()][entityNode.getNodeID()]
+                                .setStart(node.getEnd() - matcher2.group(5).trim().split(" ").length);
 
-                        //create a new desNode
+                        // create a new desNode
                         Node desNode = createNode(Node.NODE_TYPE_VERB);
                         desNode.setStr(matcher2.group(5).trim());
                         desNode.setEnd(node.getEnd());
                         desNode.setStart(node.getEnd() - matcher2.group(5).trim().split(" ").length);
                         edges[entityNode.getNodeID()][desNode.getNodeID()].setEdgeType(Edge.TYPE_VERB);
 
-                        //create another desNode(usually type)
+                        // create another desNode(usually type)
                         if (matcher2.group(2) != null && !matcher2.group(2).trim().equals("")) {
                             Node desNode1 = createNode(Node.NODE_TYPE_NON_VERB);
                             desNode1.setStr(matcher2.group(2));
@@ -821,7 +845,7 @@ public class EDG {
                             edges[findEntityNodeID(node)][desNode1.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
                         }
 
-                        //modify the origin nodeStr and containRefer tag
+                        // modify the origin nodeStr and containRefer tag
                         node.setStr(matcher2.group(3).trim() + " is #entity" + entityNode.getEntityID());
                         node.setContainsRefer(true);
 
@@ -829,18 +853,19 @@ public class EDG {
                     }
 
                     // e.g. "acted in the movie which was directed by Quentin Tarantino"
-                    Matcher matcher3 = Pattern.compile("(?i)((.*)((the|a|an) (.*) (whose|who|which|where|that) (.*)))").matcher(nodeStr);
+                    Matcher matcher3 = Pattern.compile("(?i)((.*)((the|a|an) (.*) (whose|who|which|where|that) (.*)))")
+                            .matcher(nodeStr);
                     if (matcher3.matches()) {
 
                         System.out.println("[DEBUG] Matching Matcher3:" + nodeStr);
 
                         System.out.println(matcher3.group(7));
-                        //the xxx of xxx which is also xxx
+                        // the xxx of xxx which is also xxx
                         if (matcher3.group(7).matches("^(is|was|are|were) also (.*)")
-                                || matcher3.group(7).contains(" and ")) {//conjunction,turn to conjunction module, pass
+                                || matcher3.group(7).contains(" and ")) {// conjunction,turn to conjunction module, pass
                             System.out.println("[DEBUG] Matcher3: contain conjunction, pass");
                             continue;
-                        } else if (matcher3.group(7).contains("#entity")) {//already contains refer, pass
+                        } else if (matcher3.group(7).contains("#entity")) {// already contains refer, pass
                             System.out.println("[DEUBG] Matcher3: already contains Refer, pass");
                             continue;
                         }
@@ -848,31 +873,32 @@ public class EDG {
                         if (!containsRelation(matcher3.group(2)) && containsRelation(matcher3.group(5))) {
                             // e.g. "where was the scientist born whose doctoral advisor is ..."
 
-                            //find the type word in gropu5
+                            // find the type word in gropu5
                             List<String> tokens = NLPUtil.getTokens(matcher3.group(5));
 
                             String typeString = tokens.get(0);
 
-                            //create entity node
+                            // create entity node
                             Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                             edges[node.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_REFER);
 
                             // modify origin nodeStr
-                            node.setStr(matcher3.group(2) + " " + matcher3.group(5).replace(typeString, " #entity" + entityNode.getEntityID()));
+                            node.setStr(matcher3.group(2) + " "
+                                    + matcher3.group(5).replace(typeString, " #entity" + entityNode.getEntityID()));
                             node.setContainsRefer(true);
 
-                            //description before "whose"
+                            // description before "whose"
                             Node desNode1 = createNode(Node.NODE_TYPE_NON_VERB);
                             desNode1.setStr(typeString);
                             edges[entityNode.getNodeID()][desNode1.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
 
-                            //description after "whose"
+                            // description after "whose"
                             Node desNode2 = createNode(Node.NODE_TYPE_VERB);
                             desNode2.setStr(matcher3.group(7).trim());
                             edges[entityNode.getNodeID()][desNode2.getNodeID()].setEdgeType(Edge.TYPE_VERB);
 
                         } else {
-                            //create entity and refer edge
+                            // create entity and refer edge
                             Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                             edges[node.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_REFER);
                             node.setStr(matcher3.group(2).trim() + " #entity" + entityNode.getEntityID());
@@ -892,7 +918,6 @@ public class EDG {
                         continue;
                     }
 
-
                     // e.g. "the composer of <e0>"
                     Matcher matcher4 = Pattern.compile("(?i)((.*) (the (.*) of <e\\d>) (.*))").matcher(nodeStr);
                     if (matcher4.matches()) {
@@ -901,17 +926,18 @@ public class EDG {
                         if (containsRelation(restStr)) {
                             String newDesStr = matcher4.group(3);
 
-                            //create entity Node
+                            // create entity Node
                             Node newEn = createNode(Node.NODE_TYPE_ENTITY);
                             edges[i][newEn.getNodeID()].setEdgeType(Edge.TYPE_REFER);
 
-                            //create desNode
+                            // create desNode
                             Node newDes = createNode(Node.NODE_TYPE_NON_VERB);
                             newDes.setStr(newDesStr);
                             edges[newEn.getNodeID()][newDes.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
 
-                            //modify the origin nodeStr
-                            String newStr = matcher4.group(2) + " #entity" + findEntityBlockID(newEn) + " " + matcher4.group(5);
+                            // modify the origin nodeStr
+                            String newStr = matcher4.group(2) + " #entity" + findEntityBlockID(newEn) + " "
+                                    + matcher4.group(5);
                             node.setStr(newStr);
                             node.setContainsRefer(true);
 
@@ -922,13 +948,16 @@ public class EDG {
                     }
 
                     // e.g., the xx of the xx by|in|with xx
-                    Matcher matcher5 = Pattern.compile("(.*)the (.*) of ((the )?(.*) (by|in|with) (.*))").matcher(nodeStr);
+                    Matcher matcher5 = Pattern.compile("(.*)the (.*) of ((the )?(.*) (by|in|with) (.*))")
+                            .matcher(nodeStr);
                     if (matcher5.matches()) {
 
                         System.out.println("[DEBUG] Matching Matcher5:" + nodeStr);
                         String referString = matcher5.group(3);
 
-                        if (matcher5.group(5).contains(" and ") || matcher5.group(5).contains(" also ")) {// contains conjunction, pass
+                        if (matcher5.group(5).contains(" and ") || matcher5.group(5).contains(" also ")) {// contains
+                                                                                                          // conjunction,
+                                                                                                          // pass
                             continue;
                         }
 
@@ -936,7 +965,7 @@ public class EDG {
                             continue;
                         }
 
-                        //create entity node
+                        // create entity node
                         Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                         edges[node.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_REFER);
 
@@ -974,8 +1003,9 @@ public class EDG {
 
                         System.out.println("[DEBUG] Matcher6:" + nodeStr);
 
-                        //the xx of the xx and xx of ...
-                        // 'and' is wrongly identified, continue directly, and the conjunction processor will deal with it
+                        // the xx of the xx and xx of ...
+                        // 'and' is wrongly identified, continue directly, and the conjunction processor
+                        // will deal with it
                         if (matcher6.group(4).contains("and ") || matcher6.group(4).contains("also ")) {
                             System.out.println("Matcher0: conjunctions detected");
                             continue;
@@ -991,7 +1021,8 @@ public class EDG {
                         newDes.setStr(newDesStr);
                         edges[newEn.getNodeID()][newDes.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
 
-                        // modify the entity to be referred in the original node, and set containRefer to true
+                        // modify the entity to be referred in the original node, and set containRefer
+                        // to true
                         String newStr = nodeStr.replace(newDesStr, "#entity" + findEntityBlockID(newEn));
                         node.setStr(newStr);
                         node.setContainsRefer(true);
@@ -1009,7 +1040,8 @@ public class EDG {
                             continue;
                         }
 
-                        if (relWord.contains("one of") || relWord.contains("member of") || beWordSet.contains(relWord.trim())) { // one of|member of|is|was misidentification
+                        if (relWord.contains("one of") || relWord.contains("member of")
+                                || beWordSet.contains(relWord.trim())) { // one of|member of|is|was misidentification
                             continue;
                         }
 
@@ -1033,7 +1065,12 @@ public class EDG {
                                         continue;
                                     }
                                     ArrayList<String> tokens = NLPUtil.getTokens(group2);
-                                    if (tokens.size() >= 4 && (tokens.get(2).endsWith("ing") || tokens.get(2).endsWith("ed"))) { // the river starting at <e0>
+                                    if (tokens.size() >= 4
+                                            && (tokens.get(2).endsWith("ing") || tokens.get(2).endsWith("ed"))) { // the
+                                                                                                                  // river
+                                                                                                                  // starting
+                                                                                                                  // at
+                                                                                                                  // <e0>
                                         typeString = tokens.get(0) + " " + tokens.get(1);
                                         relString = group1.replaceAll(typeString, "").trim();
                                     } else {
@@ -1065,7 +1102,8 @@ public class EDG {
 
                         }
 
-                        if (judgeIfAuxiliary(relWord)) {// sentences guided by auxiliary verbs, e.g., did the director of XX win
+                        if (judgeIfAuxiliary(relWord)) {// sentences guided by auxiliary verbs, e.g., did the director
+                                                        // of XX win
 
                             // find the NP node
                             TreeNode nodeTree;
@@ -1095,10 +1133,12 @@ public class EDG {
                             edges[i][newEn.getNodeID()].setEdgeType(Edge.TYPE_REFER);
                             edges[i][newEn.getNodeID()].setStart(getFirstLeaf(npTreeNode).index);
 
-                            // VBD+NP, did [the director of xx win] is taken as a NP, verbs need to be extracted
+                            // VBD+NP, did [the director of xx win] is taken as a NP, verbs need to be
+                            // extracted
                             if (treeID == nodeTree.getChildren().size() - 1) {
                                 edges[i][newEn.getNodeID()].setEnd(getLastLeaf(npTreeNode).index);
-                                desStr = selectLeafByIndex(npTreeNode, getFirstLeaf(npTreeNode).index, getLastLeaf(npTreeNode).index);
+                                desStr = selectLeafByIndex(npTreeNode, getFirstLeaf(npTreeNode).index,
+                                        getLastLeaf(npTreeNode).index);
                             } else {
                                 edges[i][newEn.getNodeID()].setEnd(getLastLeaf(npTreeNode).index + 1);
                                 desStr = selectLeaf(npTreeNode);
@@ -1112,7 +1152,6 @@ public class EDG {
 
                             edges[newEn.getNodeID()][newDes.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
 
-
                             // modify the entity to be referred in the original node
                             String newStr = nodeStr.replace(newDes.getStr(), "#entity" + findEntityBlockID(newEn));
                             node.setStr(newStr);
@@ -1120,8 +1159,8 @@ public class EDG {
 
                             continue;
 
-                        } else if (containsRelation(relWord)) { // matcher2.group(1) contains relation, it needs to be split
-
+                        } else if (containsRelation(relWord)) { // matcher2.group(1) contains relation, it needs to be
+                                                                // split
 
                             // create a new entity
                             Node newEn = createNode(Node.NODE_TYPE_ENTITY);
@@ -1198,10 +1237,12 @@ public class EDG {
                 if (node.isContainsRefer()) { // this description node has an reference edge
                     String nodeStr = node.getStr().trim();
                     if (nodeStr.matches("(^#entity\\d$)|(^(is|was|are|were|did|does|do)( also)? #entity\\d$)")
-                            || nodeStr.matches("^((is|are|was|were) )?the ((total|whole) )?(name|number|count) of #entity\\d$")
+                            || nodeStr.matches(
+                                    "^((is|are|was|were) )?the ((total|whole) )?(name|number|count) of #entity\\d$")
                             || EDG.getKB() == KBEnum.Freebase) {
 
-                        if (nodeStr.matches("^((is|are|was|were) )?the ((total|whole) )?(number|count) of #entity\\d$")) {
+                        if (nodeStr
+                                .matches("^((is|are|was|were) )?the ((total|whole) )?(number|count) of #entity\\d$")) {
                             nodes[0].setQuesType(QueryType.COUNT);
                         }
 
@@ -1209,7 +1250,9 @@ public class EDG {
                         int referredEntityNodeID = 0;
                         // find the nodeID of this referring entity
                         for (int j = 0; j < numNode; j++) {
-                            if (edges[i][j] != null && edges[i][j].getEdgeType() == Edge.TYPE_REFER) { // find the referring entity
+                            if (edges[i][j] != null && edges[i][j].getEdgeType() == Edge.TYPE_REFER) { // find the
+                                                                                                       // referring
+                                                                                                       // entity
                                 referredEntityNodeID = j;
                                 break;
                             }
@@ -1266,11 +1309,11 @@ public class EDG {
             }
         }
 
-
     }
 
     /**
-     * Post-processing, dealing with 'and' 'also' conjunction that are not partitioned in the EDG
+     * Post-processing, dealing with 'and' 'also' conjunction that are not
+     * partitioned in the EDG
      */
     private void ProcessConjunction() {
 
@@ -1283,7 +1326,8 @@ public class EDG {
                 if (!node.isContainsRefer()) {
                     // VP-des or NVP-des without refer edge
                     String nodeStr = node.getStr();
-                    if (nodeStr != null && (nodeStr.contains(" and ") || nodeStr.contains(" also ") || nodeStr.contains(" both ") || nodeStr.contains(" & "))) {
+                    if (nodeStr != null && (nodeStr.contains(" and ") || nodeStr.contains(" also ")
+                            || nodeStr.contains(" both ") || nodeStr.contains(" & "))) {
                         TreeNode treeNode = node.getTree();
                         if (treeNode == null) {
                             treeNode = createTree(NLPUtil.getSyntaxTree(node.getStr()));
@@ -1321,7 +1365,8 @@ public class EDG {
                             splitNodeByCC(treeNode, nodeIdx);
                         }
                         if (node.getStr().contains("also ")) {
-                            nodeStr = node.getStr().replaceAll("(am|is|are|was|were|have been|has been|has|have) also", "also").trim();
+                            nodeStr = node.getStr()
+                                    .replaceAll("(am|is|are|was|were|have been|has been|has|have) also", "also").trim();
 
                             String[] str = nodeStr.split("also");
                             System.out.println("Split By also:" + Arrays.toString(str));
@@ -1330,7 +1375,8 @@ public class EDG {
                                 String latter = str[1].trim();
                                 int formerLen = NLPUtil.getTokens(former).size();
                                 int latterLen = NLPUtil.getTokens(latter).size();
-                                if (!former.equals("") && !latter.equals("")) {// also is not at the start, additional nodes are generated
+                                if (!former.equals("") && !latter.equals("")) {// also is not at the start, additional
+                                                                               // nodes are generated
                                     node.setStr(former);
                                     if (NLPUtil.judgeIfVP(former)) {
                                         if (node.getNodeType() != 3) {
@@ -1369,7 +1415,9 @@ public class EDG {
                 } else {
                     // VP-des or NVP-des contains refer edge
                     String nodeStr = node.getStr();
-                    Matcher matcher1 = Pattern.compile("^(.*?)((is|are|was|were|and) )?(also|and) ((is|are|was|were) )?(#entity\\d)$").matcher(nodeStr);
+                    Matcher matcher1 = Pattern
+                            .compile("^(.*?)((is|are|was|were|and) )?(also|and) ((is|are|was|were) )?(#entity\\d)$")
+                            .matcher(nodeStr);
                     if (matcher1.matches()) {
                         // create a new description and connect it with the current node
                         Node desNode = createNode(Node.NODE_TYPE_VERB);
@@ -1385,20 +1433,19 @@ public class EDG {
 
                     }
 
-
                 }
             }
         }
     }
 
     /**
-     * Divide the description into two parts based on conjunctions and generate additional descriptions
+     * Divide the description into two parts based on conjunctions and generate
+     * additional descriptions
      *
      * @param nodeTree  the nodeTree of node to be split
      * @param nodeIndex the nodeID of node to be split
      */
     private void splitNodeByCC(TreeNode nodeTree, int nodeIndex) {
-
 
         LinkedList<TreeNode> toSearch = new LinkedList<>();
         toSearch.add(nodeTree);
@@ -1426,10 +1473,10 @@ public class EDG {
             int nodeStart = TreeNode.getFirstLeaf(nodeTree).index;
             int nodeEnd = TreeNode.getLastLeaf(nodeTree).index;
 
-            //startIndex for the former part
+            // startIndex for the former part
             int firstStart = getFirstLeaf(parentNode).index;
 
-            //relation before "and" (e.g. written A and B)
+            // relation before "and" (e.g. written A and B)
             StringBuilder sb = new StringBuilder();
             for (int j = nodeStart; j < firstStart; j++) {
                 sb.append(Objects.requireNonNull(getLeaf(nodeTree, j)).str);
@@ -1438,10 +1485,11 @@ public class EDG {
             String commonRelationBefore = sb.toString().trim();
             System.out.println("commonRelation Before:" + commonRelationBefore);
 
-            //relation after "and" (e.g. "A and B shares common...")
+            // relation after "and" (e.g. "A and B shares common...")
             StringBuilder sb1 = new StringBuilder();
             if (!containsRelation(commonRelationBefore)) {// no commonRelation before;
-                if (parentNode.data.trim().equals("NP") || parentNode.data.trim().equals("NML")) {// e.g. "A and B are both famous"
+                if (parentNode.data.trim().equals("NP") || parentNode.data.trim().equals("NML")) {// e.g. "A and B are
+                                                                                                  // both famous"
                     List<TreeNode> siblings = parentNode.getParent().getChildren();
                     int indexOfParent = siblings.indexOf(parentNode);
                     for (int i = indexOfParent + 1; i < siblings.size(); i++) {// father's sibling nodes
@@ -1451,7 +1499,6 @@ public class EDG {
             }
             String commonRelationAfter = sb1.toString().trim();
             System.out.println("commonRelation After:" + commonRelationAfter);
-
 
             // split the node by ccNode
             StringBuilder former = new StringBuilder();
@@ -1517,9 +1564,9 @@ public class EDG {
             node.setEnd(splitIndex);
 
             int newNodeType;
-            if (NLPUtil.judgeIfVP(des2)) { //VP node
+            if (NLPUtil.judgeIfVP(des2)) { // VP node
                 newNodeType = Node.NODE_TYPE_VERB;
-            } else { //NVP node
+            } else { // NVP node
                 newNodeType = Node.NODE_TYPE_NON_VERB;
             }
             Node newNode = createNode(newNodeType);
@@ -1549,7 +1596,10 @@ public class EDG {
         }
 
         for (int i = 0; i < numNode; i++) {
-            if (nodes[i].getNodeType() == Node.NODE_TYPE_ENTITY && edges[i][node.getNodeID()].getEdgeType() > 0) { // it contains an edge
+            if (nodes[i].getNodeType() == Node.NODE_TYPE_ENTITY && edges[i][node.getNodeID()].getEdgeType() > 0) { // it
+                                                                                                                   // contains
+                                                                                                                   // an
+                                                                                                                   // edge
                 return i;
             }
         }
@@ -1582,7 +1632,8 @@ public class EDG {
     }
 
     /**
-     * Processes syntactic tree nodes that have been determined to be attached to the node with a given entityIdx
+     * Processes syntactic tree nodes that have been determined to be attached to
+     * the node with a given entityIdx
      *
      * @param treeNode  the node to be connected in the syntax tree
      * @param entityIdx the nodeID of entity node
@@ -1617,7 +1668,8 @@ public class EDG {
             desNode.setEnd(getLastLeaf(treeNode).index);
             edges[entityIdx][desNode.getNodeID()].setEdgeType(Edge.TYPE_VERB);
 
-        } else if (treeNode.data.equals("S ") && treeNode.children.size() > 1 && treeNode.children.get(1).data.equals("VP ") && treeNode.children.get(0).data.equals("ADVP ")) {
+        } else if (treeNode.data.equals("S ") && treeNode.children.size() > 1
+                && treeNode.children.get(1).data.equals("VP ") && treeNode.children.get(0).data.equals("ADVP ")) {
             List<Integer> listg = S(treeNode, nodes[entityIdx]);
             for (Integer in : listg) {
                 if (nodes[entityIdx].getNodeType() == Node.NODE_TYPE_ENTITY) {
@@ -1627,7 +1679,7 @@ public class EDG {
 
             }
         } else if (treeNode.data.trim().equals("S")) { // S is nested in SQ
-            //(SQ (SQ (VBZ S(...))
+            // (SQ (SQ (VBZ S(...))
             List<Integer> listg = S(treeNode, nodes[entityIdx]);
             for (Integer in : listg) {
                 if (nodes[entityIdx].getNodeType() == Node.NODE_TYPE_ENTITY) {
@@ -1690,20 +1742,20 @@ public class EDG {
         if (taggedQuestion.matches("(?i)(^(give|show|tell) me (a|the) (count|number) of (.*))")) {
             // regenerating the tree
             treeNode = createTree(NLPUtil.getSyntaxTree(
-                    taggedQuestion.replaceAll("(?i)(^(give|show|tell) me (a|the) (count|number) of)", "").trim())).
-                    getFirstChild();
+                    taggedQuestion.replaceAll("(?i)(^(give|show|tell) me (a|the) (count|number) of)", "").trim()))
+                    .getFirstChild();
             nodes[0].setQuesType(QueryType.COUNT);
         }
-
 
         for (int i = 0; i < treeNode.children.size(); i++) {
             TreeNode cur = treeNode.children.get(i);
 
             if (selectLeaf(cur).toLowerCase().trim().startsWith(trigger.trim())) { // a node with a trigger
-                // sometimes the node of a trigger has sibling nodes, the siblings need to be added
+                // sometimes the node of a trigger has sibling nodes, the siblings need to be
+                // added
                 LinkedList<TreeNode> toSearch = new LinkedList<>();
                 toSearch.add(cur);
-                while (!toSearch.isEmpty()) {  // search for ancestors of the node where the trigger is located
+                while (!toSearch.isEmpty()) { // search for ancestors of the node where the trigger is located
                     TreeNode pop = toSearch.pop();
                     if (selectLeaf(pop).toLowerCase().trim().startsWith(trigger.trim())) { // the ancestor is found
                         if (!pop.children.isEmpty()) {
@@ -1719,7 +1771,8 @@ public class EDG {
                 }
             } else if (!trigger.trim().contains(selectLeaf(cur).toLowerCase().trim())) {
                 // a node without trigger
-                // and the current node is not a part of the trigger, e.g., 'give' is a part of 'give me'
+                // and the current node is not a part of the trigger, e.g., 'give' is a part of
+                // 'give me'
                 if (!cur.data.trim().equals("CC")) { // not a conjunction such as 'and'
                     toAdd.add(cur);
                 }
@@ -1754,7 +1807,8 @@ public class EDG {
     }
 
     /**
-     * node2 is referred from node1, calculate the start and the end in node2 and set them to the edge.
+     * node2 is referred from node1, calculate the start and the end in node2 and
+     * set them to the edge.
      *
      * @param node1Idx node1 id
      * @param node2Idx node2 id
@@ -1763,7 +1817,7 @@ public class EDG {
     private void ComputeEdgeStartEnd(int node1Idx, int node2Idx, TreeNode treeNode) {
 
         edges[node1Idx][node2Idx].setEdgeType(Edge.TYPE_REFER);
-        edges[node1Idx][node2Idx].start = TreeNode.getFirstLeaf(treeNode).index;  // start
+        edges[node1Idx][node2Idx].start = TreeNode.getFirstLeaf(treeNode).index; // start
         edges[node1Idx][node2Idx].end = TreeNode.getLastLeaf(treeNode).index + 1; // end
         // [start, end)
     }
@@ -1801,7 +1855,7 @@ public class EDG {
             if (node.getNodeType() == Node.NODE_TYPE_ENTITY) { // current node is an entity
                 // create a VPNode
                 node1 = createNode(Node.NODE_TYPE_VERB);
-                nodeIdxs.add(node1.getNodeID());    // add it to the result list
+                nodeIdxs.add(node1.getNodeID()); // add it to the result list
                 ComputeNodeStartEnd(node1, treeNode);
                 edges[node.getNodeID()][node1.getNodeID()].edgeType = Edge.TYPE_VERB;// VP edge
 
@@ -1912,7 +1966,8 @@ public class EDG {
                 edges[node.getNodeID()][node0.getNodeID()].setEdgeType(Edge.TYPE_VERB); // set the edge
                 listg.add(node0.getNodeID()); // add it to the result list
 
-                if (node0.getStr().matches("(.*?) ((is|was|are|were) )?also (.*)")) { // the case with 'also' is easily misidentified
+                if (node0.getStr().matches("(.*?) ((is|was|are|were) )?also (.*)")) { // the case with 'also' is easily
+                                                                                      // misidentified
                     return listg;
                 }
 
@@ -1922,7 +1977,6 @@ public class EDG {
             } else { // current node is description
                 node0 = node;
             }
-
 
             // further breakdown according to special circumstances
             if (len == 2) { // SQ has two children
@@ -1944,7 +1998,8 @@ public class EDG {
                                     Node nvpNode = createNode(Node.NODE_TYPE_NON_VERB); // VPNode is already generated
                                     nvpNode.setEnd(node0.getEnd());
                                     nvpNode.setStart(node0.getEnd() - clause.split(" ").length);
-                                    nvpNode.setStr(clause.replaceAll("(which|what|who|where|when) ", ""));// remove the lead word
+                                    nvpNode.setStr(clause.replaceAll("(which|what|who|where|when) ", ""));// remove the
+                                                                                                          // lead word
 
                                     // modify the string of original VP
                                     node0.setEnd(nvpNode.getStart() - 1);
@@ -1960,11 +2015,13 @@ public class EDG {
                             logger.error("SQ not Cover-2, SQ guided by auxiliary verb:" + question);
                         }
                     } else if (judgeIfBeWord(treeNode1.str)
-                            && treeNode.parent.children.get(0).data.trim().equals("WHPP")) { // be verb, and SQ is preceded by WHPP
+                            && treeNode.parent.children.get(0).data.trim().equals("WHPP")) { // be verb, and SQ is
+                                                                                             // preceded by WHPP
                         // e.g. "In what nn is xxx"
                         if (treeNode2.data.trim().equals("NP")) { // the right child is NP
                             if (containClause(treeNode2)) {
-                                NP(treeNode2, node0); // node0 is either a new entity node, description node, or a root node
+                                NP(treeNode2, node0); // node0 is either a new entity node, description node, or a root
+                                                      // node
                             }
                         } else if (treeNode2.data.trim().equals("VP")) { // passive
                             // continue processing by substituting into SQ
@@ -1978,7 +2035,8 @@ public class EDG {
                             logger.error("SQ not Cover-3:" + question);
                         }
                     } else if (judgeIfBeWord(treeNode1.str) && ((treeNode2.data.trim().equals("VP")
-                            || (treeNode2.data.trim().equals("S") && treeNode2.children.size() == 1 && treeNode2.children.get(0).data.trim().equals("VP "))))) { // passive
+                            || (treeNode2.data.trim().equals("S") && treeNode2.children.size() == 1
+                                    && treeNode2.children.get(0).data.trim().equals("VP "))))) { // passive
                         // e.g., what city is owned by
                         // tree2 is either VP or S, VP is under S
                         // put it to SQ to process recursively
@@ -1999,11 +2057,15 @@ public class EDG {
                                     || edges[0][1].edgeType == Edge.TYPE_NO_EDGE) {
                                 NP(treeNode2, node0);
                             }
-                        } else if (treeNode2.data.startsWith("PP")) {//e.g. what is of xxx
+                        } else if (treeNode2.data.startsWith("PP")) {// e.g. what is of xxx
                             if (containClause(treeNode2)) {
                                 PP(treeNode2, node0);
                             }
-                        } else if (treeNode2.data.trim().equals("ADJP") || treeNode2.data.trim().equals("ADVP")) { // e.g. what xxx is adj./adv.
+                        } else if (treeNode2.data.trim().equals("ADJP") || treeNode2.data.trim().equals("ADVP")) { // e.g.
+                                                                                                                   // what
+                                                                                                                   // xxx
+                                                                                                                   // is
+                                                                                                                   // adj./adv.
                             if (treeNode2.children.size() == 2) {
                                 TreeNode treeNode21 = treeNode2.children.get(0);
                                 TreeNode treeNode22 = treeNode2.children.get(1);
@@ -2013,7 +2075,7 @@ public class EDG {
                                     logger.error("SQ not Cover-4:" + question);
                                 }
                             }
-                        } else if (treeNode2.data.startsWith("VP")) { // e.g. what xxx is -ed by  /has come ...
+                        } else if (treeNode2.data.startsWith("VP")) { // e.g. what xxx is -ed by /has come ...
                             // recursive to SQ
                             List<Integer> listg2 = SQ(treeNode2, node0);
                             if (listg2.size() > 0) {
@@ -2021,12 +2083,12 @@ public class EDG {
                                     edges[node0.getNodeID()][in2].edgeType = Edge.TYPE_REFER;
                                 }
                             }
-                        } else if (treeNode2.data.trim().equals("S")) {//e.g. ?
+                        } else if (treeNode2.data.trim().equals("S")) {// e.g. ?
                             if (treeNode2.children.size() == 2
                                     && treeNode2.children.get(0).data.trim().equals("NP")
                                     && treeNode2.children.get(1).data.trim().equals("VP")) {
-                                TreeNode treeNode21 = treeNode2.children.get(0);//NP
-                                TreeNode treeNode22 = treeNode2.children.get(1);//VP
+                                TreeNode treeNode21 = treeNode2.children.get(0);// NP
+                                TreeNode treeNode22 = treeNode2.children.get(1);// VP
 
                                 if (treeNode21.children.size() == 2) { // two nodes are under NP
                                     TreeNode treeNode211 = treeNode21.children.get(0);
@@ -2049,7 +2111,8 @@ public class EDG {
 
                                         // NVP edge
                                         edges[node1.getNodeID()][listg1.get(0)].edgeType = Edge.TYPE_NON_VERB;
-                                        edges[node0.getNodeID()][node1.getNodeID()].start = nodes[listg1.get(0)].getStart();
+                                        edges[node0.getNodeID()][node1.getNodeID()].start = nodes[listg1.get(0)]
+                                                .getStart();
 
                                         // tree2 is handled to SQ
                                         List<Integer> listg2 = SQ(treeNode22, node1);
@@ -2116,7 +2179,7 @@ public class EDG {
                             String tempString = selectLeaf(treeNode22, "");
                             if (edges[0][1].edgeType == Edge.TYPE_NO_EDGE) {
                                 if (tempString.trim().startsWith("how")) { // question of type COUNT
-                                    //nodes[0].setQuesType(QueryType.COUNT);
+                                    // nodes[0].setQuesType(QueryType.COUNT);
                                     nodes[0].setQuesType(QueryType.COMMON);
                                     String[] tempString1 = selectLeaf(treeNode22, "").toLowerCase().split(" ");
                                     nodes[0].setTrigger(tempString1[1] + " " + tempString1[2]);
@@ -2144,8 +2207,8 @@ public class EDG {
                                 ComputeEdgeStartEnd(node0.getNodeID(), node1.getNodeID(), treeNode2);
                             }
 
-                        } else if (treeNode2.data.trim().equals("SBAR") || treeNode2.data.trim().equals("SBARQ")) { // subordinate clause
-
+                        } else if (treeNode2.data.trim().equals("SBAR") || treeNode2.data.trim().equals("SBARQ")) { // subordinate
+                                                                                                                    // clause
 
                             if (treeNode2.children.size() == 1) {
                                 listg = SQ(treeNode2.children.get(0), node0);
@@ -2195,7 +2258,8 @@ public class EDG {
                     }
                     List<Integer> listg2 = SQ(treeNode2, node0);
 
-                } else if ((treeNode1.data.startsWith("TO") || treeNode1.data.startsWith("IN")) && (treeNode2.data.equals("VP "))) {
+                } else if ((treeNode1.data.startsWith("TO") || treeNode1.data.startsWith("IN"))
+                        && (treeNode2.data.equals("VP "))) {
                     List<Integer> listg1 = SQ(treeNode2, node0);
                     if (listg1.size() > 0) {
                         for (int in1 : listg1) {
@@ -2249,7 +2313,7 @@ public class EDG {
                             }
                             SQ(treeNode3, node0);
                         } else if ((treeNode2.data.equals("NP ")) && (treeNode3.data.equals("PP "))) {
-                            //System.out.println(syntaxTreeText);
+                            // System.out.println(syntaxTreeText);
                             if (containClause(treeNode2)) {
                                 NP(treeNode2, node0);
                             }
@@ -2259,7 +2323,14 @@ public class EDG {
                         }
 
                     } else if (treeNode1.data.startsWith("VB") && (judgeIfContainBeWord(ss))
-                            && IsPPOnlyIN(treeNode3) && treeNode2.data.equals("NP ") && treeNode3.data.equals("PP ")) { // inversion, e.g., What country is Mount Everest in?
+                            && IsPPOnlyIN(treeNode3) && treeNode2.data.equals("NP ") && treeNode3.data.equals("PP ")) { // inversion,
+                                                                                                                        // e.g.,
+                                                                                                                        // What
+                                                                                                                        // country
+                                                                                                                        // is
+                                                                                                                        // Mount
+                                                                                                                        // Everest
+                                                                                                                        // in?
                         if (containClause(treeNode2)) {
                             NP(treeNode2, node0);
                         }
@@ -2273,7 +2344,7 @@ public class EDG {
                         SQ(treeNode3, node0);
 
                     } else if (treeNode1.data.startsWith("VB") && (judgeIfContainBeWord(ss))
-                            && treeNode2.data.equals("NP ") && treeNode3.data.equals("NP ") && sign == 1) {//Yes/no
+                            && treeNode2.data.equals("NP ") && treeNode3.data.equals("NP ") && sign == 1) {// Yes/no
 
                         if (containClause(treeNode2)) {
                             NP(treeNode2, node0);
@@ -2281,9 +2352,11 @@ public class EDG {
                         if (containClause(treeNode3)) {
                             NP(treeNode3, node0);
                         }
-                        //System.out.println(question);
-                        //System.out.println(syntaxTreeText);
-                    } else if (treeNode1.data.equals("VP ") && treeNode2.data.equals("CC ") && (treeNode3.data.equals("VP ") || treeNode3.data.equals("S ") || treeNode3.data.equals("SQ "))) {
+                        // System.out.println(question);
+                        // System.out.println(syntaxTreeText);
+                    } else if (treeNode1.data.equals("VP ") && treeNode2.data.equals("CC ")
+                            && (treeNode3.data.equals("VP ") || treeNode3.data.equals("S ")
+                                    || treeNode3.data.equals("SQ "))) {
                         // concatenated conjunctions, e.g., is xx and written by xx
                         if (node.getNodeType() == Node.NODE_TYPE_ENTITY) {
                             listg.clear();
@@ -2313,7 +2386,10 @@ public class EDG {
                             }
 
                         }
-                    } else if (treeNode2.data.equals("NP ") && treeNode3.data.equals("SBAR ")) {// NP + SBAR: subordinate pattern, it needs the reference
+                    } else if (treeNode2.data.equals("NP ") && treeNode3.data.equals("SBAR ")) {// NP + SBAR:
+                                                                                                // subordinate pattern,
+                                                                                                // it needs the
+                                                                                                // reference
 
                         // create a new entity node, and create an reference edge
                         Node node1 = createNode(Node.NODE_TYPE_ENTITY);
@@ -2414,7 +2490,8 @@ public class EDG {
                         }
                         SQ(treeNode3, node0);
                     }
-                } else if (treeNode1.data.startsWith("VP") && treeNode2.data.equals("NP ") && treeNode3.data.equals("NP ")) {
+                } else if (treeNode1.data.startsWith("VP") && treeNode2.data.equals("NP ")
+                        && treeNode3.data.equals("NP ")) {
 
                 } else if (treeNode1.data.equals("NP ")) {
                     if (containClause(treeNode1)) {
@@ -2435,7 +2512,8 @@ public class EDG {
     }
 
     /**
-     * process the 'PP' phrase, e.g. `... of the xx that ..`, referred entity will be generated
+     * process the 'PP' phrase, e.g. `... of the xx that ..`, referred entity will
+     * be generated
      *
      * @param treeNode the syntax treeNode node tagged 'PP'
      * @param node     the EDG node to be attached
@@ -2444,7 +2522,7 @@ public class EDG {
     private List<Integer> PP(TreeNode treeNode, Node node) { // call it when new nodes are generated
         List<Integer> listg = new ArrayList<>();
         if (treeNode.children.size() != 2 && !treeNode.children.get(0).data.equals("ADVP ")) {
-            //System.out.println("Error in PP");
+            // System.out.println("Error in PP");
             return listg;
         }
         TreeNode temp = treeNode.children.get(treeNode.children.size() - 1);// PP the most right node
@@ -2458,8 +2536,10 @@ public class EDG {
                     temp.getFirstChild().getData().trim().equals("NP")
                     && temp.getLastChild().getData().trim().equals("PP")
                     && containClause(temp.getLastChild())) {
-                // PP is nested in NP, and NP of PP contains subordinate clauses, then the new entity is needed
-                // e.g. the total number of the cast number of the television shows whose actress is Joey Mclntyre
+                // PP is nested in NP, and NP of PP contains subordinate clauses, then the new
+                // entity is needed
+                // e.g. the total number of the cast number of the television shows whose
+                // actress is Joey Mclntyre
                 Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                 ComputeEdgeStartEnd(node.getNodeID(), entityNode.getNodeID(), temp);
 
@@ -2517,13 +2597,16 @@ public class EDG {
         Node node0 = null; // temp node for the generation of description
 
         boolean isRooten = false; // if it's a root entity
-        if (node.getNodeType() == Node.NODE_TYPE_ROOT) { // if current node is a root node, the additional entity should be generated
+        if (node.getNodeType() == Node.NODE_TYPE_ROOT) { // if current node is a root node, the additional entity should
+                                                         // be generated
             isRooten = true;
         }
 
         Node entityNode = new Node();
         if (node.getNodeType() == Node.NODE_TYPE_ENTITY) {
-            // if this layer generates a new non-ver description node, nodes generated afterwards are connected to the current node, otherwise it is connected to the upper-level verb/non-verb nodes
+            // if this layer generates a new non-ver description node, nodes generated
+            // afterwards are connected to the current node, otherwise it is connected to
+            // the upper-level verb/non-verb nodes
             // create a new NVP node
             node0 = createNode(Node.NODE_TYPE_NON_VERB);
 
@@ -2534,7 +2617,6 @@ public class EDG {
         } else if (isRooten) { // root Entity
             node0 = node;
             entityNode = nodes[node.getNodeID() + 1]; // entity node after root
-
 
         } else { // it's neither an entity nor root, it's description node
             node0 = node;
@@ -2549,7 +2631,8 @@ public class EDG {
                     TreeNode treeNode3 = treeNode.children.get(2);
                     if (treeNode2.data.trim().equals("PP") && treeNode3.data.trim().equals("SBAR")) { // NP+PP+SBAR
 
-                        if (node.getNodeType() != Node.NODE_TYPE_ROOT) { // current node is not root, but an existing entity
+                        if (node.getNodeType() != Node.NODE_TYPE_ROOT) { // current node is not root, but an existing
+                                                                         // entity
                             // create a new entity node and add it to nodes
                             entityNode = createNode(Node.NODE_TYPE_ENTITY);
                             // record an reference edge
@@ -2576,8 +2659,9 @@ public class EDG {
                         ComputeNodeStartEnd(node1, treeNode2);
                         nodes[nvpNodeIdx].setEnd(node1.getEnd());
 
-                    } else if (NPNode.data.trim().equals("NP") && treeNode2.data.trim().equals(",") && treeNode3.data.trim().equals("NP")) {
-                        if (node.getNodeType() == Node.NODE_TYPE_ROOT) {  // connected directly to root
+                    } else if (NPNode.data.trim().equals("NP") && treeNode2.data.trim().equals(",")
+                            && treeNode3.data.trim().equals("NP")) {
+                        if (node.getNodeType() == Node.NODE_TYPE_ROOT) { // connected directly to root
                             logger.error("NP not Cover-2:" + question);
                         } else { // not connected directly to root
                             if (containClause(NPNode)) {
@@ -2654,8 +2738,12 @@ public class EDG {
                             nvpDesNode.setNodeType(Node.NODE_TYPE_NON_VERB); // the node type is nvp
                             ComputeNodeStartEnd(nvpDesNode, treeNode);
                             nodeIdxs.add(nvpDesNode.getNodeID());
-                            edges[entityNode.getNodeID()][nvpDesNode.getNodeID()].edgeType = Edge.TYPE_NON_VERB;// the edge type is nvp
-                        } else {  // current node is not root
+                            edges[entityNode.getNodeID()][nvpDesNode.getNodeID()].edgeType = Edge.TYPE_NON_VERB;// the
+                                                                                                                // edge
+                                                                                                                // type
+                                                                                                                // is
+                                                                                                                // nvp
+                        } else { // current node is not root
                             nvpDesNode = node0; // get NVP node as description node
                         }
 
@@ -2676,11 +2764,13 @@ public class EDG {
                                 logger.error("NP not Cover-8:" + question);
                             }
                         }
-                    } else if (treeNode2.data.startsWith("SBAR") || treeNode2.data.trim().equals("VP")) { // NP + SBAR / NP+SBARQ / NP+VP
+                    } else if (treeNode2.data.startsWith("SBAR") || treeNode2.data.trim().equals("VP")) { // NP + SBAR /
+                                                                                                          // NP+SBARQ /
+                                                                                                          // NP+VP
 
                         if (treeNode2.data.trim().equals("VP") && treeNode2.getChildren().size() == 1) {
                             // VP of (NP + VP) is one word, no addition entity
-                            //e.g. has A written
+                            // e.g. has A written
                             return nodeIdxs;
                         }
 
@@ -2695,17 +2785,17 @@ public class EDG {
                             nodes[numNode] = entityNode;
                             numNode++;
                             entityNode.setNodeType(Node.NODE_TYPE_ENTITY); // new entity
-                            edges[node0.getNodeID()][entityNode.getNodeID()].edgeType = Edge.TYPE_REFER; // reference edge
+                            edges[node0.getNodeID()][entityNode.getNodeID()].edgeType = Edge.TYPE_REFER; // reference
+                                                                                                         // edge
                             ComputeEdgeStartEnd(node0.getNodeID(), entityNode.getNodeID(), treeNode);
                         } else {
                             logger.error("NP not Cover-9:" + question);
                         }
 
-
                         // process NP node at first
                         List<Integer> nvpDesNode = NP(NPNode, entityNode);
-                        int in1 = nvpDesNode.get(0); //NVP Node
-                        edges[entityNode.getNodeID()][in1].edgeType = Edge.TYPE_NON_VERB; //NVP edge
+                        int in1 = nvpDesNode.get(0); // NVP Node
+                        edges[entityNode.getNodeID()][in1].edgeType = Edge.TYPE_NON_VERB; // NVP edge
 
                         if (treeNode2.data.startsWith("SBAR")) { // NP+SBAR || NP+SBARQ
                             nodeIdxs.addAll(SBAR(treeNode2, entityNode, isRooten));
@@ -2754,7 +2844,8 @@ public class EDG {
                 }
             } else { // other cases
                 for (TreeNode temp : treeNode.children) {
-                    if (temp.data.trim().equals("VP") || temp.data.trim().equals("S") || temp.data.trim().equals("SQ")) {
+                    if (temp.data.trim().equals("VP") || temp.data.trim().equals("S")
+                            || temp.data.trim().equals("SQ")) {
                         SQ(temp, node0);
                     } else if (temp.data.trim().equals("PP")) {
                         PP(temp, node0);
@@ -2775,7 +2866,7 @@ public class EDG {
         }
 
         // other cases
-        if (treeNode.children.size() == 2) {        // current node has two children
+        if (treeNode.children.size() == 2) { // current node has two children
             TreeNode treeNode2 = treeNode.children.get(1);
             if (treeNode2.data.trim().equals("WHPP")) { // Of which ...
                 if (edges[0][1].edgeType == Edge.TYPE_NO_EDGE) { // no edge from Node0 to Node1
@@ -2783,7 +2874,9 @@ public class EDG {
                     edges[0][1].edgeType = Edge.TYPE_QUEST;
                     ComputeNodeStartEnd(nodes[0], treeNode2);
                     nodes[0].setQuesType(QueryType.COMMON);
-                    nodes[0].setTrigger(selectLeaf(treeNode2.children.get(1).children.get(0), "")); // get trigger, e.g., 'which' in 'of (which)'
+                    nodes[0].setTrigger(selectLeaf(treeNode2.children.get(1).children.get(0), "")); // get trigger,
+                                                                                                    // e.g., 'which' in
+                                                                                                    // 'of (which)'
                 } else { // there's edge from Node0 to Node1
                     // create a new entity node
                     Node node1 = new Node();
@@ -2811,14 +2904,17 @@ public class EDG {
      * @return the IDs of the nodes generated
      */
     private List<Integer> SBAR(TreeNode treeNode, Node node_en, boolean isRooten) {
-        List<Integer> listg = new ArrayList<>();  // the result node list
+        List<Integer> listg = new ArrayList<>(); // the result node list
         List<Integer> listg2 = new ArrayList<>(); // results of recursive functions
-        if (treeNode.children.size() == 2) {      // SBAR has two children
-            String substr = selectLeaf(treeNode.children.get(0), "").toLowerCase().trim(); // string of the node where the introductory word is located
+        if (treeNode.children.size() == 2) { // SBAR has two children
+            String substr = selectLeaf(treeNode.children.get(0), "").toLowerCase().trim(); // string of the node where
+                                                                                           // the introductory word is
+                                                                                           // located
             if (substr.equals("that") || substr.equals("which")) {
                 listg2 = S(treeNode.children.get(1), node_en); // S->VP
                 // omitting relational words
-            } else if (substr.equals("who") || substr.equals("whom") || substr.equals("when") || substr.equals("where")) {
+            } else if (substr.equals("who") || substr.equals("whom") || substr.equals("when")
+                    || substr.equals("where")) {
                 listg2 = S(treeNode.children.get(1), node_en); // S->VP
 
                 for (Integer in2 : listg2) { // add information
@@ -2929,7 +3025,7 @@ public class EDG {
         if (listg2.size() > 1) {
             // System.out.println("--2");
         }
-        for (int in2 : listg2) { //verb node
+        for (int in2 : listg2) { // verb node
             edges[node_en.getNodeID()][in2].edgeType = 3;
 
             if (isRooten) {
@@ -2949,7 +3045,7 @@ public class EDG {
      * @param node     entity node
      * @return the nodeID of node
      */
-    private int WH(TreeNode treeNode, Node node) {//common
+    private int WH(TreeNode treeNode, Node node) {// common
         if (treeNode.data.trim().equals("WHNP")) {
             int len = treeNode.children.size();
             if (len == 1) {
@@ -3009,7 +3105,7 @@ public class EDG {
                         in1 = listg1.get(0); // nodeID returned from NP
                         edges[node.getNodeID()][in1].edgeType = Edge.TYPE_NON_VERB;
 
-                        if (treeNode2.data.equals("PP ")) {  // WHNP + PP
+                        if (treeNode2.data.equals("PP ")) { // WHNP + PP
                             if (containClause(treeNode2)) { // tree2 has suboridinate clause
                                 List<Integer> listg2 = PP(treeNode2, nodes[in1]);
                                 for (int in2 : listg2) {
@@ -3035,7 +3131,8 @@ public class EDG {
                             TreeNode treeNode11 = treeNode1.children.get(0);
                             TreeNode treeNode12 = treeNode1.children.get(1);
                             TreeNode treeNode13 = treeNode1.children.get(2);
-                            if (treeNode11.data.equals("WDT ") && treeNode12.data.equals("JJ ") && (treeNode13.data.equals("NN ") || treeNode13.data.equals("NP "))) {
+                            if (treeNode11.data.equals("WDT ") && treeNode12.data.equals("JJ ")
+                                    && (treeNode13.data.equals("NN ") || treeNode13.data.equals("NP "))) {
 
                                 // create a new NVP node
                                 Node node1 = new Node();
@@ -3043,14 +3140,16 @@ public class EDG {
                                 nodes[numNode] = node1;
                                 numNode++;
                                 node1.setNodeType(Node.NODE_TYPE_NON_VERB);
-                                node1.setStart(TreeNode.getFirstLeaf(treeNode12).index); // set start as the start of tree12
+                                node1.setStart(TreeNode.getFirstLeaf(treeNode12).index); // set start as the start of
+                                                                                         // tree12
                                 node1.setEnd(getLastLeaf(treeNode13).index + 1); // set end as the end of tree13 + 1
                                 edges[node.getNodeID()][node1.getNodeID()].edgeType = Edge.TYPE_NON_VERB;
 
                                 if (treeNode13.data.equals("NP ")) { // tree13 is NP
                                     NP(treeNode13, node);
                                 }
-                            } else if (treeNode11.data.equals("WDT ") && treeNode12.data.equals("NN ") && treeNode13.data.equals("POS ")) {
+                            } else if (treeNode11.data.equals("WDT ") && treeNode12.data.equals("NN ")
+                                    && treeNode13.data.equals("POS ")) {
                                 // possessive, e.g., which xxx 's
                                 Node node1 = new Node();
                                 node1.setNodeID(numNode);
@@ -3112,10 +3211,10 @@ public class EDG {
     /**
      * determine whether the questions is a special sentence, handle if it is
      *
-     * @return true= special sentence, handle it；false= not special sentence, do not handle it right now
+     * @return true= special sentence, handle it；false= not special sentence, do not
+     *         handle it right now
      */
     private boolean JudgeSpecialSent() {
-
 
         Matcher matcher3 = Pattern.compile("(?i)((.*) (when|during) (.*))").matcher(question.trim());
         if (KB == KBEnum.Freebase && matcher3.matches()) {
@@ -3146,8 +3245,9 @@ public class EDG {
             return true;
         }
 
-        //Which band's former member are Kevin Jonas and Joe Jonas?
-        Matcher matcher2 = Pattern.compile("(?i)((which|what|whose) (.*)('s|s') ((.*) (is|are|was|were) (.*)))").matcher(question.trim());
+        // Which band's former member are Kevin Jonas and Joe Jonas?
+        Matcher matcher2 = Pattern.compile("(?i)((which|what|whose) (.*)('s|s') ((.*) (is|are|was|were) (.*)))")
+                .matcher(question.trim());
         if (matcher2.matches()) {
             System.out.println("[DEBUG] SpecialSent Matcher2 Matching:" + question);
             if (matcher2.group(3).matches("(.*) (whose|who|which|where|when) (.*)")) {// subordinate clause
@@ -3164,7 +3264,7 @@ public class EDG {
             edges[rootNode.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_QUEST);
 
             if (rootNode.getTrigger().equals("whose")) { // process the special case of 'whose'
-                //whose network's parent organisation is Comcast
+                // whose network's parent organisation is Comcast
 
                 // new desNode1, network is #entity1
                 Node desNode1 = createNode(Node.NODE_TYPE_NON_VERB);
@@ -3179,17 +3279,13 @@ public class EDG {
                 edges[desNode1.getNodeID()][entityNode1.getNodeID()].setStart(desNode1.getEnd() + 1);
                 edges[desNode1.getNodeID()][entityNode1.getNodeID()].setEnd(question.split(" ").length);
 
-
                 // create a desNode2, as a modifier of entityNode1
                 Node desNode2 = createNode(Node.NODE_TYPE_VERB);
                 desNode2.setStr(matcher2.group(5)
-                        .replace("?", "").
-                                replace(".", "").
-                                replace("!", "").trim());
+                        .replace("?", "").replace(".", "").replace("!", "").trim());
                 desNode2.setStart(desNode1.getEnd() + 1);
                 desNode2.setEnd(desNode2.getStart() + desNode2.getStr().split(" ").length);
                 edges[entityNode1.getNodeID()][desNode2.getNodeID()].setEdgeType(Edge.TYPE_VERB);
-
 
             } else {
                 // create desNode1, e.g., 'xx' in what (xx)'s
@@ -3202,9 +3298,7 @@ public class EDG {
                 // new desNode2, e.g. y in what (x)'s is (y)
                 Node desNode2 = createNode(Node.NODE_TYPE_VERB);
                 desNode2.setStr(matcher2.group(5)
-                        .replace("?", "").
-                                replace(".", "").
-                                replace("!", "").trim());
+                        .replace("?", "").replace(".", "").replace("!", "").trim());
                 desNode2.setStart(desNode1.getEnd() + 1);
                 desNode2.setEnd(desNode2.getStart() + desNode2.getStr().split(" ").length);
                 edges[entityNode.getNodeID()][desNode2.getNodeID()].setEdgeType(Edge.TYPE_VERB);
@@ -3216,7 +3310,7 @@ public class EDG {
         // e.g., what is the number of.
         Matcher matcher1 = Pattern.compile("(?i)(^what is (the .*)?(number|amount) of (.*)$)").matcher(question.trim());
         if (matcher1.matches()) {
-            //System.out.println(matcher.group(4));
+            // System.out.println(matcher.group(4));
 
             System.out.println("[DEBUG] SpecialSent Matcher1 Matching:" + question);
             // new root, the question type is COUNT
@@ -3228,12 +3322,9 @@ public class EDG {
             Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
             edges[rootNode.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_QUEST);
 
-            String npString = matcher1.group(4).
-                    replace("?", "").
-                    replace(".", "").
-                    replace("!", "");
+            String npString = matcher1.group(4).replace("?", "").replace(".", "").replace("!", "");
             String tempSyntax = NLPUtil.getSyntaxTree(npString);
-            //System.out.println(TransferParentheses(tempSyntax));
+            // System.out.println(TransferParentheses(tempSyntax));
             TreeNode npTreeNode = createTree(tempSyntax).getFirstChild();
             if (npTreeNode.data.trim().equals("NP")) {
                 NP(npTreeNode, rootNode);
@@ -3266,10 +3357,7 @@ public class EDG {
             edges[rootNode.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_QUEST);
 
             // S/SQ/VP
-            String npString = matcher.group(5).
-                    replace("?", "").
-                    replace(".", "").
-                    replace("!", "");
+            String npString = matcher.group(5).replace("?", "").replace(".", "").replace("!", "");
             String tempSyntax = NLPUtil.getSyntaxTree(npString);
             TreeNode STreeNode = createTree(tempSyntax).getFirstChild();
             if (STreeNode.data.trim().equals("S")) {
@@ -3334,7 +3422,8 @@ public class EDG {
             if (treeNode.data.trim().equals("FRAG")) { // questions generated incorrectly by CoreNLP, marked as FRAG
 
                 // detect if it is a special question
-                Matcher matcher = Pattern.compile("^(?i)((which|where|who|what|whose|when) (.*))").matcher(taggedQuestion);
+                Matcher matcher = Pattern.compile("^(?i)((which|where|who|what|whose|when) (.*))")
+                        .matcher(taggedQuestion);
 
                 //
                 if (matcher.matches()) {
@@ -3349,7 +3438,7 @@ public class EDG {
 
                     // CoreNLP generation has failed, generate syntax tree of the following phrase
                     String newSynTree = NLPUtil.getSyntaxTree(matcher.group(3));
-                    System.out.println("partTree:" + newSynTree);  // print the syntax tree of phrase
+                    System.out.println("partTree:" + newSynTree); // print the syntax tree of phrase
                     TreeNode newTreeNode = createTree(newSynTree);
                     if (newTreeNode.children.size() > 0) {
                         newTreeNode = newTreeNode.children.get(0);
@@ -3378,15 +3467,14 @@ public class EDG {
                     String trigger = getImperativeTrigger(taggedQuestion);
                     node.setTrigger(trigger);
                     if (judgeIfCount(question)) {
-                        //node.setQuesType(QueryType.COUNT);
+                        // node.setQuesType(QueryType.COUNT);
                         node.setQuesType(QueryType.COMMON);
                     } else {
                         node.setQuesType(QueryType.LIST);
                     }
 
-                    String description = taggedQuestion.replaceAll("(?i)" + trigger, "").
-                            replaceAll("\\?", "").replaceAll("\\.", "").
-                            replaceAll("!", "").trim();
+                    String description = taggedQuestion.replaceAll("(?i)" + trigger, "").replaceAll("\\?", "")
+                            .replaceAll("\\.", "").replaceAll("!", "").trim();
 
                     // create a new entity
                     Node newNode = createNode(Node.NODE_TYPE_ENTITY);
@@ -3405,7 +3493,7 @@ public class EDG {
             // prefix, e.g., “Of which ... ?”
             String prefix = null;
             if (treeNode.data.equals("PP ")) { // of which...?
-                prefix = selectLeaf(treeNode.children.get(0));  // get the prefix
+                prefix = selectLeaf(treeNode.children.get(0)); // get the prefix
                 treeNode = treeNode.children.get(1); // the following is treat as a normal question
 
             }
@@ -3415,11 +3503,12 @@ public class EDG {
                 // the string of current sub-tree
                 String temp = selectLeaf(treeNode);
 
-                // determine three situations: imperative / general question / question word in the middle
+                // determine three situations: imperative / general question / question word in
+                // the middle
                 if (judgeIfImperative(temp)) { // imperative
 
                     if (judgeIfCount(temp)) { // determine if it's COUNT
-                        //node.setQuesType(QueryType.COUNT); // the question type is COUNT
+                        // node.setQuesType(QueryType.COUNT); // the question type is COUNT
                         node.setQuesType(QueryType.COMMON);
                     } else { // general question
                         node.setQuesType(QueryType.LIST); // the question type is LIST
@@ -3430,8 +3519,8 @@ public class EDG {
 
                     TreeNode treeNode1 = treeNode.getFirstChild(); // the most left child of node S
                     if (treeNode.children.size() <= 2) { // the number of nodes under S is smaller than or equal to 2
-                        if (treeNode1.data.equals("VP ")) { //(VP (VB List) (NP the xx of xx..))
-                            imperativeSentence(node.getNodeID(), node.getTrigger(), treeNode1);  // imperative
+                        if (treeNode1.data.equals("VP ")) { // (VP (VB List) (NP the xx of xx..))
+                            imperativeSentence(node.getNodeID(), node.getTrigger(), treeNode1); // imperative
                         } else {
                             String restString = taggedQuestion.replaceAll("(?i)" + triggerWord, "");
                             Node entityNode = createNode(Node.NODE_TYPE_ENTITY); // new entity node
@@ -3452,7 +3541,7 @@ public class EDG {
 
                             // create a new entity node
                             Node node0 = createNode(Node.NODE_TYPE_ENTITY);
-                            edges[node.getNodeID()][node0.getNodeID()].edgeType = Edge.TYPE_QUEST; //quest
+                            edges[node.getNodeID()][node0.getNodeID()].edgeType = Edge.TYPE_QUEST; // quest
 
                             // create a NPV description node
                             Node node1 = createNode(Node.NODE_TYPE_NON_VERB);
@@ -3478,7 +3567,7 @@ public class EDG {
                                         taggedQuestion.replaceAll("(?i)(^list)", "")
                                                 .replace(".", "").trim());
                                 TreeNode newTreeNode = createTree(newSyntaxTree);
-                                //System.out.println(TransferParentheses(newSyntaxTree));
+                                // System.out.println(TransferParentheses(newSyntaxTree));
 
                                 for (TreeNode tmpTreeNode : newTreeNode.getChildren()) {
                                     ConcateDes(tmpTreeNode, entityNode.getNodeID(), 0);
@@ -3515,7 +3604,7 @@ public class EDG {
                             logger.error("general question not covered:" + question);
                         } else if (treeNode.children.size() == 2) { // VP = auxiliary verb + X
 
-                            if (treeNode.children.get(1).data.trim().equals("SBAR")) {//VBZ+SBAR
+                            if (treeNode.children.get(1).data.trim().equals("SBAR")) {// VBZ+SBAR
                                 // Does Breaking Bad have more episodes than Game of Thrones?
                                 TreeNode SBARNode = treeNode.getChildren().get(1);
                                 if (!SBARNode.children.isEmpty()) {// empty list check
@@ -3536,10 +3625,11 @@ public class EDG {
 
                             } else if (treeNode.children.get(1).data.trim().equals("NP")) { // VBZ + NP
                                 /*
-                                  similar as SBAR
+                                 * similar as SBAR
                                  */
                                 TreeNode NPNode = treeNode.children.get(1);
-                                List<TreeNode> toHandle = new ArrayList<>(NPNode.children); // syntax tree nodes to be processed
+                                List<TreeNode> toHandle = new ArrayList<>(NPNode.children); // syntax tree nodes to be
+                                                                                            // processed
                                 int indexofentity = GeneralQuestion(toHandle, 0);
                                 edges[node.getNodeID()][indexofentity].edgeType = Edge.TYPE_QUEST;
                             }
@@ -3578,7 +3668,7 @@ public class EDG {
                             logger.error("Sent S not Cover-1:" + question);
                         }
                     } else {
-                        //e.g. Greater Napanee is the home town of what people?
+                        // e.g. Greater Napanee is the home town of what people?
 
                         System.out.println("[DEBUG] the question word is not at the beginning");
                         List<String> posTags = NLPUtil.getPOS(taggedQuestion);
@@ -3606,17 +3696,17 @@ public class EDG {
                         }
                         node.setTrigger(whWord);
                         if (countTag) {
-                            //node.setQuesType(QueryType.COUNT);
+                            // node.setQuesType(QueryType.COUNT);
                             node.setQuesType(QueryType.COMMON);
                         } else {
                             node.setQuesType(QueryType.COMMON);// COMMON TYPE BY DEFAULT
                         }
 
-                        //create a entityNode
+                        // create a entityNode
                         Node entityNode = createNode(Node.NODE_TYPE_ENTITY);
                         edges[node.getNodeID()][entityNode.getNodeID()].setEdgeType(Edge.TYPE_QUEST);
 
-                        //string after wh-word
+                        // string after wh-word
                         StringBuilder afterWH = new StringBuilder();
                         int index = whIndex + 1;
                         if (countTag) {
@@ -3628,8 +3718,8 @@ public class EDG {
                             }
                         }
 
-                        if (!afterWH.toString().trim().equals("")) {//not null
-                            //create a des Node
+                        if (!afterWH.toString().trim().equals("")) {// not null
+                            // create a des Node
                             Node desNode1 = createNode(Node.NODE_TYPE_NON_VERB);
                             desNode1.setStr(afterWH.toString().trim());
                             desNode1.setStart(whIndex + 1);
@@ -3637,12 +3727,12 @@ public class EDG {
                             edges[entityNode.getNodeID()][desNode1.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
                         }
 
-                        //string before wh-word
+                        // string before wh-word
                         StringBuilder beforeWH = new StringBuilder();
                         for (int i = 0; i < whIndex; i++) {
                             beforeWH.append(" ").append(tokens.get(i).trim());
                         }
-                        if (!beforeWH.toString().trim().equals("")) {//not null
+                        if (!beforeWH.toString().trim().equals("")) {// not null
 
                             Node desNode2 = createNode(Node.NODE_TYPE_VERB);
                             desNode2.setStr(beforeWH.toString().trim());
@@ -3663,7 +3753,7 @@ public class EDG {
                         String trigger = getWHTrigger(question);
                         node.setTrigger(trigger);
                         if (judgeIfCount(trigger)) {
-                            //node.setQuesType(QueryType.COUNT);
+                            // node.setQuesType(QueryType.COUNT);
                             node.setQuesType(QueryType.COMMON);
                         } else {
                             node.setQuesType(QueryType.COMMON);
@@ -3719,11 +3809,11 @@ public class EDG {
                 // determine if it's imperative
                 if (judgeIfImperative(temp)) { // imperative sentence
                     /*
-                        The same as the imperative sentence processing in S,
-                        but the tag is different, one is S, and the other one is SQ
+                     * The same as the imperative sentence processing in S,
+                     * but the tag is different, one is S, and the other one is SQ
                      */
                     if (judgeIfCount(temp)) {
-                        //node.setQuesType(QueryType.COUNT);
+                        // node.setQuesType(QueryType.COUNT);
                         node.setQuesType(QueryType.COMMON);
                     } else {
                         node.setQuesType(QueryType.LIST);
@@ -3764,7 +3854,9 @@ public class EDG {
                                 listtree.add(treeNode.children.get(i));
                             }
                         } else { // only one child or two children
-                            node.setTrigger(selectLeaf(treeNode, "").trim().split(" ")[0].toLowerCase());// the first word is trigger
+                            node.setTrigger(selectLeaf(treeNode, "").trim().split(" ")[0].toLowerCase());// the first
+                                                                                                         // word is
+                                                                                                         // trigger
                             treeNode = treeNode.children.get(0); // the most left node under S
                             if (treeNode.data.trim().equals("VP")) { // VP + xx
                                 int lent = treeNode.children.size();
@@ -3781,8 +3873,9 @@ public class EDG {
                                         listtree.add(treeNode.children.get(i));
                                     }
                                 }
-                            } else if (treeNode.data.trim().equals("SQ")) { //CoreNLP wrong identification, SQ is nested in SQ
-                                //e.g. Is Ombla originiate in Croatia?
+                            } else if (treeNode.data.trim().equals("SQ")) { // CoreNLP wrong identification, SQ is
+                                                                            // nested in SQ
+                                // e.g. Is Ombla originiate in Croatia?
                                 for (TreeNode child : treeNode.children) {
                                     if (!child.getData().startsWith("VB")) {
                                         if (child.getData().trim().equals("S")) {
@@ -3875,9 +3968,10 @@ public class EDG {
                     if (treeNode1.data.equals("WHPP ")) { // preposition + which / how / ...
                         String tempString = selectLeaf(treeNode1.children.get(1), "");
                         if (tempString.trim().startsWith("how")) { // of how ...
-                            //node.setQuesType(QueryType.COUNT); // count
+                            // node.setQuesType(QueryType.COUNT); // count
                             node.setQuesType(QueryType.COMMON);
-                            String[] tempString1 = selectLeaf(treeNode1.children.get(1), "").trim().toLowerCase().split(" ");
+                            String[] tempString1 = selectLeaf(treeNode1.children.get(1), "").trim().toLowerCase()
+                                    .split(" ");
                             node.setTrigger(tempString1[1] + " " + tempString1[2]); // how many / how much
                         } else {
                             node.setQuesType(QueryType.COMMON); // common
@@ -3899,7 +3993,8 @@ public class EDG {
                             edges[in1][in2].edgeType = Edge.TYPE_VERB;
                             edges[in1][in2].info = selectLeaf(treeNode1.children.get(0), "").substring(1).toLowerCase();
                         }
-                    } else if (selectLeaf(treeNode1, "").trim().toLowerCase().startsWith("when") || selectLeaf(treeNode1, "").trim().toLowerCase().startsWith("where")) {
+                    } else if (selectLeaf(treeNode1, "").trim().toLowerCase().startsWith("when")
+                            || selectLeaf(treeNode1, "").trim().toLowerCase().startsWith("where")) {
                         node.setQuesType(QueryType.COMMON); // question type
                         // set trigger
                         if (treeNode1.children.get(0).str != null) {
@@ -3917,7 +4012,7 @@ public class EDG {
                         }
                     } else if (treeNode1.data.startsWith("WHNP")) {
                         if (selectLeaf(treeNode1).trim().toLowerCase().startsWith("how many")) {
-                            //node.setQuesType(QueryType.COUNT);
+                            // node.setQuesType(QueryType.COUNT);
                             node.setQuesType(QueryType.COMMON);
                             node.setTrigger("how many");
                             int in1 = WH(treeNode1, node0);
@@ -3929,10 +4024,11 @@ public class EDG {
                         } else {
                             node.setQuesType(QueryType.COMMON); // common
                             node.setTrigger(selectLeaf(treeNode1, "").split(" ")[1].toLowerCase()); // set trigger
-                            int in1 = WH(treeNode1, node0);//index of entity
+                            int in1 = WH(treeNode1, node0);// index of entity
                             edges[node.getNodeID()][in1].edgeType = Edge.TYPE_QUEST;
 
-                            if (treeNode2.data.equals("S ") && treeNode2.children.size() == 1) { // sometimes SQ maybe under S
+                            if (treeNode2.data.equals("S ") && treeNode2.children.size() == 1) { // sometimes SQ maybe
+                                                                                                 // under S
                                 treeNode2 = treeNode2.children.get(0);
                             }
                             List<Integer> listg2 = SQ(treeNode2, nodes[in1]);
@@ -3940,13 +4036,20 @@ public class EDG {
                                 edges[in1][in2].edgeType = Edge.TYPE_VERB; // verb
                             }
                         }
-                    } else if (selectLeaf(treeNode1, "").toLowerCase().trim().startsWith("how")) { // How + adj./adv.(sometimes not directly followed by a noun)
+                    } else if (selectLeaf(treeNode1, "").toLowerCase().trim().startsWith("how")) { // How +
+                                                                                                   // adj./adv.(sometimes
+                                                                                                   // not directly
+                                                                                                   // followed by a
+                                                                                                   // noun)
                         edges[node.getNodeID()][node0.getNodeID()].edgeType = Edge.TYPE_QUEST;
                         node.setTrigger(selectLeaf(treeNode1, "").substring(1));
 
-                        if (treeNode1.data.trim().equals("SBAR") && ((node.getTrigger().toLowerCase().startsWith("how many") || node.getTrigger().toLowerCase().startsWith("how much")))) { // SBAR = WHADJP + S
+                        if (treeNode1.data.trim().equals("SBAR")
+                                && ((node.getTrigger().toLowerCase().startsWith("how many")
+                                        || node.getTrigger().toLowerCase().startsWith("how much")))) { // SBAR = WHADJP
+                                                                                                       // + S
                             node.setTrigger(selectLeaf(treeNode1.getFirstChild()).trim());
-                            //node.setQuesType(QueryType.COUNT);
+                            // node.setQuesType(QueryType.COUNT);
                             node.setQuesType(QueryType.COMMON);
 
                             Node node2 = createNode(Node.NODE_TYPE_VERB);
@@ -3955,9 +4058,11 @@ public class EDG {
                             node2.setEnd(taggedQuestion.split(" ").length);
                             edges[node0.getNodeID()][node2.getNodeID()].edgeType = Edge.TYPE_VERB;
                         } else {
-                            if ((treeNode1.data.trim().equals("WHNP")) && (node.getTrigger().toLowerCase().startsWith("how many") || node.getTrigger().toLowerCase().startsWith("how much"))) {
+                            if ((treeNode1.data.trim().equals("WHNP"))
+                                    && (node.getTrigger().toLowerCase().startsWith("how many")
+                                            || node.getTrigger().toLowerCase().startsWith("how much"))) {
                                 node.setTrigger(selectLeaf(treeNode1.getFirstChild()).trim());
-                                //node.setQuesType(QueryType.COUNT);
+                                // node.setQuesType(QueryType.COUNT);
                                 node.setQuesType(QueryType.COMMON);
                                 Node node2 = createNode(Node.NODE_TYPE_NON_VERB);
                                 ComputeNodeStartEnd(node2, treeNode1);
@@ -3965,8 +4070,9 @@ public class EDG {
                                 edges[node0.getNodeID()][node2.getNodeID()].edgeType = Edge.TYPE_NON_VERB;
 
                             } else {
-                                if (node.getTrigger().toLowerCase().contains("how many") || node.getTrigger().toLowerCase().contains("how much")) {
-                                    //node.setQuesType(QueryType.COUNT);
+                                if (node.getTrigger().toLowerCase().contains("how many")
+                                        || node.getTrigger().toLowerCase().contains("how much")) {
+                                    // node.setQuesType(QueryType.COUNT);
                                     node.setQuesType(QueryType.COMMON);
                                 } else {
                                     node.setQuesType(QueryType.EXTENT);
@@ -4001,7 +4107,7 @@ public class EDG {
                             }
                         }
                     } else {
-                        //  System.out.println("error in Sent");
+                        // System.out.println("error in Sent");
                         int in1 = WH(treeNode1, node0);
                         List<Integer> listg2 = SQ(treeNode2, nodes[in1]);
                         for (Integer in2 : listg2) {
@@ -4010,7 +4116,8 @@ public class EDG {
                     }
                 }
             } else if (treeNode.data.trim().equals("SINV") || needRefact) {
-                // inverted declarative sentence / general question, e.g., Was winston churchill the prime minister of Selwyn Lloyd
+                // inverted declarative sentence / general question, e.g., Was winston churchill
+                // the prime minister of Selwyn Lloyd
                 if (needRefact) {
                     System.out.println("FRAG to SINV question:" + question);
                 } else {
@@ -4020,10 +4127,10 @@ public class EDG {
                 if (judgeIfGeneral(question)) {
                     String tig = getGeneralTrigger(question);
                     if (question.toLowerCase().trim().startsWith(Objects.requireNonNull(tig))) {
-                        node.setQuesType(QueryType.JUDGE); //judge
+                        node.setQuesType(QueryType.JUDGE); // judge
                         node.setTrigger(tig);
 
-                        //create entity node
+                        // create entity node
                         Node node0 = createNode(Node.NODE_TYPE_ENTITY);
                         edges[node.getNodeID()][node0.getNodeID()].edgeType = 1;
                         int entityNodeID = node0.getNodeID();
@@ -4033,16 +4140,16 @@ public class EDG {
 
                         System.out.println("tempQuestion:" + tempQuestion);
                         Pattern pattern = Pattern.compile("(?i)(" + tig + " (.*))");
-                        //System.out.println("pattern:"+pattern.toString());
+                        // System.out.println("pattern:"+pattern.toString());
                         Matcher matcher = pattern.matcher(tempQuestion);
                         if (matcher.matches()) {
-                            //System.out.println("matcher:"+matcher.group(2));
+                            // System.out.println("matcher:"+matcher.group(2));
                             tempQuestion = matcher.group(2);
                         }
                         System.out.println("tempQuestion:" + tempQuestion);
 
                         Pattern pattern1 = Pattern.compile("^(<e\\d>|the <e\\d>) (.*)");
-                        //System.out.println("pattern1:" + pattern1);
+                        // System.out.println("pattern1:" + pattern1);
                         Matcher matcher1 = pattern1.matcher(tempQuestion.trim());
 
                         String firstNode = null;
@@ -4053,8 +4160,8 @@ public class EDG {
                         int secondEnd = 0;
 
                         if (matcher1.matches()) {
-                            //System.out.println("group1:" + matcher1.group(1));
-                            //System.out.println("group2:" + matcher1.group(2));
+                            // System.out.println("group1:" + matcher1.group(1));
+                            // System.out.println("group2:" + matcher1.group(2));
                             firstNode = matcher1.group(1);
                             secondNode = matcher1.group(2);
                         } else {
@@ -4089,7 +4196,6 @@ public class EDG {
                             System.out.println("SecondNode:" + secondNode);
                         }
 
-
                         // the first entity
                         Node newNode = createNode(Node.NODE_TYPE_NON_VERB);
                         newNode.setStart(firstStart);
@@ -4121,7 +4227,7 @@ public class EDG {
                     }
                 } else if (judgeIfImperative(question)) {
                     if (judgeIfCount(question)) {
-                        //node.setQuesType(QueryType.COUNT);
+                        // node.setQuesType(QueryType.COUNT);
                         node.setQuesType(QueryType.COMMON);
                     } else { // general imperative sentence
                         node.setQuesType(QueryType.LIST);
@@ -4138,7 +4244,6 @@ public class EDG {
                     edges[entityNode.getNodeID()][desNode.getNodeID()].setEdgeType(Edge.TYPE_NON_VERB);
 
                 }
-
 
             } else if (question.toLowerCase().startsWith("show me ")) {
                 node.setQuesType(QueryType.LIST);
@@ -4159,9 +4264,9 @@ public class EDG {
                 }
             } else { // default
 
-                if (!fragHandled) { //frag not handled successfully, neither do SINV
+                if (!fragHandled) { // frag not handled successfully, neither do SINV
                     SpecialDeclar(node); // special declarative
-                    node.setQuesType(QueryType.COMMON);//default COMMON
+                    node.setQuesType(QueryType.COMMON);// default COMMON
                 }
             }
             if (prefix != null) {
@@ -4189,13 +4294,13 @@ public class EDG {
 
         Pattern pattern2 = Pattern.compile("(?i)((.*) (what|which|when|where|whose|whom|how many|how much)(.*))");
         Matcher matcher2 = pattern2.matcher(taggedQuestion);
-        //System.out.println("questionToMatch:" + taggedQuestion);
+        // System.out.println("questionToMatch:" + taggedQuestion);
         if (matcher2.matches()) { // the question word is after the declarative
             handled = true;
             System.out.println("Special Declar Matches matcher2");
             node.setTrigger(matcher2.group(3).trim());
             if (node.getTrigger().startsWith("how")) {
-                //node.setQuesType(QueryType.COUNT);
+                // node.setQuesType(QueryType.COUNT);
                 node.setQuesType(QueryType.COMMON);
             } else {
                 node.setQuesType(QueryType.COMMON); // common
@@ -4222,7 +4327,8 @@ public class EDG {
         }
 
         // List may be treat as NP incorrectly
-        Matcher matcher = Pattern.compile("(?i)(^(list all|give me|show me|tell me|list|give|show|tell) (.*))").matcher(taggedQuestion);
+        Matcher matcher = Pattern.compile("(?i)(^(list all|give me|show me|tell me|list|give|show|tell) (.*))")
+                .matcher(taggedQuestion);
         if (matcher.matches()) {
             System.out.println("Special Declar Matches matcher1");
             handled = true;
@@ -4280,7 +4386,8 @@ public class EDG {
         // remove all the edges connected to nodeID
         for (int i = 0; i < numNode; i++) {
             for (int j = 0; j < numNode; j++) {
-                if ((i == nodeID || j == nodeID) && edges[i][j] != null && edges[i][j].getEdgeType() > Edge.TYPE_NO_EDGE) {
+                if ((i == nodeID || j == nodeID) && edges[i][j] != null
+                        && edges[i][j].getEdgeType() > Edge.TYPE_NO_EDGE) {
                     edges[i][j].setEdgeType(Edge.TYPE_NO_EDGE);
                 }
             }
@@ -4320,8 +4427,10 @@ public class EDG {
         if (NodeIdOfEntity < 0) // index out of bound
             return result;
         for (int i = 0; i < numNode; i++) {
-            if (edges[NodeIdOfEntity][i] == null) continue;
-            if (edges[NodeIdOfEntity][i].edgeType == Edge.TYPE_VERB || edges[NodeIdOfEntity][i].edgeType == Edge.TYPE_NON_VERB) {
+            if (edges[NodeIdOfEntity][i] == null)
+                continue;
+            if (edges[NodeIdOfEntity][i].edgeType == Edge.TYPE_VERB
+                    || edges[NodeIdOfEntity][i].edgeType == Edge.TYPE_NON_VERB) {
                 result.add(nodes[i]);
             }
         }
@@ -4344,7 +4453,8 @@ public class EDG {
     }
 
     /**
-     * Determine the existence of the reference between an entity and the description,
+     * Determine the existence of the reference between an entity and the
+     * description,
      * i.e., the determine if the entity is at the bottom of the tree
      *
      * @param entityID entityID
@@ -4370,7 +4480,7 @@ public class EDG {
     public List<Integer> getReferredEntity(int entityID) {
 
         List<Integer> result = new ArrayList<>();
-        if (!entityNodeHasRefer(entityID)) {  // no reference, return an empty list
+        if (!entityNodeHasRefer(entityID)) { // no reference, return an empty list
             return result;
         } else {
             List<Node> relatedDes = getRelatedDescription(entityID);
@@ -4399,7 +4509,7 @@ public class EDG {
                 return findEntityBlockID(nodes[i]);
             }
         }
-        return 0;   // return 0 by default
+        return 0; // return 0 by default
     }
 
     /**
@@ -4436,7 +4546,6 @@ public class EDG {
         Node entityNode = newEDG.createNode(Node.NODE_TYPE_ENTITY);
         Node desNode = newEDG.createNode(Node.NODE_TYPE_VERB);
 
-
         newEDG.edges[0][1].setEdgeType(Edge.TYPE_QUEST);
         newEDG.edges[1][2].setEdgeType(Edge.TYPE_VERB);
 
@@ -4467,7 +4576,6 @@ public class EDG {
                 result.append(blockToString(desReferredEntityID));
             }
         }
-
 
         if (QAArgs.getDataset() == DatasetEnum.QALD_9) {
             if (entityID == 0) {
