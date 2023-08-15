@@ -23,7 +23,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 /**
  * one question, one question solver
  * store intermediate results
@@ -43,7 +42,8 @@ public class QuestionSolver {
     private final Map<Integer, List<SparqlGenerator>> subQuerySparqlMap;
     /**
      * The entity linking list for a node, top-1 mention
-     * Simple Assumption: one node contains at most one entity and one corresponding relation
+     * Simple Assumption: one node contains at most one entity and one corresponding
+     * relation
      * key: node id, value: entity linking list
      */
     private final Map<Integer, List<Link>> nodeEntityListMap;
@@ -64,7 +64,8 @@ public class QuestionSolver {
     /**
      * The generated candidate 3-tuple for each EDG node.
      * <p>
-     * key: node id, value: (entity url, relation url, entity_score * relation_score)
+     * key: node id, value: (entity url, relation url, entity_score *
+     * relation_score)
      */
     private final HashMap<Integer, List<ThreeTuple<String, String, Double>>> nodeERTupleListMap;
     private final HashMap<Integer, List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>>> blockCandidateMap;
@@ -174,12 +175,13 @@ public class QuestionSolver {
      */
     public List<String> solveQuestion() {
 
-
         List<String> result = new ArrayList<>(); // predicted answer
 
-//        System.out.println("Fetching global linking...");
-//        LinkingTool.getEnsembleLinking(edg.getQuestion(), globalEntityLinkMap.getData(), globalRelationLinkMap.getData(), true); // global linking results
-//        System.out.println("Global Linking Fetched");
+        // System.out.println("Fetching global linking...");
+        // LinkingTool.getEnsembleLinking(edg.getQuestion(),
+        // globalEntityLinkMap.getData(), globalRelationLinkMap.getData(), true); //
+        // global linking results
+        // System.out.println("Global Linking Fetched");
 
         if (this.edg.getNumEntity() <= 0) { // EDG generation failed
             System.out.println("[ERROR] EDG generation failed: " + edg.getQuestion());
@@ -187,11 +189,14 @@ public class QuestionSolver {
         } else { // start from the root entity
 
             List<SparqlGenerator> sparqlList;
+
             // specially for judgement
             if (edg.getQueryType() == QueryType.JUDGE) {
-                System.out.println("In judge type question");
+                // System.out.println("In judge type question");
+                // sysout8-1
+                System.out.println("==Sysout8-1== JUDGE type question");
 
-                sparqlList = judgeQuestionSolver(edg, 0);
+                sparqlList = judgeQuestionSolver(edg, 0); // judgeQuestionSolver
                 EvaluateLinking(sparqlList);
                 for (SparqlGenerator spg : sparqlList) {
                     result.addAll(spg.solve());
@@ -208,25 +213,40 @@ public class QuestionSolver {
 
             } else { // not boolean question, all other types of questions
 
-                if (QAArgs.isQuestionDecomposition()) {  // with question decomposition
-                    System.out.println("compound "+edg);
+                // sysout8-2
+                System.out.println("==Sysout8-2== OTHER type question");
+
+                if (QAArgs.isQuestionDecomposition()) { // with question decomposition
+                    // sysout8-2-1
+                    System.out.println("==Sysout8-2-1== With question decomposition, run compoundQuestionSolver()");
+                    System.out.println(">> EDG:\n" + edg);
+                    //System.out.println("compound " + edg);
+
                     sparqlList = compoundQuestionSolver(edg, 0);
-                    //System.out.println("Finish compound question");
-                } else {  // without question decomposition
+
+                    System.out.println(">> Finish compound question");
+                } else { // without question decomposition
+                    // sysout8-2-1
+                    System.out.println(
+                            "==Sysout8-2-2== Without question decomposition, run edg.flattenEDG() & atomicQuestionSolver()");
                     edg = edg.flattenEDG();
-                    System.out.println("Atomic "+edg);
+                    System.out.println(">> EDG:\n" + edg);
+                    //System.out.println("Atomic " + edg);
+
                     sparqlList = atomicQuestionSolver(edg, 0);
                     subQuerySparqlMap.put(0, sparqlList);
-                    //System.out.println("Finish atomic question");
+
+                    System.out.println(">> Finish atomic question");
                 }
-                //System.out.println("final sparql list: "+sparqlList);
+                // System.out.println("final sparql list: "+sparqlList);
                 for (SparqlGenerator spg : sparqlList) {
                     result.addAll(spg.solve());
                 }
             }
         }
 
-        //System.out.println("the result is : "+result.stream().distinct().collect(Collectors.toList()));
+        // System.out.println("the result is :
+        // "+result.stream().distinct().collect(Collectors.toList()));
         return result.stream().distinct().collect(Collectors.toList());
     }
 
@@ -239,14 +259,17 @@ public class QuestionSolver {
      */
     public List<SparqlGenerator> compoundQuestionSolver(EDG edg, int entityID) {
 
-        List<SparqlGenerator> sparqlList = new ArrayList<>();  // generated sparql list
+        List<SparqlGenerator> sparqlList = new ArrayList<>(); // generated sparql list
 
-        List<Node> relatedDescription = edg.getRelatedDescription(entityID);//Get all connected Description Node 
-        HashSet<Integer> relatedDescriptionIDs = new HashSet<>();//Node IDS related to current node 
+        List<Node> relatedDescription = edg.getRelatedDescription(entityID);// Get all connected Description Node
+        HashSet<Integer> relatedDescriptionIDs = new HashSet<>();// Node IDS related to current node
         relatedDescription.forEach(node -> relatedDescriptionIDs.add(node.getNodeID()));
 
+        // sysout8-3
+        System.out.println("==Sysout8-3== Referred entity 偵測");
         if (!edg.entityNodeHasRefer(entityID)) { // no referred entity, call atomic question solver
-            System.out.println("atomic");
+            // sysout8-3-1
+            System.out.println(">> 無referred entity, 使用 Atomic QS");
             List<SparqlGenerator> subSparqlList = atomicQuestionSolver(edg, entityID);
             sparqlList.addAll(subSparqlList);
             subQuerySparqlMap.put(entityID, subSparqlList);
@@ -260,27 +283,31 @@ public class QuestionSolver {
 
             return sparqlList;
         } else { // if it has referred entity, deal with a composed question
-            System.out.println("composed");
-            //all entityID referred from this entity
+            // sysout8-3-2
+            System.out.println(">> 有referred entity(composed question), 使用 Compound QS");
+            
+            // all entityID referred from this entity
             List<Integer> referredEntity = edg.getReferredEntity(entityID);
 
             // Iterate all sub entities
             for (Integer subEntityID : referredEntity) {
-                List<SparqlGenerator> subSparqlList = compoundQuestionSolver(edg, subEntityID); // recursively solve this sub entity
+                List<SparqlGenerator> subSparqlList = compoundQuestionSolver(edg, subEntityID); // recursively solve
+                                                                                                // this sub entity
                 subQuerySparqlMap.put(subEntityID, subSparqlList);
                 List<String> subResult = new ArrayList<>();
                 for (SparqlGenerator subSparqlGen : subSparqlList) {
                     List<String> subResultList = subSparqlGen.solve();
                     for (String res : subResultList) {
                         subResult.add(res);
-//                        if (QAArgs.getDataset() != DatasetEnum.LC_QUAD || res.startsWith("http://dbpedia.org/resource")) {
-//
-//                        }
+                        // if (QAArgs.getDataset() != DatasetEnum.LC_QUAD ||
+                        // res.startsWith("http://dbpedia.org/resource")) {
+                        //
+                        // }
                     }
                 }
                 subResult = subResult.stream().distinct().collect(Collectors.toList()); // remove the duplicate
 
-                if (subEntityID > 0) { //not root
+                if (subEntityID > 0) { // not root
                     while (subResult.size() > 20) {// limit the number of subResult to speed up generation
                         subResult.remove(20);
                     }
@@ -296,12 +323,12 @@ public class QuestionSolver {
             // detect entities of all nodes without reference edge
             for (Node desNode : relatedDescription) {
                 if (!desNode.isContainsRefer()) {
-                    initialEntityDetection(desNode,edg);
+                    initialEntityDetection(desNode, edg);
                 }
             }
 
             // reduce irrelevant entities
-//            entityReduce(relatedDescriptionIDs);
+            // entityReduce(relatedDescriptionIDs);
 
             // relation detection of all nodes without reference edge
             for (Node desNode : relatedDescription) {
@@ -310,15 +337,17 @@ public class QuestionSolver {
                 }
             }
 
-            //Node generated candidate TUPLE for the result of the solid link 
+            // Node generated candidate TUPLE for the result of the solid link
             for (Node desNode : relatedDescription) {
                 if (!desNode.isContainsRefer()) {
-                    List<ThreeTuple<String, String, Double>> tupleList = nodeTupleGeneration(desNode, relatedDescriptionIDs);
-                    if (!tupleList.isEmpty()) nodeERTupleListMap.put(desNode.getNodeID(), tupleList);
+                    List<ThreeTuple<String, String, Double>> tupleList = nodeTupleGeneration(desNode,
+                            relatedDescriptionIDs);
+                    if (!tupleList.isEmpty())
+                        nodeERTupleListMap.put(desNode.getNodeID(), tupleList);
                 }
             }
 
-            //type detection of nodes without reference edge
+            // type detection of nodes without reference edge
             if (QAArgs.isUsingTypeConstraints()) {
                 for (Node desNode : relatedDescription) {
                     if (!desNode.isContainsRefer()) {
@@ -332,10 +361,10 @@ public class QuestionSolver {
                 }
             }
 
-            //handle description nodes with reference edge
-            for (Node desNode : relatedDescription) {//Generate Candidate Tuple by node 
+            // handle description nodes with reference edge
+            for (Node desNode : relatedDescription) {// Generate Candidate Tuple by node
                 int nodeID = desNode.getNodeID();
-                if (desNode.isContainsRefer()) {//The current node contains REFER 
+                if (desNode.isContainsRefer()) {// The current node contains REFER
                     int desReferredEntityID = edg.getDesReferredEntityID(desNode.getNodeID());
                     List<SparqlGenerator> subSparqlList = subQuerySparqlMap.get(desReferredEntityID);
                     String nodeStr = desNode.getStr();
@@ -343,26 +372,27 @@ public class QuestionSolver {
                         continue;
                     }
                     if (SimilarityUtil.isDescriptionEqual(nodeStr, "#entity" + desReferredEntityID)) {
-                        //This is redundant decomposition, directly return answers 
+                        // This is redundant decomposition, directly return answers
                         subSparqlList.forEach(sp -> {
                             SparqlGenerator newSP = new SparqlGenerator(sp);
                             newSP.changeFinalVarName("e" + entityID);
                             sparqlList.add(newSP);
                         });
-                    } else {//Non-redundant decomposition 
+                    } else {// Non-redundant decomposition
                         List<String> subResults = subResultsMap.get(desReferredEntityID);
                         if (!subResults.isEmpty()) {
-                            // Subproof results 
-                            // Replace the #ntity {i} in Nodestr and join NodelistMap 
+                            // Subproof results
+                            // Replace the #ntity {i} in Nodestr and join NodelistMap
                             String entity_id_mention = "#entity" + desReferredEntityID;
                             List<Link> linkList = new ArrayList<>();
-                            subResults.forEach(entityUri -> linkList.add(new Link(entity_id_mention, entityUri, LinkEnum.ENTITY, 1.0)));
+                            subResults.forEach(entityUri -> linkList
+                                    .add(new Link(entity_id_mention, entityUri, LinkEnum.ENTITY, 1.0)));
 
                             nodeEntityListMap.put(nodeID, linkList);
 
                             Map<String, List<Link>> entityMap = new HashMap<>();
                             entityMap.put(entity_id_mention, linkList);
-                            //nodeEntityMap.put(nodeID, entityMap);
+                            // nodeEntityMap.put(nodeID, entityMap);
                             desNode.setStr(nodeStr.replaceAll(entity_id_mention, "<e0>").trim());
 
                             Map<String, String> entityIndexMap = new HashMap<>();
@@ -376,11 +406,12 @@ public class QuestionSolver {
                             Map<String, List<Link>> relationMap = Detector.relationDetection(desNode.getStr(),
                                     entityIndexMap, nodeEntityListMap.get(nodeID), trigger,
                                     QAArgs.getGoldenLinkingMode(),
-                                    GoldenLinkingUtil.getGoldenRelationLinkBySerialNumber(serialNumber), this.globalRelationLinkMap);// Here is Refer Node's Relation Detection 
+                                    GoldenLinkingUtil.getGoldenRelationLinkBySerialNumber(serialNumber),
+                                    this.globalRelationLinkMap);// Here is Refer Node's Relation Detection
 
-                            if (!relationMap.isEmpty()) { //relationMap is not empty
+                            if (!relationMap.isEmpty()) { // relationMap is not empty
 
-                                //nodeRelationMap.put(nodeID, relationMap);
+                                // nodeRelationMap.put(nodeID, relationMap);
                                 for (String rMention : relationMap.keySet()) {
                                     nodeRelationListMap.put(nodeID, relationMap.get(rMention));
                                     break;
@@ -395,50 +426,53 @@ public class QuestionSolver {
                                 for (Link eLink : linkList) {
                                     oneHopProperty.addAll(Detector.oneHopPropertyFiltered(eLink.getUri()));
                                 }
-                                //high similarity
-                                Map<String, List<String>> labelUriMap = UriUtil.extractLabelMap(new ArrayList<>(oneHopProperty));
+                                // high similarity
+                                Map<String, List<String>> labelUriMap = UriUtil
+                                        .extractLabelMap(new ArrayList<>(oneHopProperty));
 
-
-                                for (Integer id : nodeIdsWithNoEntity) {//Other nodes of the unintegrated link 
+                                for (Integer id : nodeIdsWithNoEntity) {// Other nodes of the unintegrated link
                                     if (relatedDescriptionIDs.contains(id)) {
                                         List<Link> otherRLink = nodeRelationListMap.get(id);
                                         if (otherRLink != null) {
                                             for (Link otherR : otherRLink) {
-                                                if (rlinkUriList.contains(otherR.getUri())) {//Re-score, improve 
-                                                    //rlinkList.get(rlinkList.indexOf(otherR)).setScore(0.6);
+                                                if (rlinkUriList.contains(otherR.getUri())) {// Re-score, improve
+                                                    // rlinkList.get(rlinkList.indexOf(otherR)).setScore(0.6);
                                                     rlinkList.removeIf(o -> o.getUri().equals(otherR.getUri()));
                                                     otherR.setScore(0.6);
                                                     rlinkList.add(otherR);
                                                 } else if (oneHopProperty.contains(otherR.getUri())) {
-                                                    rlinkList.add(new Link(otherR.getMention(), otherR.getUri(), LinkEnum.RELATION, 0.8));
+                                                    rlinkList.add(new Link(otherR.getMention(), otherR.getUri(),
+                                                            LinkEnum.RELATION, 0.8));
                                                 }
                                             }
                                         }
 
-
                                         String otherStr = edg.getNodes()[id].getStr();
-                                        HashMap<String, Double> labelSim = SimilarityUtil.getLexicalSetSimilarity(otherStr, labelUriMap.keySet());
+                                        HashMap<String, Double> labelSim = SimilarityUtil
+                                                .getLexicalSetSimilarity(otherStr, labelUriMap.keySet());
                                         for (String propLabel : labelSim.keySet()) {
                                             double score = labelSim.get(propLabel);
                                             if (score > 0.6) {
-                                                labelUriMap.get(propLabel).forEach(property ->
-                                                        rlinkList.add(new Link(otherStr, property, LinkEnum.RELATION, score)));
+                                                labelUriMap.get(propLabel).forEach(property -> rlinkList
+                                                        .add(new Link(otherStr, property, LinkEnum.RELATION, score)));
 
                                             }
                                         }
 
                                     }
                                 }
-                                rlinkList.sort(Collections.reverseOrder()); //Reorder, from high to low 
+                                rlinkList.sort(Collections.reverseOrder()); // Reorder, from high to low
 
                                 for (Link rLink : rlinkList) {
-                                    for (SparqlGenerator subSparql : subSparqlList) {//Each result of the child is added to a Triple 
+                                    for (SparqlGenerator subSparql : subSparqlList) {// Each result of the child is
+                                                                                     // added to a Triple
                                         SparqlGenerator newSparql = new SparqlGenerator(subSparql);
                                         String oldVariable = newSparql.getFinalVarName();
                                         String newVariable = "e" + entityID;
                                         newSparql.setFinalVarName(newVariable);
-                                        // Add one? E0 <dbp: xxx>? E1 
-                                        newSparql.addTriple("?" + newVariable, "<" + rLink.getUri() + ">", "?" + oldVariable);
+                                        // Add one? E0 <dbp: xxx>? E1
+                                        newSparql.addTriple("?" + newVariable, "<" + rLink.getUri() + ">",
+                                                "?" + oldVariable);
                                         newSparql.setScore(newSparql.getScore() * rLink.getScore());
                                         sparqlList.add(newSparql);
                                     }
@@ -453,7 +487,7 @@ public class QuestionSolver {
 
             // root block, modify the query type of sparql
             if (entityID == 0) {
-                if (sparqlList.isEmpty()) {//empty sparqlList, add new sparql
+                if (sparqlList.isEmpty()) {// empty sparqlList, add new sparql
                     SparqlGenerator spg = new SparqlGenerator();
                     spg.setFinalVarName("e0");
                     sparqlList.add(spg);
@@ -469,7 +503,7 @@ public class QuestionSolver {
 
             List<SparqlGenerator> newSparqlList = new ArrayList<>();
 
-            //Add other candidate Tuples of the current node into Sparql 
+            // Add other candidate Tuples of the current node into Sparql
             HashSet<Integer> tempSet = new HashSet<>(nodeERTupleListMap.keySet());
             tempSet.retainAll(relatedDescriptionIDs);
             if (!tempSet.isEmpty()) {
@@ -478,7 +512,8 @@ public class QuestionSolver {
                     for (SparqlGenerator sparql : sparqlList) {
                         for (ThreeTuple<String, String, Double> nodeTuple : nodeTuples) {
                             SparqlGenerator newSparql = new SparqlGenerator(sparql);
-                            newSparql.addTriple("?e" + entityID, "<" + nodeTuple.getSecond() + ">", "<" + nodeTuple.getFirst() + ">");
+                            newSparql.addTriple("?e" + entityID, "<" + nodeTuple.getSecond() + ">",
+                                    "<" + nodeTuple.getFirst() + ">");
                             newSparql.setScore(newSparql.getScore() * nodeTuple.getThird()); // reset the score
                             if (!newSparql.execute().isEmpty()) {
                                 newSparqlList.add(newSparql);
@@ -492,7 +527,7 @@ public class QuestionSolver {
                 sparqlList.clear();
                 sparqlList.addAll(newSparqlList);
             }
-            //sparqlList.removeIf(sp->KBUtil.isZeroSelect(sp.toString()));
+            // sparqlList.removeIf(sp->KBUtil.isZeroSelect(sp.toString()));
 
             sparqlListDistinct(sparqlList);
 
@@ -509,8 +544,7 @@ public class QuestionSolver {
             // reduce the number of candidate sparqls
             reduceCandidateSparql(entityID, sparqlList);
 
-
-            //expand query
+            // expand query
             if (QAArgs.getGoldenLinkingMode() == GoldenMode.DISABLED && !QAArgs.isEvaluateCandNum()) {
                 List<SparqlGenerator> temp = new ArrayList<>(sparqlList);
                 sparqlList.clear();
@@ -523,7 +557,7 @@ public class QuestionSolver {
 
             sparqlList.removeIf(sparqlGenerator -> sparqlGenerator.getTupleList().isEmpty());
 
-            //Add to SubQuerySparqlmap 
+            // Add to SubQuerySparqlmap
             subQuerySparqlMap.put(entityID, sparqlList);
 
             if (entityID == 0) {
@@ -536,12 +570,13 @@ public class QuestionSolver {
     }
 
     /**
-     * remove redundant sparql candidates in the sparql List, retain the higher score
+     * remove redundant sparql candidates in the sparql List, retain the higher
+     * score
      *
      * @param sparqlList sparqlList
      */
     private void sparqlListDistinct(List<SparqlGenerator> sparqlList) {
-        //distinct the sparql List
+        // distinct the sparql List
         ListIterator<SparqlGenerator> iter = sparqlList.listIterator(sparqlList.size());
         while (iter.hasPrevious()) {
             SparqlGenerator previous = iter.previous();
@@ -565,23 +600,24 @@ public class QuestionSolver {
     public List<SparqlGenerator> atomicQuestionSolver(EDG edg, int entityID) {
         System.out.println("[DEBUG] (AQS) Processing EntityID: " + entityID);
 
-        //Description nodes in current block
+        // Description nodes in current block
         List<Node> relatedDes = edg.getRelatedDescription(entityID);
         Set<Integer> relatedDesIDs = relatedDes.stream().map(Node::getNodeID).collect(Collectors.toSet());
 
-        //Entity Detection Part
-        for (Node node : relatedDes) {//Entity detection of the node one by one 
-            initialEntityDetection(node,edg); //shallowEntityDetection£¬Determine nodeemap
+        // Entity Detection Part
+        for (Node node : relatedDes) {// Entity detection of the node one by one
+            initialEntityDetection(node, edg); // shallowEntityDetection£¬Determine nodeemap
         }
-//        System.out.println("NodeEListMap after initial detection:" + nodeEntityListMap);
+        // System.out.println("NodeEListMap after initial detection:" +
+        // nodeEntityListMap);
 
-//        if (!QAArgs.isGoldenEntity()) {
-//            entityReduce(relatedDesIDs); //reduce the irrelevant entities
-//        }
-        //System.out.println("NodeEListMap after entity reduce:" + nodeEntityListMap);
+        // if (!QAArgs.isGoldenEntity()) {
+        // entityReduce(relatedDesIDs); //reduce the irrelevant entities
+        // }
+        // System.out.println("NodeEListMap after entity reduce:" + nodeEntityListMap);
 
-        //Relation Detection Part
-        for (Node node : relatedDes) {//Starting a node Relation detection 
+        // Relation Detection Part
+        for (Node node : relatedDes) {// Starting a node Relation detection
             initialRelationDetection(node);
         }
 
@@ -604,19 +640,20 @@ public class QuestionSolver {
         // Assemble entities and relations to build queries
         for (Node node : relatedDes) {
             List<ThreeTuple<String, String, Double>> tupleList = nodeTupleGeneration(node, relatedDesIDs);
-            if (!tupleList.isEmpty()) nodeERTupleListMap.put(node.getNodeID(), tupleList);
+            if (!tupleList.isEmpty())
+                nodeERTupleListMap.put(node.getNodeID(), tupleList);
         }
 
         System.out.println("nodeERTupleList:" + nodeERTupleListMap);
 
-        //Generate Candidate Tuple of Block 
+        // Generate Candidate Tuple of Block
         blockCandidateMap.put(entityID, blockTupleGeneration(relatedDesIDs));
 
-        //generate sparql for this atomic block, sorted DESC
+        // generate sparql for this atomic block, sorted DESC
         List<SparqlGenerator> sparqlList = blockSparqlGeneration(entityID, edg, relatedDesIDs);
         sparqlList.sort(Collections.reverseOrder());
 
-        //distinct the sparqlList
+        // distinct the sparqlList
         sparqlListDistinct(sparqlList);
 
         // potential type constraint
@@ -628,7 +665,7 @@ public class QuestionSolver {
         if (QAArgs.isReRanking()) {
             reRankSparql(entityID, sparqlList);
         }
-        //System.out.println("sparql list 2 : "+sparqlList);
+        // System.out.println("sparql list 2 : "+sparqlList);
         // for QALD, the system needs to judge whether the question can be answered
         if (QAArgs.getDataset() == DatasetEnum.QALD_9) {
             double total_threshold = 0.25;
@@ -636,7 +673,8 @@ public class QuestionSolver {
             double threshold;
 
             boolean isEntityDetected = false;
-            List<Link> entityLinking = nodeEntityListMap.values().stream().flatMap(List::stream).collect(Collectors.toList());
+            List<Link> entityLinking = nodeEntityListMap.values().stream().flatMap(List::stream)
+                    .collect(Collectors.toList());
             for (Link link : entityLinking) {
                 if (link.getScore() == 1.0) {
                     isEntityDetected = true;
@@ -649,7 +687,6 @@ public class QuestionSolver {
                 threshold = total_threshold;
             }
 
-
             if (!sparqlList.isEmpty()) {
                 double maxScore = sparqlList.get(0).getScore();
                 if (maxScore < threshold) {
@@ -657,19 +694,20 @@ public class QuestionSolver {
                 }
             }
         }
-        //System.out.println("sparql list 3 : "+sparqlList);
-        //reduce the number of Candidate Sparqls
-        //reduceCandidateSparql(entityID, sparqlList);
+        // System.out.println("sparql list 3 : "+sparqlList);
+        // reduce the number of Candidate Sparqls
+        // reduceCandidateSparql(entityID, sparqlList);
 
         // dbo/dbp expand
-//        if (QAArgs.getGoldenLinkingMode() == GoldenMode.DISABLED && !QAArgs.isEvaluateCandNum()) {
-//            List<SparqlGenerator> expand = new ArrayList<>(sparqlList);
-//            sparqlList.clear();
-//            List<SparqlGenerator> tempList = new ArrayList<>();
-//            expand.forEach(sp -> tempList.addAll(sp.expandQueryWithDbpOrDbo()));
-//            sparqlList = tempList.stream().distinct().collect(Collectors.toList());
-//        }
-        //System.out.println("sparql list 4 : "+sparqlList);
+        // if (QAArgs.getGoldenLinkingMode() == GoldenMode.DISABLED &&
+        // !QAArgs.isEvaluateCandNum()) {
+        // List<SparqlGenerator> expand = new ArrayList<>(sparqlList);
+        // sparqlList.clear();
+        // List<SparqlGenerator> tempList = new ArrayList<>();
+        // expand.forEach(sp -> tempList.addAll(sp.expandQueryWithDbpOrDbo()));
+        // sparqlList = tempList.stream().distinct().collect(Collectors.toList());
+        // }
+        // System.out.println("sparql list 4 : "+sparqlList);
         // sparql generation failed, generate default sparql
         if (sparqlList.isEmpty()) {
 
@@ -677,12 +715,14 @@ public class QuestionSolver {
 
                 // for qald, try to find the concept constraint
                 if (!nodeTypeListMap.isEmpty()) {
-                    List<String> typeList = nodeTypeListMap.values().stream().flatMap(List::stream).distinct().collect(Collectors.toList());
+                    List<String> typeList = nodeTypeListMap.values().stream().flatMap(List::stream).distinct()
+                            .collect(Collectors.toList());
                     SparqlGenerator spg = new SparqlGenerator();
                     spg.setQuesType(QueryType.COMMON);
                     String finalVarName = "e" + entityID;
                     spg.setFinalVarName(finalVarName);
-                    spg.addTriple("?" + finalVarName, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", typeList.get(0));
+                    spg.addTriple("?" + finalVarName, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                            typeList.get(0));
                     sparqlList.add(spg);
                 }
 
@@ -694,10 +734,11 @@ public class QuestionSolver {
                 }
 
                 Set<String> candidateRelations = new HashSet<>();
-                globalRelationLinkMap.getData().values().forEach(list -> candidateRelations.addAll(list.stream().map(Link::getUri).collect(Collectors.toList())));
+                globalRelationLinkMap.getData().values().forEach(list -> candidateRelations
+                        .addAll(list.stream().map(Link::getUri).collect(Collectors.toList())));
 
-                System.out.println("candidate Entities: "+candidateEntities);
-                System.out.println("candidate Relations: "+candidateRelations);
+                System.out.println("candidate Entities: " + candidateEntities);
+                System.out.println("candidate Relations: " + candidateRelations);
                 for (Link entity : candidateEntities) {
                     Set<String> oneHops = KBUtil.oneHopProperty(entity.getUri());
                     oneHops.retainAll(candidateRelations);
@@ -723,7 +764,7 @@ public class QuestionSolver {
             }
 
         }
-        //System.out.println("sparql list 5 : "+sparqlList);
+        // System.out.println("sparql list 5 : "+sparqlList);
         return sparqlList;
     }
 
@@ -747,21 +788,24 @@ public class QuestionSolver {
         List<SparqlGenerator> newSparqlList = new ArrayList<>();
         while (iter.hasNext()) {
             SparqlGenerator sparql = iter.next();
-            //whether a type constraint is added
+            // whether a type constraint is added
             for (String type : typeList) {
                 SparqlGenerator sp = new SparqlGenerator(sparql);
-                sp.addTriple("?" + sp.getFinalVarName(), "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "<" + type + ">");
+                sp.addTriple("?" + sp.getFinalVarName(), "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "<" + type + ">");
                 if (!KBUtil.isZeroSelect(sp.toString())) {
-                    //query not empty
-                    //sparqlList.set(iter.previousIndex(), sp);
+                    // query not empty
+                    // sparqlList.set(iter.previousIndex(), sp);
                     newSparqlList.add(sp);
                     break;
                 }
             }
-            /*if(!added){
-                newSparqlList.add(sparql);
-            }*/
-            //if (added) break;
+            /*
+             * if(!added){
+             * newSparqlList.add(sparql);
+             * }
+             */
+            // if (added) break;
         }
 
         // type added to current sparql, update it
@@ -779,7 +823,8 @@ public class QuestionSolver {
      * @param sparqlList candidate sparqlList
      */
     private void reRankSparql(int entityID, List<SparqlGenerator> sparqlList) {
-        if (sparqlList.isEmpty()) return;
+        if (sparqlList.isEmpty())
+            return;
         HashMap<String, List<SparqlGenerator>> stringMap = new HashMap<>();
         for (SparqlGenerator spg : sparqlList) {
 
@@ -796,7 +841,8 @@ public class QuestionSolver {
         }
         String blockString = edg.blockToString(entityID);
 
-        Map<String, Double> sparqlRerankScoreMap = NeuralSemanticMatchingScorer.query_reranking_score(blockString, stringMap.keySet());
+        Map<String, Double> sparqlRerankScoreMap = NeuralSemanticMatchingScorer.query_reranking_score(blockString,
+                stringMap.keySet());
         System.out.println("Block String:" + blockString);
         System.out.println("Sparql Rerank Map:" + sparqlRerankScoreMap);
 
@@ -821,7 +867,8 @@ public class QuestionSolver {
     private void reduceCandidateSparql(int entityID, List<SparqlGenerator> sparqlList) {
         int upperBound = QAArgs.getCandidateSparqlNumUpperB();
         // only retain one for root
-        if (entityID == 0) upperBound = QAArgs.getRootCandidateSparqlNumUpperB();
+        if (entityID == 0)
+            upperBound = QAArgs.getRootCandidateSparqlNumUpperB();
 
         double threshold;
 
@@ -832,7 +879,6 @@ public class QuestionSolver {
         } else {
             threshold = sparqlList.get(0).getScore();
         }
-
 
         while (sparqlList.size() > upperBound) {
             SparqlGenerator tail = sparqlList.get(sparqlList.size() - 1);
@@ -868,7 +914,7 @@ public class QuestionSolver {
         List<SparqlGenerator> sparqlList = new ArrayList<>();
         // all the entity candidates
         List<List<Link>> eLinkCands = null;
-        //all the relations
+        // all the relations
         List<Link> rLinkList = null;
 
         if (!edg.entityNodeHasRefer(entityID)) {// simple edg block
@@ -877,7 +923,7 @@ public class QuestionSolver {
             Set<Integer> relatedDesIDs = relatedDesNodes.stream().map(Node::getNodeID).collect(Collectors.toSet());
 
             for (Node node : relatedDesNodes) {
-                initialEntityDetection(node,edg);
+                initialEntityDetection(node, edg);
             }
             if (!QAArgs.isGoldenEntity()) {
                 entityReduce(relatedDesIDs);
@@ -890,21 +936,21 @@ public class QuestionSolver {
             rLinkList = nodeRelationListMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
         } else {// compound edg block, use global linking
             eLinkCands = new ArrayList<>(globalEntityLinkMap.getData().values());
-            rLinkList = globalRelationLinkMap.getData().values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+            rLinkList = globalRelationLinkMap.getData().values().stream().flatMap(Collection::stream)
+                    .collect(Collectors.toList());
         }
         System.out.println("nodeRlistMap in judge question: " + rLinkList);
 
-        //default judge sparql
+        // default judge sparql
         SparqlGenerator spg = new SparqlGenerator();
         spg.setQuesType(QueryType.JUDGE);
         String varName = "e" + entityID;
         spg.setFinalVarName(varName);
 
-
-        int eNodeNum = eLinkCands.size(); // Identified Entity Mention 
-        if (eNodeNum < 1) {//No Entity 
+        int eNodeNum = eLinkCands.size(); // Identified Entity Mention
+        if (eNodeNum < 1) {// No Entity
             System.out.println("[ERROR] No entity detected for Question:" + question);
-        } else if (eNodeNum == 1) {//Only one node recognizes Entity 
+        } else if (eNodeNum == 1) {// Only one node recognizes Entity
             List<Link> eLinkList = eLinkCands.get(0);
             for (Link eLink : eLinkList) {
                 boolean bingoTag = false;
@@ -917,13 +963,14 @@ public class QuestionSolver {
                         break;
                     }
                 }
-                if (bingoTag) break;
+                if (bingoTag)
+                    break;
             }
             if (!spg.getTupleList().isEmpty()) {
                 sparqlList.add(spg);
             }
 
-        } else {//More than two Node recognizes Entity 
+        } else {// More than two Node recognizes Entity
             List<Link> eLink1List = eLinkCands.get(0);
             List<Link> eLink2List = eLinkCands.get(1);
             boolean bingoTag = false;
@@ -933,7 +980,8 @@ public class QuestionSolver {
 
                         // relations in rLinkList, return true
                         if (KBUtil.isE1RE2exists(eLink1.getUri(), rLink.getUri(), eLink2.getUri())) {
-                            spg.addTriple("<" + eLink1.getUri() + ">", "<" + rLink.getUri() + ">", "<" + eLink2.getUri() + ">");
+                            spg.addTriple("<" + eLink1.getUri() + ">", "<" + rLink.getUri() + ">",
+                                    "<" + eLink2.getUri() + ">");
                             spg.setScore(eLink1.getScore() * eLink2.getScore() * rLink.getScore());
                             bingoTag = true;
                             break;
@@ -948,15 +996,17 @@ public class QuestionSolver {
                                 bingoTag = true;
                                 spg.addTriple("<" + eLink1.getUri() + ">", "?p", "<" + eLink2.getUri() + ">");
                             } else {
-                                //evaluate the similarity between the surface and the relation
+                                // evaluate the similarity between the surface and the relation
                                 Map<String, List<String>> labelMap = UriUtil.extractLabelMap(rUris);
                                 String surface = question.replaceAll("(?i)" + eLink1.getMention(), "")
                                         .replaceAll("(?i)" + eLink2.getMention(), "")
                                         .replaceAll(" +", " ").trim();
-                                HashMap<String, Double> similarity = SimilarityUtil.getLexicalSetSimilarity(surface, labelMap.keySet());
+                                HashMap<String, Double> similarity = SimilarityUtil.getLexicalSetSimilarity(surface,
+                                        labelMap.keySet());
                                 for (String label : similarity.keySet()) {
-                                    if (similarity.get(label) > 0/*0.3*/) {// the similarity is beyond a threshold
-                                        spg.addTriple("<" + eLink1.getUri() + ">", "<" + labelMap.get(label).get(0) + ">", "<" + eLink2.getUri() + ">");
+                                    if (similarity.get(label) > 0/* 0.3 */) {// the similarity is beyond a threshold
+                                        spg.addTriple("<" + eLink1.getUri() + ">",
+                                                "<" + labelMap.get(label).get(0) + ">", "<" + eLink2.getUri() + ">");
                                         spg.setScore(eLink1.getScore() * eLink2.getScore() * similarity.get(label));
                                         bingoTag = true;
                                         break;
@@ -964,11 +1014,14 @@ public class QuestionSolver {
                                 }
                             }
                         }
-                        if (bingoTag) break;
+                        if (bingoTag)
+                            break;
                     }
-                    if (bingoTag) break;
+                    if (bingoTag)
+                        break;
                 }
-                if (bingoTag) break;
+                if (bingoTag)
+                    break;
             }
             if (!spg.getTupleList().isEmpty()) {
                 sparqlList.add(spg);
@@ -995,13 +1048,17 @@ public class QuestionSolver {
         for (SparqlGenerator sparqlGenerator : sparqlList) {
             for (ThreeTuple<String, String, String> triple : sparqlGenerator.getTupleList()) {
                 if (triple.getFirst().startsWith("<http")) {
-                    if (!triple.getFirst().contains("ontology")) entityPrediction.add(triple.getFirst());
-                    if (triple.getSecond().contains("rdf-syntax-ns#type") && triple.getFirst().contains("ontology") && Character.isUpperCase(triple.getFirst().charAt(29)))
+                    if (!triple.getFirst().contains("ontology"))
+                        entityPrediction.add(triple.getFirst());
+                    if (triple.getSecond().contains("rdf-syntax-ns#type") && triple.getFirst().contains("ontology")
+                            && Character.isUpperCase(triple.getFirst().charAt(29)))
                         typePrediction.add(triple.getFirst());
                 }
                 if (triple.getThird().startsWith("<http")) {
-                    if (!triple.getThird().contains("ontology")) entityPrediction.add(triple.getThird());
-                    if (triple.getSecond().contains("rdf-syntax-ns#type") && triple.getThird().contains("ontology") && Character.isUpperCase(triple.getThird().charAt(29)))
+                    if (!triple.getThird().contains("ontology"))
+                        entityPrediction.add(triple.getThird());
+                    if (triple.getSecond().contains("rdf-syntax-ns#type") && triple.getThird().contains("ontology")
+                            && Character.isUpperCase(triple.getThird().charAt(29)))
                         typePrediction.add(triple.getFirst());
                 }
                 if (triple.getSecond().startsWith("<http") && !triple.getSecond().contains("rdf-syntax-ns#type")) {
@@ -1009,30 +1066,37 @@ public class QuestionSolver {
                 }
             }
         }
-        Evaluator.addEntityLinkingSample(new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(entityPrediction))), entityGolden);
-        Evaluator.addRelationLinkingSample(new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(relationPrediction))), relationGolden);
-        Evaluator.addTypeLinkingSample(new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(typePrediction))), typeGolden);
+        Evaluator.addEntityLinkingSample(
+                new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(entityPrediction))), entityGolden);
+        Evaluator.addRelationLinkingSample(
+                new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(relationPrediction))),
+                relationGolden);
+        Evaluator.addTypeLinkingSample(
+                new ArrayList<>(GoldenLinkingUtil.removeAngleBrackets(new HashSet<>(typePrediction))), typeGolden);
     }
 
     /**
-     * Detect entity for one node, fill the content of nodeEMap, nodeEListMap and noEntityNodeIds
+     * Detect entity for one node, fill the content of nodeEMap, nodeEListMap and
+     * noEntityNodeIds
      *
      * @param node descriptive node
      */
-    public void initialEntityDetection(Node node,EDG edg) {
+    public void initialEntityDetection(Node node, EDG edg) {
         int nodeID = node.getNodeID();
 
-        //key: entity mention; value: List<Link>
-        Map<String, List<Link>> entityLinkingMap = Detector.entityDetection(node.getStr(), globalEntityLinkMap.getData(),
+        // key: entity mention; value: List<Link>
+        Map<String, List<Link>> entityLinkingMap = Detector.entityDetection(node.getStr(),
+                globalEntityLinkMap.getData(),
                 QAArgs.getGoldenLinkingMode(), GoldenLinkingUtil.getGoldenEntityLinkBySerialNumber(serialNumber));
-//        System.out.println("entity linking map: " + entityLinkingMap);
+        // System.out.println("entity linking map: " + entityLinkingMap);
         if (!entityLinkingMap.isEmpty()) {
 
             // if more than one entity mention is recognized, reduce them
             if (entityLinkingMap.keySet().size() > 1) {
                 List<TwoTuple<String, Double>> scoreList = new ArrayList<>(); // pair (mention, score)
 
-                List<Link> candidateUriList = entityLinkingMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+                List<Link> candidateUriList = entityLinkingMap.values().stream().flatMap(Collection::stream)
+                        .collect(Collectors.toList());
                 Set<String> oneHopProperties = KBUtil.getOneHopPotentialEntity(candidateUriList);
 
                 for (String key : entityLinkingMap.keySet()) {
@@ -1041,9 +1105,10 @@ public class QuestionSolver {
                     double score = SimilarityUtil.getMentionConfidence(key, entityLinkingMap);
                     for (String oneHopProperty : oneHopProperties) {
                         if (oneHopProperty.toLowerCase().contains(key.toLowerCase())
-                                || (key.toLowerCase().contains(oneHopProperty.toLowerCase()) && oneHopProperty.length() >= 3)
+                                || (key.toLowerCase().contains(oneHopProperty.toLowerCase())
+                                        && oneHopProperty.length() >= 3)
                                 || SimilarityUtil.getScoreIgnoreCase(key, oneHopProperty) > 0.9) {
-                            //score *= 0;
+                            // score *= 0;
                             break;
                         }
                     }
@@ -1065,46 +1130,48 @@ public class QuestionSolver {
                 String topicMention = scoreList.get(0).getFirst(); // choose the top-1 node as the topic entity
                 List<Link> eLinkList = entityLinkingMap.get(topicMention);
                 nodeEntityListMap.put(nodeID, eLinkList);
-//                System.out.println("Add: " + nodeID + eLinkList);
-                //Clear other entities identified in EMAP Mention 
+                // System.out.println("Add: " + nodeID + eLinkList);
+                // Clear other entities identified in EMAP Mention
                 for (int i = 1; i < scoreList.size(); i++) {
                     entityLinkingMap.remove(scoreList.get(i).getFirst());
                 }
-//                System.out.println("Add: " + nodeID + eLinkList);
+                // System.out.println("Add: " + nodeID + eLinkList);
             } else {
-                List<Link> eLinkList = entityLinkingMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+                List<Link> eLinkList = entityLinkingMap.values().stream().flatMap(Collection::stream)
+                        .collect(Collectors.toList());
                 nodeEntityListMap.put(nodeID, eLinkList);
             }
         } else { // if entity linking is empty
-            nodeIdsWithNoEntity.add(nodeID); //No Entity, join noentityNodeID 
+            nodeIdsWithNoEntity.add(nodeID); // No Entity, join noentityNodeID
         }
-        System.out.println("nodeElistMap in judge question: "+ nodeEntityListMap);
+        System.out.println("nodeElistMap in judge question: " + nodeEntityListMap);
     }
 
     /**
-     * Cut the Entity candidate (Entity disambiguation) through the synergy between each node
+     * Cut the Entity candidate (Entity disambiguation) through the synergy between
+     * each node
      *
      * @param relatedDesIDs DesnodeIDS related to current Entity
      */
     public void entityReduce(Set<Integer> relatedDesIDs) {
         Set<Integer> tempSet = new HashSet<>(nodeEntityListMap.keySet());
         tempSet.retainAll(relatedDesIDs);
-        int eNodeNums = tempSet.size(); //Node containing entity detection results 
+        int eNodeNums = tempSet.size(); // Node containing entity detection results
 
         if (eNodeNums >= 2) {
-            //There are more than two description containing Entity 
-            // description Union disambiguation 
+            // There are more than two description containing Entity
+            // description Union disambiguation
             for (Integer id : tempSet) {
 
                 List<Link> eLinkList = nodeEntityListMap.get(id);
-                List<Link> otherList = new ArrayList<>(); //All physical link results of other Node 
+                List<Link> otherList = new ArrayList<>(); // All physical link results of other Node
                 for (Integer otherId : nodeEntityListMap.keySet()) {
                     if (!otherId.equals(id)) {
                         otherList.addAll(nodeEntityListMap.get(otherId));
                     }
                 }
 
-                //Other lists have been emptied, no need to empty the current list 
+                // Other lists have been emptied, no need to empty the current list
                 if (otherList.isEmpty()) {
                     continue;
                 }
@@ -1113,13 +1180,14 @@ public class QuestionSolver {
                 while (iter.hasNext()) {
                     Link link = iter.next();
                     boolean in2Hop = false;
-                    for (Link otLink : otherList) {// Limit the distance between each entry does not exceed two hops 
+                    for (Link otLink : otherList) {// Limit the distance between each entry does not exceed two hops
                         if (KBUtil.isEPairInTwoHop(link.getUri(), otLink.getUri())) {
                             in2Hop = true;
                             break;
                         }
                     }
-                    if (!in2Hop) {//The result of the link between other nodes is not in two, delete the current node 
+                    if (!in2Hop) {// The result of the link between other nodes is not in two, delete the current
+                                  // node
                         iter.remove();
                     }
                 }
@@ -1128,7 +1196,7 @@ public class QuestionSolver {
         } else {
             for (Integer id : tempSet) {
                 List<Link> eLinkList = nodeEntityListMap.get(id);
-                while (eLinkList.size() > 2) {//Leave only TOP2 entity link results 
+                while (eLinkList.size() > 2) {// Leave only TOP2 entity link results
                     eLinkList.remove(2);
                 }
 
@@ -1140,7 +1208,8 @@ public class QuestionSolver {
                     }
                 }
 
-                // if a linked entity is a title,e.g. "mayor of paris", replace with its instances
+                // if a linked entity is a title,e.g. "mayor of paris", replace with its
+                // instances
                 List<Link> newLink = new ArrayList<>();
                 Iterator<Link> iterator = eLinkList.iterator();
                 while (iterator.hasNext()) {
@@ -1148,7 +1217,8 @@ public class QuestionSolver {
                     if (KBUtil.isaTitle(eLink.getUri())) {
                         iterator.remove();
                         List<String> titleInstances = KBUtil.getTitleInstances(eLink.getUri());
-                        titleInstances.forEach(uri -> newLink.add(new Link(eLink.getMention(), uri, LinkEnum.ENTITY, eLink.getScore())));
+                        titleInstances.forEach(uri -> newLink
+                                .add(new Link(eLink.getMention(), uri, LinkEnum.ENTITY, eLink.getScore())));
                     }
                 }
                 if (!newLink.isEmpty()) {
@@ -1168,24 +1238,26 @@ public class QuestionSolver {
     public void initialRelationDetection(Node node) {
 
         int nodeID = node.getNodeID();
-        //Map<String, List<Link>> eMap = nodeEntityMap.getOrDefault(nodeID, new HashMap<>());
+        // Map<String, List<Link>> eMap = nodeEntityMap.getOrDefault(nodeID, new
+        // HashMap<>());
         List<Link> eLinkList = nodeEntityListMap.getOrDefault(nodeID, new ArrayList<>());
-        //Replace the Entity in NodeStr to transform in <E0>, EntityIndexmap store <E0, DBR: OBAMA> such mapping 
+        // Replace the Entity in NodeStr to transform in <E0>, EntityIndexmap store <E0,
+        // DBR: OBAMA> such mapping
         Map<String, String> entityIndexMap = Detector.replaceEntityInNode(node, eLinkList);
-//        System.out.println("A: "+nodeEntityListMap);
+        // System.out.println("A: "+nodeEntityListMap);
         // if it is the target entity, considering the trigger of the question
         Trigger trigger = Trigger.UNKNOWN;
         if (edg.findEntityBlockID(node) == 0) {
             trigger = edg.getTrigger();
         }
-//        System.out.println("B: "+nodeEntityListMap);
+        // System.out.println("B: "+nodeEntityListMap);
         Map<String, List<Link>> rMap = Detector.relationDetection(node.getStr(), entityIndexMap,
                 eLinkList, trigger, QAArgs.getGoldenLinkingMode(),
                 GoldenLinkingUtil.getGoldenRelationLinkBySerialNumber(serialNumber), this.globalRelationLinkMap);
 
-//        System.out.println("C: "+nodeEntityListMap);
+        // System.out.println("C: "+nodeEntityListMap);
         List<Link> rLinkList = rMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
-        System.out.println("rLinkList: "+rLinkList);
+        System.out.println("rLinkList: " + rLinkList);
 
         if (!rLinkList.isEmpty()) {
             nodeRelationListMap.put(nodeID, rLinkList);
@@ -1194,7 +1266,8 @@ public class QuestionSolver {
     }
 
     /**
-     * Splicing each of the Entity-containing DESNODE, generating candidate Threetuple <E, R, SCORE>
+     * Splicing each of the Entity-containing DESNODE, generating candidate
+     * Threetuple <E, R, SCORE>
      *
      * @param node          desNode
      * @param relatedDesIDS NodeID with DESNODE related to current Entity
@@ -1207,12 +1280,12 @@ public class QuestionSolver {
         List<Link> relationLinkList = nodeRelationListMap.getOrDefault(nodeID, null);
         List<ThreeTuple<String, String, Double>> tupleList = new ArrayList<>();
 
-        if (entityLinkList != null) {//Current node has physical link results 
-            if (relationLinkList == null) {//Current Node No RLINKLIST 
-                //May be a Type misunderstanding as Entity 
-                //Delete the result of entity identification 
-                if (!NLPUtil.judgeIfEntity(node.getStr())) {//EqualNode in the Judge type question
-//                    System.out.println("Judge type question: " + node.getStr());
+        if (entityLinkList != null) {// Current node has physical link results
+            if (relationLinkList == null) {// Current Node No RLINKLIST
+                // May be a Type misunderstanding as Entity
+                // Delete the result of entity identification
+                if (!NLPUtil.judgeIfEntity(node.getStr())) {// EqualNode in the Judge type question
+                    // System.out.println("Judge type question: " + node.getStr());
                     nodeEntityListMap.remove(node.getNodeID());
                 }
             } else { // if relation link is not null
@@ -1220,23 +1293,24 @@ public class QuestionSolver {
                 for (Link elink : entityLinkList) {
                     oneHopProperty.addAll(Detector.oneHopPropertyFiltered(elink.getUri()));
                 }
-//                System.out.println("oneHopProperty: " + oneHopProperty);
+                // System.out.println("oneHopProperty: " + oneHopProperty);
                 List<Link> otherRLinkList = new ArrayList<>();
                 List<String> otherNodeStrs = new ArrayList<>();
                 for (Integer id : nodeIdsWithNoEntity) {
                     if (relatedDesIDS.contains(id) && nodeRelationListMap.containsKey(id)) {
                         otherRLinkList.addAll(nodeRelationListMap.get(id));
                         otherNodeStrs.add(edg.getNodes()[id].getStr());
-//                        System.out.println("otherRLinkList " + otherRLinkList);
-//                        System.out.println("otherNodeStrs " + otherNodeStrs);
+                        // System.out.println("otherRLinkList " + otherRLinkList);
+                        // System.out.println("otherNodeStrs " + otherNodeStrs);
                     }
                 }
 
                 for (Link otherRLink : otherRLinkList) {
                     if (oneHopProperty.contains(otherRLink.getUri())) {
-                        //If a relationship link of an Entity's Node is in another Node, add another Node RLIST 
+                        // If a relationship link of an Entity's Node is in another Node, add another
+                        // Node RLIST
                         // other node relation link result in oneHopProperty, add to relationLinkList
-                        otherRLink.setScore(0.6);//Improve score 
+                        otherRLink.setScore(0.6);// Improve score
                         relationLinkList.add(otherRLink);
                     }
                 }
@@ -1252,41 +1326,44 @@ public class QuestionSolver {
                     }
                     labelUriMap.get(propLabel).add(prop);
                 }
-//                System.out.println("labelUriMap: "+labelUriMap);
+                // System.out.println("labelUriMap: "+labelUriMap);
                 for (String otherStr : otherNodeStrs) {
-                    HashMap<String, Double> labelSim = SimilarityUtil.getLexicalSetSimilarity(otherStr, labelUriMap.keySet());
+                    HashMap<String, Double> labelSim = SimilarityUtil.getLexicalSetSimilarity(otherStr,
+                            labelUriMap.keySet());
                     for (String propLabel : labelSim.keySet()) {
                         double score = labelSim.get(propLabel);
-//                        System.out.println("score: "+score);
+                        // System.out.println("score: "+score);
                         if (score > 0.6) {
-                            labelUriMap.get(propLabel).forEach(property ->
-                                    relationLinkList.add(new Link(otherStr, property, LinkEnum.RELATION, score)));
+                            labelUriMap.get(propLabel).forEach(property -> relationLinkList
+                                    .add(new Link(otherStr, property, LinkEnum.RELATION, score)));
                         }
                     }
                 }
 
-
-                LinkingTool.reSortRelationLinkList(relationLinkList); //Reorder rlinklist 
+                LinkingTool.reSortRelationLinkList(relationLinkList); // Reorder rlinklist
 
                 for (Link entityLink : entityLinkList) {
                     for (Link relationLink : relationLinkList) {
                         if (KBUtil.isERexists(entityLink.getUri(), relationLink.getUri())) {
 
                             double score = entityLink.getScore() * relationLink.getScore();
-//                            System.out.println("score: "+score);
+                            // System.out.println("score: "+score);
                             tupleList.add(new ThreeTuple<>(entityLink.getUri(), relationLink.getUri(), score));
                         }
                     }
                 }
 
-                //Current Node generated tuPleList 
-                //Reverse order 
+                // Current Node generated tuPleList
+                // Reverse order
                 Ordering<ThreeTuple> threeTupleOrdering = new Ordering<ThreeTuple>() {
                     @Override
                     public int compare(@Nullable ThreeTuple t1, @Nullable ThreeTuple t2) {
-                        if (t1 == null && t2 == null) return 0;
-                        if (t1 == null) return 1;
-                        if (t2 == null) return -1;
+                        if (t1 == null && t2 == null)
+                            return 0;
+                        if (t1 == null)
+                            return 1;
+                        if (t2 == null)
+                            return -1;
                         return Double.compare((double) t2.getThird(), (double) t1.getThird());
                     }
                 };
@@ -1294,13 +1371,15 @@ public class QuestionSolver {
 
                 // Tuple cuts the score below a certain threshold
                 if (tupleList.size() > 1 || edg.findEntityBlockID(node) != 0) {
-                    tupleList.removeIf(o -> o.getThird() <= 0.05 /*0.05*/);
+                    tupleList.removeIf(o -> o.getThird() <= 0.05 /* 0.05 */);
                 }
 
-                /*//Control the number of Ertuples no more than 5 
-                while (tupleList.size() > 5) {
-                    tupleList.remove(5);
-                }*/
+                /*
+                 * //Control the number of Ertuples no more than 5
+                 * while (tupleList.size() > 5) {
+                 * tupleList.remove(5);
+                 * }
+                 */
 
             }
         }
@@ -1313,9 +1392,9 @@ public class QuestionSolver {
      * @param relatedDesIDs RelatedDesids within this block
      * @return ¸ÃblockµÄcandidate block tuples
      */
-    public List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> blockTupleGeneration
-    (Set<Integer> relatedDesIDs) {
-        //Several Node stitching 
+    public List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> blockTupleGeneration(
+            Set<Integer> relatedDesIDs) {
+        // Several Node stitching
         List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> candidateTuples = new ArrayList<>();
 
         // get each node's highest score
@@ -1335,20 +1414,20 @@ public class QuestionSolver {
         List<Integer> nodeIDList = new ArrayList<>(nodeERScoreMap.keySet());
         nodeIDList.sort((o1, o2) -> Double.compare(nodeERScoreMap.get(o2), nodeERScoreMap.get(o1)));
 
-
-        // There is current Block Node 
+        // There is current Block Node
         if (!nodeIDList.isEmpty()) {
             for (Integer nodeID : nodeIDList) {
                 List<ThreeTuple<String, String, Double>> nodeTuples = nodeERTupleListMap.get(nodeID);
 
-                if (candidateTuples.isEmpty()) {//First addition, join all 
+                if (candidateTuples.isEmpty()) {// First addition, join all
                     for (ThreeTuple<String, String, Double> tuple : nodeTuples) {
                         List<ThreeTuple<String, String, Double>> candidate = new ArrayList<>();
                         candidate.add(tuple);
                         candidateTuples.add(new TwoTuple<>(candidate, tuple.getThird()));
                     }
-                } else {//There have been results, pay 
-                    Iterator<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> iterator = candidateTuples.iterator();
+                } else {// There have been results, pay
+                    Iterator<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> iterator = candidateTuples
+                            .iterator();
                     List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> newCandidateTuples = new ArrayList<>();
                     while (iterator.hasNext()) {
                         TwoTuple<List<ThreeTuple<String, String, Double>>, Double> oldTuple = iterator.next();
@@ -1357,7 +1436,7 @@ public class QuestionSolver {
 
                         boolean added = false;
                         for (ThreeTuple<String, String, Double> tuple : nodeTuples) {
-                            //Add new statement 
+                            // Add new statement
                             List<ThreeTuple<String, String, Double>> tempList = new ArrayList<>(candidate);
                             tempList.add(tuple);
                             if (KBUtil.isThreeTupleListExists(tempList)) {
@@ -1368,10 +1447,11 @@ public class QuestionSolver {
 
                     }
 
-                    //Generated new longer sparql, abandoning the original sparql, otherwise retaining the original Sparql 
+                    // Generated new longer sparql, abandoning the original sparql, otherwise
+                    // retaining the original Sparql
                     if (!newCandidateTuples.isEmpty()) {
                         if (!QAArgs.isEvaluateCandNum()) {
-                            candidateTuples = newCandidateTuples; //Update CandidateTuples 
+                            candidateTuples = newCandidateTuples; // Update CandidateTuples
                         } else {
                             // evaluate Candidates, reverse the old sparqls
                             candidateTuples.addAll(newCandidateTuples);
@@ -1381,22 +1461,22 @@ public class QuestionSolver {
             }
         }
 
-        //Reverse order 
+        // Reverse order
         candidateTuples.sort((o1, o2) -> Double.compare(o2.getSecond(), o1.getSecond()));
 
         int blockBound = QAArgs.getBlockSparqlNumUpperB();
         if (!QAArgs.isEvaluateCandNum()) {
-            //Keep TOP 5 
+            // Keep TOP 5
             while (candidateTuples.size() > blockBound) {
                 candidateTuples.remove(blockBound);
             }
         }
 
-        //Reduce according to threshold 
+        // Reduce according to threshold
         Iterator<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> iterator = candidateTuples.iterator();
         while (iterator.hasNext()) {
             double score = iterator.next().getSecond();
-            if (score <= 0.05/*0.05*/) {
+            if (score <= 0.05/* 0.05 */) {
                 iterator.remove();
             }
         }
@@ -1416,33 +1496,37 @@ public class QuestionSolver {
 
         List<SparqlGenerator> sparqlList = new ArrayList<>();
 
-        List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> candidateTuples = blockCandidateMap.get(entityID);
+        List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> candidateTuples = blockCandidateMap
+                .get(entityID);
         System.out.println("blockCandidateMap: " + blockCandidateMap);
         SparqlGenerator tmpSparqlGen = new SparqlGenerator();
         String finalVarName = "e" + entityID;
         tmpSparqlGen.setFinalVarName(finalVarName);
 
-        boolean isRootJudge = false; //Whether it is rootentity and is Judge type 
-        if (entityID == 0) {//Root Entity, generate sparql according to QuestionType 
+        boolean isRootJudge = false; // Whether it is rootentity and is Judge type
+        if (entityID == 0) {// Root Entity, generate sparql according to QuestionType
             QueryType queryType = edg.getNodes()[0].getQueryType();
 
             if (queryType == QueryType.JUDGE) {
                 SparqlGenerator sparqlGen = new SparqlGenerator(tmpSparqlGen);
                 sparqlGen.setQuesType(queryType); // set the question type
                 for (Integer nodeID : relatedDesIDs) {
-                    if (edg.isEqualNode(nodeID)) {//Find Equal 
+                    if (edg.isEqualNode(nodeID)) {// Find Equal
                         List<Link> nodeEList = nodeEntityListMap.get(nodeID);
                         if (nodeEList != null && !nodeEList.isEmpty()) {
                             sparqlGen.getVarValueMap().put(finalVarName, "<" + nodeEList.get(0).getUri() + ">");
                         }
-                    } else {//Non-equal 
+                    } else {// Non-equal
                         List<ThreeTuple<String, String, Double>> threeTuples = nodeERTupleListMap.get(nodeID);
-                        //Join only the first TUPLE 
+                        // Join only the first TUPLE
                         if (threeTuples != null && !threeTuples.isEmpty()) {
                             ThreeTuple<String, String, Double> threeTuple = threeTuples.get(0);
-                            //sparqlGen.addTriple("?" + finalVarName, "?p", "<" + threeTuple.getFirst() + ">");//Adjacent
-                            System.out.println("sparql is like: "+"?" + finalVarName+ "<" + threeTuple.getSecond() + ">"+ "<" + threeTuple.getFirst() + ">");
-                            sparqlGen.addTriple("?" + finalVarName, "<" + threeTuple.getSecond() + ">", "<" + threeTuple.getFirst() + ">");
+                            // sparqlGen.addTriple("?" + finalVarName, "?p", "<" + threeTuple.getFirst() +
+                            // ">");//Adjacent
+                            System.out.println("sparql is like: " + "?" + finalVarName + "<" + threeTuple.getSecond()
+                                    + ">" + "<" + threeTuple.getFirst() + ">");
+                            sparqlGen.addTriple("?" + finalVarName, "<" + threeTuple.getSecond() + ">",
+                                    "<" + threeTuple.getFirst() + ">");
                             sparqlGen.setScore(1.0);
                         }
                     }
@@ -1451,7 +1535,7 @@ public class QuestionSolver {
                 isRootJudge = true;
 
             } else { // if it's not judge type
-                if (queryType == QueryType.COUNT) {//Set the question type to count 
+                if (queryType == QueryType.COUNT) {// Set the question type to count
                     tmpSparqlGen.setQuesType(QueryType.COUNT);
                 } else {
                     tmpSparqlGen.setQuesType(QueryType.COMMON);
@@ -1469,7 +1553,7 @@ public class QuestionSolver {
             }
         }
 
-        System.out.println("sparql list :"+sparqlList);
+        System.out.println("sparql list :" + sparqlList);
 
         return sparqlList;
     }

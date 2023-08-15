@@ -519,13 +519,13 @@ public class EDG {
 
     private void construct(String question) {
         // origin question
-        System.out.println("Original Question: " + question);
+        System.out.println(">> Original Question: " + question);
         // pre process the question
 
         // sysout3
         System.out.println("\n==Sysout3== Preprocessing");
         this.question = Preprocessor.preProcessQuestion(question);
-        System.out.println("Question after preprocess: " + this.question);
+        System.out.println(">> Question after preprocess: " + this.question);
 
         // recognize long entity
         if (this.entityMap == null) {
@@ -535,13 +535,17 @@ public class EDG {
         // sysout5
         System.out.println("\n==Sysout5== taggedQuestion");
         taggedQuestion = LinkingTool.recognizeLongEntity(this.question, this.entityMap, EDG.KB);
-        System.out.println("TaggedQuestion: " + taggedQuestion);
+        System.out.println(">> TaggedQuestion: " + taggedQuestion);
 
         // generate syntax treeNode of taggedQuestion
         // sysout6
         System.out.println("\n==Sysout6== NLPUtil");
         this.syntaxTreeText = NLPUtil.getSyntaxTree(taggedQuestion);
+        //System.out.println("SyntaxTreeText:"+this.syntaxTreeText );
+
         this.syntaxTreeNode = createTree(this.syntaxTreeText);
+        System.out.println(">> SyntaxTreeNode:"+this.syntaxTreeNode);
+
         System.out.println(NLPUtil.transferParentheses(this.syntaxTreeText));
 
         // parse the syntaxTree, generate nodes and edges

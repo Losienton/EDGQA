@@ -277,10 +277,14 @@ public class EDGQA extends QASystem {
 
                 // sysout7
                 System.out.println("\n==Sysout7== QuestionSolver");
+                // System.out.println(">> Question: " + question);
+                // System.out.println(">> SeriaNumber: " + serialNumber);
+                // System.out.println(">> EDG: \n" + edg);
                 questionSolver = new QuestionSolver(question, serialNumber, edg);
+                System.out.println(">> QuestionSolver: " + questionSolver);
 
                 // sysout8
-                System.out.println("====================================");
+                System.out.println("\n====================================");
                 System.out.println("==Sysout8== Start predictedAnswer");
                 System.out.println("====================================");
                 predictedAnswer.addAll(questionSolver.solveQuestion()); // generate our answers here
