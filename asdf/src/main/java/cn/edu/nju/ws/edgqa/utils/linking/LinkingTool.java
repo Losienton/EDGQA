@@ -121,7 +121,7 @@ public class LinkingTool {
      * @return Link result map
      */
     public static Map<String, List<Link>> getFalconLinking(String sentence, String linking_type) {
-        System.out.println(">> Use falconlinking >>");
+        System.out.println("\n>> Use falconlinking >>");
         System.out.println(">> Use Sentence : " + sentence);
         if (QAArgs.isUsingLinkingCache() && CacheUtil.getFalconMap() != null
                 && CacheUtil.getFalconMap().containsKey(sentence))
@@ -559,6 +559,8 @@ public class LinkingTool {
      * @return RlinkMap after re-scoring
      */
     public static Map<String, List<Link>> reScoreRelation(Map<String, List<Link>> rLinkMap) {
+        System.out.println("\n>> Rescore resultmap (P-dictionary and literal similarity) >>\n");
+
         // Simple scoring based on similarity
         for (String rMention : rLinkMap.keySet()) {
             if (!rLinkMap.get(rMention).isEmpty()) {
@@ -713,8 +715,8 @@ public class LinkingTool {
             if (kb == KBEnum.DBpedia) {
                 // use dexter for general question
                 Map<String, List<Link>> dexterLinking = LinkingTool.getFalconLinking(question, "entity");
-                //System.out.println("\n==Test before linking==");
-                //System.out.println("dexterLinking:" + dexterLinking);
+                // System.out.println("\n==Test before linking==");
+                // System.out.println("dexterLinking:" + dexterLinking);
                 for (String mention : dexterLinking.keySet()) {
                     if (!dexterLinking.get(mention).isEmpty()) {
                         int mentionLen = mention.split(" ").length;
@@ -739,11 +741,11 @@ public class LinkingTool {
                            */
                     }
                 }
-                //System.out.println("\n==Test after lining==");
-                //System.out.println("dexterLinking after:" + dexterLinking);
+                // System.out.println("\n==Test after lining==");
+                // System.out.println("dexterLinking after:" + dexterLinking);
                 for (String mention : dexterLinking.keySet()) {
-                    //System.out.println("\n==Test Candidate==");
-                    //System.out.println("earlMention:" + mention);
+                    // System.out.println("\n==Test Candidate==");
+                    // System.out.println("earlMention:" + mention);
                     if (!dexterLinking.get(mention).isEmpty()) {
                         if (dexterLinking.get(mention).get(0).getType() == LinkEnum.ENTITY) { // Substitution entity
                                                                                               // only

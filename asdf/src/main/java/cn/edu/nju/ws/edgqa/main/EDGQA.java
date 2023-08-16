@@ -539,7 +539,8 @@ public class EDGQA extends QASystem {
         LogUtil.printlnInfo("queryLog", Evaluator.getEntityLinkingMetricsStr());
         LogUtil.printlnInfo("queryLog", Evaluator.getRelationLinkingMetricsStr());
         LogUtil.printlnInfo("queryLog", Evaluator.getTypeLinkingMetricsStr());
-        LogUtil.println("queryLog", "===================================END===================================");
+        LogUtil.println("queryLog",
+                "===================================END===================================\n\n\n\n\n\n\n");
     }
 
     private static int getPredictedTripleNum(EDG edg) {

@@ -541,10 +541,10 @@ public class EDG {
         // sysout6
         System.out.println("\n==Sysout6== NLPUtil");
         this.syntaxTreeText = NLPUtil.getSyntaxTree(taggedQuestion);
-        //System.out.println("SyntaxTreeText:"+this.syntaxTreeText );
+        // System.out.println("SyntaxTreeText:"+this.syntaxTreeText );
 
         this.syntaxTreeNode = createTree(this.syntaxTreeText);
-        System.out.println(">> SyntaxTreeNode:"+this.syntaxTreeNode);
+        System.out.println(">> SyntaxTreeNode:" + this.syntaxTreeNode);
 
         System.out.println(NLPUtil.transferParentheses(this.syntaxTreeText));
 
@@ -4493,6 +4493,7 @@ public class EDG {
                     for (int i = 0; i < numNode; i++) {// find the referring entityID
                         if (edges[desNode.getNodeID()][i].edgeType == Edge.TYPE_REFER) {
                             result.add(nodes[i].getEntityID());
+                            System.out.println(">> ReferredEntity: " + nodes[i]);
                         }
                     }
                 }

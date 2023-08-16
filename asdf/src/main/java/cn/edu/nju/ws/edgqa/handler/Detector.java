@@ -57,26 +57,30 @@ public class Detector {
     public static void init(DatasetEnum dataset) {
         System.out.println("[INFO] Detector initializing...");
 
-        //ontology in dbpedia 1604
-        dbpediaClass.addAll(FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/dbpedia1604Classes.txt"));
+        // ontology in dbpedia 1604
+        dbpediaClass.addAll(FileUtil
+                .readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/dbpedia1604Classes.txt"));
 
-        //paraphrase dict
+        // paraphrase dict
         List<Paraphrase> paraphraseList = new ArrayList<>();
         try {
-            paraphraseList = FileUtil.loadParaphrase("/home/wassteven/EDGQA/asdf/src/main/resources/nlp/relation_paraphrase_dict_test.txt", "\t", true);
-            //System.out.println(paraphraseList);
+            paraphraseList = FileUtil.loadParaphrase(
+                    "/home/wassteven/EDGQA/asdf/src/main/resources/nlp/relation_paraphrase_dict_test.txt", "\t", true);
+            // System.out.println(paraphraseList);
         } catch (IOException e) {
-            //System.out.println("ERROR in loading paraphrase");
+            // System.out.println("ERROR in loading paraphrase");
             e.printStackTrace();
         }
         buildParaphraseMap(paraphraseList);
 
-        //stop words
+        // stop words
         stopWords = FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/nlp/stopwords-en.txt");
-        //auxiliaryVerbs
-        auxiliaryVerbs = FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/nlp/auxiliary_verbs.txt");
-        //dbpedia ontologies
-        List<String> dbOntoUris = FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/dbpedia1604Classes.txt");
+        // auxiliaryVerbs
+        auxiliaryVerbs = FileUtil
+                .readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/nlp/auxiliary_verbs.txt");
+        // dbpedia ontologies
+        List<String> dbOntoUris = FileUtil
+                .readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/dbpedia1604Classes.txt");
         dbOntoUris.forEach(uri -> {
             String label = KBUtil.queryLabel(uri);
             if (label == null || label.trim().equals("")) {
@@ -85,13 +89,17 @@ public class Detector {
             dbOntos.put(uri, label);
         });
 
-        //whiteList and blackList
+        // whiteList and blackList
         if (dataset == DatasetEnum.LC_QUAD) {
-            entityWhiteList.addAll(FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/entity_whitelist_lcquad.txt"));
-            predicateWhiteList.addAll(FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_whitelist_lcquad.txt"));
-            predicateBlackList.addAll(FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_blacklist_lcquad.txt"));
+            entityWhiteList.addAll(FileUtil.readFileAsList(
+                    "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/entity_whitelist_lcquad.txt"));
+            predicateWhiteList.addAll(FileUtil.readFileAsList(
+                    "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_whitelist_lcquad.txt"));
+            predicateBlackList.addAll(FileUtil.readFileAsList(
+                    "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_blacklist_lcquad.txt"));
         } else if (dataset == DatasetEnum.QALD_9) {
-            predicateBlackList.addAll(FileUtil.readFileAsList("/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_blacklist_qald.txt"));
+            predicateBlackList.addAll(FileUtil.readFileAsList(
+                    "/home/wassteven/EDGQA/asdf/src/main/resources/datasets/predicate_blacklist_qald.txt"));
         }
 
         try {
@@ -128,13 +136,17 @@ public class Detector {
                 }
             }
 
-            File relationSimilarityFile = new File(directory + "relation_similarity_" + QAArgs.getDatasetName() + ".data");
+            File relationSimilarityFile = new File(
+                    directory + "relation_similarity_" + QAArgs.getDatasetName() + ".data");
             if (QAArgs.isCreatingRelationSimilarityCache()) { // create relation similarity cache
-                CacheUtil.setRelationSimilarityOutput(new ObjectOutputStream(new FileOutputStream(relationSimilarityFile)));
+                CacheUtil.setRelationSimilarityOutput(
+                        new ObjectOutputStream(new FileOutputStream(relationSimilarityFile)));
             } else { // read relation similarity from cache
                 if (QAArgs.isUsingRelationSimilarityCache() && relationSimilarityFile.exists()) {
-                    ObjectInputStream relationSimilarityInput = new ObjectInputStream(new FileInputStream(relationSimilarityFile));
-                    SimilarityUtil.setRelationSimilarityCache((Map<String, Double>) relationSimilarityInput.readObject());
+                    ObjectInputStream relationSimilarityInput = new ObjectInputStream(
+                            new FileInputStream(relationSimilarityFile));
+                    SimilarityUtil
+                            .setRelationSimilarityCache((Map<String, Double>) relationSimilarityInput.readObject());
                 }
             }
 
@@ -213,11 +225,13 @@ public class Detector {
         // lemmatize of the sentence
         String lemmaSent = NLPUtil.getLemmaSent(sentence);
 
-        /*List<String> tokens = NLPUtil.getTokens(sentence);
-        // too long sentence
-        if(tokens.size()>=5){
-            return result;
-        }*/
+        /*
+         * List<String> tokens = NLPUtil.getTokens(sentence);
+         * // too long sentence
+         * if(tokens.size()>=5){
+         * return result;
+         * }
+         */
 
         for (String dbOnto : dbOntos.keySet()) {
             String dbOntoStr = UriUtil.splitLabelFromUri(dbOnto);
@@ -230,9 +244,12 @@ public class Detector {
 
         return result;
 
-        /*List<String> typeLinkingList = TypeLinkingUtil.getTypeLinkingList(NLPUtil.getLemmaSent(sentence));
-        System.out.println(sentence + " CL:" + typeLinkingList);
-        return typeLinkingList;*/
+        /*
+         * List<String> typeLinkingList =
+         * TypeLinkingUtil.getTypeLinkingList(NLPUtil.getLemmaSent(sentence));
+         * System.out.println(sentence + " CL:" + typeLinkingList);
+         * return typeLinkingList;
+         */
 
     }
 
@@ -246,12 +263,14 @@ public class Detector {
      * @param goldenLinking       the golden entity linking
      * @return sorted entity mention and the linking results
      */
-    public static Map<String, List<Link>> entityDetection(@NotNull String nodeStr, Map<String, List<Link>> globalEntityLinkMap,
-                                                          GoldenMode goldenMode, List<Link> goldenLinking) {
+    public static Map<String, List<Link>> entityDetection(@NotNull String nodeStr,
+            Map<String, List<Link>> globalEntityLinkMap,
+            GoldenMode goldenMode, List<Link> goldenLinking) {
         long startTime = System.currentTimeMillis();
-        System.out.println("\tEntityDetection:" + nodeStr);
-        nodeStr = nodeStr.replace(" 's", "'s"); // Merge 'S 
-        Map<String, List<Link>> resultMap = new ConcurrentHashMap<>();//The final entity detection result of the current NodeStr 
+        System.out.println("EntityDetection: " + nodeStr);
+        nodeStr = nodeStr.replace(" 's", "'s"); // Merge 'S
+        Map<String, List<Link>> resultMap = new ConcurrentHashMap<>();// The final entity detection result of the
+                                                                      // current NodeStr
 
         long linkingToolTime = 0;
         if (QAArgs.isGoldenEntity() && goldenMode == GoldenMode.GENERATION) {
@@ -267,7 +286,8 @@ public class Detector {
             linkingToolTime = entityDetectionCore(nodeStr, globalEntityLinkMap, goldenMode, goldenLinking, resultMap);
         }
 
-        System.out.println("\tEntity detection resultMap:" + resultMap + "\n");
+        System.out.println("Entity detection resultMap: " + resultMap + "\n");
+
         // count entity linking time
         long timeCount = (System.currentTimeMillis() - startTime);
         synchronized (QuestionSolver.lock) {
@@ -277,12 +297,13 @@ public class Detector {
         return resultMap;
     }
 
-    private static long entityDetectionCore(@NotNull String nodeStr, Map<String, List<Link>> globalLinking, GoldenMode goldenMode,
-                                            @Nullable List<Link> goldenLinking, @NotNull Map<String, List<Link>> resultMap) {
+    private static long entityDetectionCore(@NotNull String nodeStr, Map<String, List<Link>> globalLinking,
+            GoldenMode goldenMode,
+            @Nullable List<Link> goldenLinking, @NotNull Map<String, List<Link>> resultMap) {
 
         long startLinkingToolTime = System.currentTimeMillis(); // timing for linking tools
 
-        System.out.println("global entity: "+globalLinking);
+        System.out.println("global entity: " + globalLinking);
 
         // Add the global entity linking results
         if (QAArgs.isGlobalEntityLinking()) {
@@ -306,37 +327,53 @@ public class Detector {
             try {
 
                 // threads pool
-                Callable<Map<String, List<Link>>> falconLinking = new EntityLinkingThread(EntityLinkingThread.LINKING_FALCON, nodeStr, resultMap);
-                //System.out.println("falcon: "+falconLinking);
+                Callable<Map<String, List<Link>>> falconLinking = new EntityLinkingThread(
+                        EntityLinkingThread.LINKING_FALCON, nodeStr, resultMap);
+                // System.out.println("falcon: "+falconLinking);
                 Future<Map<String, List<Link>>> falconRes = EDGQA.getPool().submit(falconLinking);
-//                Callable<Map<String, List<Link>>> dexterLinking = new EntityLinkingThread(EntityLinkingThread.LINKING_DEXTER, nodeStr, resultMap);
-//                Future<Map<String, List<Link>>> dexterRes = EDGQA.getPool().submit(dexterLinking);
-//                Callable<Map<String, List<Link>>> earlLinking = new EntityLinkingThread(EntityLinkingThread.LINKING_EARL, nodeStr, resultMap);
-//                Future<Map<String, List<Link>>> earlRes = EDGQA.getPool().submit(earlLinking);
-//                System.out.println(falconLinking);
-//                System.out.println(falconRes);
+                // Callable<Map<String, List<Link>>> dexterLinking = new
+                // EntityLinkingThread(EntityLinkingThread.LINKING_DEXTER, nodeStr, resultMap);
+                // Future<Map<String, List<Link>>> dexterRes =
+                // EDGQA.getPool().submit(dexterLinking);
+                // Callable<Map<String, List<Link>>> earlLinking = new
+                // EntityLinkingThread(EntityLinkingThread.LINKING_EARL, nodeStr, resultMap);
+                // Future<Map<String, List<Link>>> earlRes =
+                // EDGQA.getPool().submit(earlLinking);
+                // System.out.println(falconLinking);
+                // System.out.println(falconRes);
                 // Merge the linking results
-//                CollectionUtil.mergeLinkMap(LinkingTool.reScoreEntity(earlRes.get(QuestionSolver.entityLinkingThreadTimeLimit, TimeUnit.SECONDS)), resultMap, LinkEnum.ENTITY);
-//                CollectionUtil.mergeLinkMap(LinkingTool.reScoreEntity(dexterRes.get(QuestionSolver.entityLinkingThreadTimeLimit, TimeUnit.SECONDS)), resultMap, LinkEnum.ENTITY);
-                CollectionUtil.mergeLinkMap(LinkingTool.reScoreEntity(falconRes.get(QuestionSolver.entityLinkingThreadTimeLimit, TimeUnit.SECONDS)), resultMap, LinkEnum.ENTITY);
+                // CollectionUtil.mergeLinkMap(LinkingTool.reScoreEntity(earlRes.get(QuestionSolver.entityLinkingThreadTimeLimit,
+                // TimeUnit.SECONDS)), resultMap, LinkEnum.ENTITY);
+                // CollectionUtil.mergeLinkMap(LinkingTool.reScoreEntity(dexterRes.get(QuestionSolver.entityLinkingThreadTimeLimit,
+                // TimeUnit.SECONDS)), resultMap, LinkEnum.ENTITY);
+                CollectionUtil.mergeLinkMap(
+                        LinkingTool.reScoreEntity(
+                                falconRes.get(QuestionSolver.entityLinkingThreadTimeLimit, TimeUnit.SECONDS)),
+                        resultMap, LinkEnum.ENTITY);
 
                 // remove the duplicate links and sort with reversed order
-//                System.out.println(resultMap);
-                resultMap.replaceAll((key, value) -> resultMap.get(key).stream().distinct().sorted(Collections.reverseOrder()).collect(Collectors.toList()));
-                resultMap.forEach((key, value) -> value.removeIf(link -> link.getUri().endsWith("_(disambiguation)"))); // remove disambiguation page
-//                System.out.println(resultMap);
+                System.out.println("resultmap 1: \t" + resultMap);
+                resultMap.replaceAll((key, value) -> resultMap.get(key).stream().distinct()
+                        .sorted(Collections.reverseOrder()).collect(Collectors.toList()));
+                resultMap.forEach((key, value) -> value.removeIf(link -> link.getUri().endsWith("_(disambiguation)"))); // remove
+                                                                                                                        // disambiguation
+                                                                                                                        // page
+                // System.out.println("resultmap 2: \t" + resultMap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        long linkingToolTime = System.currentTimeMillis() - startLinkingToolTime;  // time spent on linking tools
+        long linkingToolTime = System.currentTimeMillis() - startLinkingToolTime; // time spent on linking tools
 
-        //Conflict span digestion 
+        // Conflict span digestion
         LinkingTool.spanConflictFix(nodeStr, resultMap);
-//        System.out.println(resultMap);
+        System.out.println("resultmap 3: \t" + resultMap);
         if (!QAArgs.isEvaluateCandNum()) {
-            //Further reduce the results, using literally similarity 
+            // Further reduce the results, using literally similarity
+            System.out.println("\nFurther reduce the results, using literally similarity");
+            System.out.println(">> ResultMap.keySet: \t" + resultMap.keySet());
+
             for (String key : resultMap.keySet()) {
                 // remove the link if the score is lower than the threshold
                 List<Link> linkList = resultMap.get(key);
@@ -344,48 +381,49 @@ public class Detector {
                 boolean equalFlag = false;
                 while (linkIterator.hasNext()) {
                     Link link = linkIterator.next();
-                    //System.out.println("mention: "+link.getMention());
+                    // System.out.println("mention: "+link.getMention());
 
-                    // The confidence is below the threshold, delete 
-                    if (link.getScore() < 0.4/*QuestionSolver.entityLinkThreshold*/) {
-                        System.out.println("Delete link: "+link);
+                    // The confidence is below the threshold, delete
+                    if (link.getScore() < 0.4/* QuestionSolver.entityLinkThreshold */) {
+                        System.out.println("Delete link: " + link);
                         linkIterator.remove();
                         continue;
                     }
-                    if(link.getMention().equals("fee")){
-                        //System.out.println("remove fee");
+                    if (link.getMention().equals("fee")) {
+                        // System.out.println("remove fee");
                         linkIterator.remove();
                         continue;
                     }
 
-                    // DBPEDIA DISAMBIGUATIONPAGE, delete 
-//                    if (KBUtil.isDisambiguationPage(link.getUri())) {
-//                        linkIterator.remove();
-//                        continue;
-//                    }
+                    // DBPEDIA DISAMBIGUATIONPAGE, delete
+                    // if (KBUtil.isDisambiguationPage(link.getUri())) {
+                    // linkIterator.remove();
+                    // continue;
+                    // }
 
-                    // Is dbpedia redirectpage, modifying the entity after REDIRECT 
+                    // Is dbpedia redirectpage, modifying the entity after REDIRECT
                     if (KBUtil.isRedirectPage(link.getUri())) {
                         List<String> redirectPages = KBUtil.getRedirectPage(link.getUri());
                         if (!redirectPages.isEmpty()) {
                             link.setUri(redirectPages.get(0));
                         }
                     }
-                    //System.out.println(resultMap);
-                    //whether the entity label contains the whole entity mention
+                    // System.out.println("resultmap 4: \t" + resultMap);
+                    // whether the entity label contains the whole entity mention
                     String linkMention = link.getMention();
                     String label = KBUtil.queryLabel(link.getUri());
                     if (label == null) {
                         label = UriUtil.splitLabelFromUri(link.getUri());
                     }
-                    if (label.toLowerCase().contains(linkMention.toLowerCase().trim())) {//Contains full mout 
+                    if (label.toLowerCase().contains(linkMention.toLowerCase().trim())) {// Contains full mout
                         equalFlag = true;
                     }
                 }
-                System.out.println(resultMap);
-                //There is a completely identical link, and there is no completely containing Mention, removed. 
+                // System.out.println(resultMap);
+                // There is a completely identical link, and there is no completely containing
+                // Mention, removed.
                 if (equalFlag) {
-                    //System.out.println("equalflag");
+                    // System.out.println("equalflag");
                     Iterator<Link> iterator = linkList.iterator();
                     while (iterator.hasNext()) {
                         Link link = iterator.next();
@@ -395,32 +433,35 @@ public class Detector {
                             label = UriUtil.splitLabelFromUri(link.getUri());
                         }
                         if (!label.toLowerCase().contains(linkMention.toLowerCase().trim())) {
-                            //System.out.println("equalflag remove");
-                            //iterator.remove();
+                            // System.out.println("equalflag remove");
+                            // iterator.remove();
                         }
                     }
                 }
-                //System.out.println(resultMap);
+                // System.out.println("resultmap 5: \t" + resultMap);
                 // sort the linkList
                 linkList.sort(Collections.reverseOrder());
 
-                //Limit the number of Candidate Entity, limited to 3 
-                /*while (linkList.size() > 3) {
-                    linkList.remove(3);
-                }*/
+                // Limit the number of Candidate Entity, limited to 3
+                /*
+                 * while (linkList.size() > 3) {
+                 * linkList.remove(3);
+                 * }
+                 */
             }
         }
-        //System.out.println(resultMap);
+        // System.out.println("resultmap 6: \t" + resultMap);
         // golden linking filtering
         if (QAArgs.isGoldenEntity()) {
             if (goldenMode != GoldenMode.DISABLED && (goldenLinking == null || goldenLinking.isEmpty())) {
                 System.out.println("[INFO] golden entity linking set is empty");
             } else if (goldenMode == GoldenMode.FILTERING) {
-                resultMap.forEach((k, v) -> v.removeIf(link -> goldenLinking.stream().noneMatch(golden -> golden.getUri().equals(link.getUri()))));
+                resultMap.forEach((k, v) -> v.removeIf(
+                        link -> goldenLinking.stream().noneMatch(golden -> golden.getUri().equals(link.getUri()))));
                 resultMap.keySet().removeIf(key -> resultMap.get(key).isEmpty());
             }
         }
-//        System.out.println(resultMap);
+        // System.out.println("resultmap 7: \t" + resultMap);
         return linkingToolTime;
     }
 
@@ -428,28 +469,30 @@ public class Detector {
      * Relation detection
      *
      * @param nodeStr               original string of one EDG node
-     * @param entityIndexMap        the entity id map used for removing entity mentions
+     * @param entityIndexMap        the entity id map used for removing entity
+     *                              mentions
      * @param eLinkList             the entity linking List
-     * @param trigger               the relation Link result of the whole sentence by tools
+     * @param trigger               the relation Link result of the whole sentence
+     *                              by tools
      * @param goldenMode            golden linking mode, see GoldenLinkingUtil const
      * @param goldenLinking         the golden relation linking
      * @param globalRelationLinkMap the global relation LinkMap
      * @return sorted relation mention and the linking results
      */
     public static HashMap<String, List<Link>> relationDetection(@NotNull String nodeStr,
-                                                                @NotNull Map<String, String> entityIndexMap,
-                                                                List<Link> eLinkList,
-                                                                Trigger trigger,
-                                                                GoldenMode goldenMode,
-                                                                @Nullable List<Link> goldenLinking,
-                                                                LinkMap globalRelationLinkMap) {
+            @NotNull Map<String, String> entityIndexMap,
+            List<Link> eLinkList,
+            Trigger trigger,
+            GoldenMode goldenMode,
+            @Nullable List<Link> goldenLinking,
+            LinkMap globalRelationLinkMap) {
         long startTime = System.currentTimeMillis();
-        System.out.println("\tRelation Detection:" + nodeStr);
-//        System.out.println("A: "+eLinkList);
+        System.out.println("Relation Detection: " + nodeStr);
+        // System.out.println("A: "+eLinkList);
         HashMap<String, List<Link>> resultMap = new HashMap<>();
         HashSet<String> oneHopPropertySet = new HashSet<>();
 
-        List<Link> likelyProperties = new ArrayList<>(); // Current Node possible Predicates 
+        List<Link> likelyProperties = new ArrayList<>(); // Current Node possible Predicates
 
         // process surface form
         String surface = nodeStr;
@@ -466,8 +509,7 @@ public class Detector {
         surface = surface.replaceAll("[,./`'\"()]", "").replaceAll(" +", " ").trim();
         surface = NLPUtil.removeRedundantHeaderAndTailer(surface);
         surface = NLPUtil.getLemmaSent(surface);
-        System.out.println("\tSurface:" + surface);
-
+        System.out.println("Surface: " + surface);
 
         if (surface.trim().equals("")) {// empty String, just return
             return resultMap;
@@ -500,24 +542,25 @@ public class Detector {
 
                 }
             }
-//            System.out.println("B: "+eLinkList);
+            // System.out.println("B: "+eLinkList);
             // use localRelationLinking
             if (QAArgs.isLocalRelationLinking()) {
-                //System.out.println("in local relation linking");
-                relationDetectionCore(entityIndexMap, eLinkList, resultMap, oneHopPropertySet, likelyProperties, surface, trigger);
+                // System.out.println("in local relation linking");
+                relationDetectionCore(entityIndexMap, eLinkList, resultMap, oneHopPropertySet, likelyProperties,
+                        surface, trigger);
             }
         }
-//        System.out.println("C: "+eLinkList);
+        // System.out.println("C: "+eLinkList);
         // remove the stop-words
-        //resultMap.entrySet().removeIf(entry -> stopWords.contains(entry.getKey()));
+        // resultMap.entrySet().removeIf(entry -> stopWords.contains(entry.getKey()));
 
         // golden linking filtering
         if (QAArgs.isGoldenRelation()) {
             if (goldenMode != GoldenMode.DISABLED && (goldenLinking == null || goldenLinking.isEmpty())) {
                 System.out.println("[INFO] golden relation linking set is empty");
             } else if (goldenMode == GoldenMode.FILTERING) {
-                resultMap.forEach((k, v) -> v.removeIf(link ->
-                        goldenLinking.stream().noneMatch(golden -> golden.getUri().equals(link.getUri()))));
+                resultMap.forEach((k, v) -> v.removeIf(
+                        link -> goldenLinking.stream().noneMatch(golden -> golden.getUri().equals(link.getUri()))));
                 resultMap.keySet().removeIf(key -> resultMap.get(key).isEmpty());
             }
         }
@@ -535,12 +578,22 @@ public class Detector {
             }
         });
 
-
-        System.out.println("\tRelation Detection resultMap:" + resultMap);
+        // 0816
+        List<Link> rTestLinkList = resultMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
+        System.out.println("\n>> Relation ResultMap.keySet: \t" + resultMap.keySet());
+        System.out.println("Relation Detection resultMap: " + resultMap);
+        for (int i = 0; i < rTestLinkList.size(); i++) {
+            System.out.println(rTestLinkList.get(i).getUri() + " \t" + rTestLinkList.get(i).getScore());
+        }
 
         LinkingTool.reScoreRelation(resultMap);
-        System.out.println("after rescore resultmap: "+resultMap);
 
+        List<Link> rTest2LinkList = resultMap.values().stream().flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        System.out.println(">> After rescore resultmap: " + resultMap);
+        for (int i = 0; i < rTest2LinkList.size(); i++) {
+            System.out.println(rTest2LinkList.get(i).getUri() + " \t" + rTest2LinkList.get(i).getScore());
+        }
 
         // count relation linking time
         long timeCount = System.currentTimeMillis() - startTime;
@@ -551,41 +604,44 @@ public class Detector {
     }
 
     public static void relationDetectionCore(@NotNull Map<String, String> entityIndexMap,
-                                             List<Link> eLinkList,
-                                             HashMap<String, List<Link>> resultMap,
-                                             HashSet<String> oneHopPropertySet,
-                                             List<Link> likelyProperties,
-                                             String surface, Trigger trigger) {
-        // 1. we try to identify relations based on the identified entities without linking tools
-        // 2. if there's no relations connected to the entities, we use relation linking tools
-
+            List<Link> eLinkList,
+            HashMap<String, List<Link>> resultMap,
+            HashSet<String> oneHopPropertySet,
+            List<Link> likelyProperties,
+            String surface, Trigger trigger) {
+        // 1. we try to identify relations based on the identified entities without
+        // linking tools
+        // 2. if there's no relations connected to the entities, we use relation linking
+        // tools
 
         // identify the relations based on the identified entities
         if (!eLinkList.isEmpty()) {// Entity Detection is not empty
-//            System.out.println("A: "+eLinkList);
+            // System.out.println("A: "+eLinkList);
             Iterator<Link> iter = eLinkList.iterator();
             while (iter.hasNext()) {
                 Link link = iter.next();
-//                System.out.println("link: "+link);
+                // System.out.println("link: "+link);
                 Set<String> filteredProperties = oneHopPropertyFiltered(link.getUri());
                 // remove the type ontology
-//                filteredProperties.removeIf(url -> url.startsWith("http://dbpedia.org/ontology/") && Character.isUpperCase(url.charAt(28)));
-//                System.out.println("filteredProperties: "+filteredProperties);
+                // filteredProperties.removeIf(url ->
+                // url.startsWith("http://dbpedia.org/ontology/") &&
+                // Character.isUpperCase(url.charAt(28)));
+                // System.out.println("filteredProperties: "+filteredProperties);
                 if (filteredProperties.isEmpty()) {
                     // remove the entity without valid relation directly
-//                    iter.remove();
+                    // iter.remove();
                 } else {
                     oneHopPropertySet.addAll(filteredProperties);
                 }
 
             }
-//            System.out.println("A: "+eLinkList);
-            //System.out.println("oneHopPropertySet:"+oneHopPropertySet);
+            // System.out.println("A: "+eLinkList);
+            // System.out.println("oneHopPropertySet:"+oneHopPropertySet);
 
             // calculate sim by set
             // key: writer ; value: [dbp:writer,dbr:writer,xxx:writer,...]
             Map<String, List<String>> labelUriMap = UriUtil.extractLabelMap(new ArrayList<>(oneHopPropertySet));
-            //System.out.println("labelUriSize:"+labelUriMap.size());
+            // System.out.println("labelUriSize:"+labelUriMap.size());
 
             // calculate similarity by set
             HashMap<String, Double> labelSims = null;
@@ -594,8 +650,8 @@ public class Detector {
             } else if (QAArgs.getTextMatchingModel() == TextMatching.BERT) {
                 labelSims = SimilarityUtil.getBertSetSimilarity(surface, labelUriMap.keySet());
             } else if (QAArgs.getTextMatchingModel() == TextMatching.LEXICAL) {
-                //System.out.println("in lexical matching, "+ surface);
-                System.out.println("choices: "+labelUriMap.keySet());
+                // System.out.println("in lexical matching, "+ surface);
+                System.out.println("choices: " + labelUriMap.keySet());
                 labelSims = SimilarityUtil.getLexicalSetSimilarity(surface, labelUriMap.keySet());
             }
 
@@ -612,13 +668,14 @@ public class Detector {
 
             // resort the Relation List by reverse order
             LinkingTool.reSortRelationLinkList(likelyProperties);
-            //System.out.println("Likely Properties:" + likelyProperties);
+            // System.out.println("Likely Properties:" + likelyProperties);
 
-            //put to result Map
+            // put to result Map
             resultMap.put(surface, likelyProperties);
         }
-//        System.out.println("B: "+eLinkList);
-        // if no proper relation found according to entities, then we use relation linking tool
+        // System.out.println("B: "+eLinkList);
+        // if no proper relation found according to entities, then we use relation
+        // linking tool
         if (likelyProperties.isEmpty()) {
             System.out.println("\t[DEBUG] No Relation Detected, Using tools");
             if (!surface.trim().equals("")) {
@@ -627,7 +684,8 @@ public class Detector {
                 List<Link> candidateProps = LinkingTool.getRelationLinkingByTool(surface);
 
                 // remove the type ontology
-                candidateProps.removeIf(link -> link.getUri().startsWith("http://dbpedia.org/ontology/") && Character.isUpperCase(link.getUri().charAt(28)));
+                candidateProps.removeIf(link -> link.getUri().startsWith("http://dbpedia.org/ontology/")
+                        && Character.isUpperCase(link.getUri().charAt(28)));
 
                 // filter by black|white list
                 if (whiteListFiltered)
@@ -639,12 +697,15 @@ public class Detector {
                 candidateProps = candidateProps.stream().distinct().collect(Collectors.toList());
 
                 // calculate score by set
-                Map<String, List<String>> labelUriMap = UriUtil.extractLabelMap(candidateProps.stream().map(Link::getUri).collect(Collectors.toList()));
+                Map<String, List<String>> labelUriMap = UriUtil
+                        .extractLabelMap(candidateProps.stream().map(Link::getUri).collect(Collectors.toList()));
 
-                //reset the candidate Props
+                // reset the candidate Props
                 candidateProps = new ArrayList<>();
-                HashMap<String, Double> labelSims = SimilarityUtil.getLexicalSetSimilarity(surface, labelUriMap.keySet());
-//                HashMap<String, Double> labelSims = SimilarityUtil.getCompositeSetSimilarity(surface, labelUriMap.keySet());
+                HashMap<String, Double> labelSims = SimilarityUtil.getLexicalSetSimilarity(surface,
+                        labelUriMap.keySet());
+                // HashMap<String, Double> labelSims =
+                // SimilarityUtil.getCompositeSetSimilarity(surface, labelUriMap.keySet());
                 for (String label : labelSims.keySet()) {
                     double score = labelSims.get(label);
                     if (score > 0.1) {// beyond a threshold
@@ -660,11 +721,11 @@ public class Detector {
                 resultMap.put(surface, candidateProps);
             }
         }
-//        System.out.println("C: "+eLinkList);
+        // System.out.println("C: "+eLinkList);
         /* Use the trigger in the question to filter the relation links */
         if (trigger != Trigger.UNKNOWN) {
             for (Map.Entry<String, List<Link>> entry : resultMap.entrySet()) {
-                for (Iterator<Link> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
+                for (Iterator<Link> iterator = entry.getValue().iterator(); iterator.hasNext();) {
                     Link link = iterator.next();
                     String uri = UriUtil.extractUri(link.getUri());
                     if (!filterLinkByTrigger(trigger, uri)) {
@@ -678,7 +739,7 @@ public class Detector {
                 }
             }
         }
-//        System.out.println("D: "+eLinkList);
+        // System.out.println("D: "+eLinkList);
         /* Remove candidate relations with large differences in scores */
         if (!QAArgs.isEvaluateCandNum()) {
             for (String key : resultMap.keySet()) {
@@ -707,13 +768,13 @@ public class Detector {
                             rLinkList.remove(2);
                         }
 
-                        //Not the same label DBP / DBO, delete 
-                        if (!UriUtil.extractUri(rLinkList.get(1).getUri()).equals(UriUtil.extractUri(firstLink.getUri()))) {
+                        // Not the same label DBP / DBO, delete
+                        if (!UriUtil.extractUri(rLinkList.get(1).getUri())
+                                .equals(UriUtil.extractUri(firstLink.getUri()))) {
                             rLinkList.remove(1);
                         }
                         continue;
                     }
-
 
                     // relation score gap
                     for (int i = 0; i < rLinkList.size() - 1; i++) {
@@ -741,7 +802,8 @@ public class Detector {
         } else if (trigger == Trigger.WHERE) {
             return !uri.contains("date") && !uri.contains("time") && !uri.contains("cause") && !uri.contains("spouse");
         } else if (trigger == Trigger.WHO) {
-            return !uri.contains("date") && !uri.contains("time") && !uri.contains("cause") && !uri.contains("place") && !uri.contains("year");
+            return !uri.contains("date") && !uri.contains("time") && !uri.contains("cause") && !uri.contains("place")
+                    && !uri.contains("year");
         } else if (trigger == Trigger.HOW) {
             return !uri.contains("place") && !uri.contains("time") && !uri.contains("date");
         }
@@ -755,18 +817,19 @@ public class Detector {
      * @return the uri of adjacent relations
      */
     public static Set<String> oneHopPropertyFiltered(String entityURI) {
-//        System.out.println("entityURI: "+entityURI);
+        // System.out.println("entityURI: "+entityURI);
         Set<String> noFilteredProperties = KBUtil.oneHopProperty(entityURI);
-//        System.out.println("noFilteredProperties: "+noFilteredProperties);
+        // System.out.println("noFilteredProperties: "+noFilteredProperties);
         if (whiteListFiltered)
             return setIntersect(noFilteredProperties, predicateWhiteList);
         else {
             noFilteredProperties.removeAll(predicateBlackList);
         }
-        //先弄掉以免之後壞掉
-//        if (QAArgs.getDataset() == DatasetEnum.LC_QUAD) {
-//            noFilteredProperties.removeIf(pred -> !pred.startsWith("http://dbpedia.org"));
-//        }
+        // 先弄掉以免之後壞掉
+        // if (QAArgs.getDataset() == DatasetEnum.LC_QUAD) {
+        // noFilteredProperties.removeIf(pred ->
+        // !pred.startsWith("http://dbpedia.org"));
+        // }
         return noFilteredProperties;
     }
 
@@ -778,29 +841,30 @@ public class Detector {
      * @return Map of entity ID and entity MENTION: {<E0>: Obama}
      */
     public static HashMap<String, String> replaceEntityInNode(Node node, List<Link> eLinkList) {
-        //<e0,dbr:Obama>Such mapping 
+        // <e0,dbr:Obama>Such mapping
         HashMap<String, String> entityIndexMap = new HashMap<>();
-        //According to EntityLink results, the Node is converted 
+        // According to EntityLink results, the Node is converted
         if (!eLinkList.isEmpty()) {
             int entityIdx = 0;
             Set<String> eMentionSet = eLinkList.stream().map(Link::getMention).collect(Collectors.toSet());
 
             for (String nodeEntityLink : eMentionSet) {
-                int start = node.getStr().toLowerCase().indexOf(nodeEntityLink.toLowerCase()); // Avoid cases in cases 
+                int start = node.getStr().toLowerCase().indexOf(nodeEntityLink.toLowerCase()); // Avoid cases in cases
                 int end = start + nodeEntityLink.length();
                 if (start != -1) {
                     String substring = node.getStr().substring(start, end);
                     node.setStr(node.getStr().replace(substring, "<e" + entityIdx + ">"));
                     entityIndexMap.put("<e" + entityIdx + ">", nodeEntityLink);
                 } else {
-                    //Not found in node.getstr () 
-                    System.out.println("[DEBUG] entity mention: \"" + nodeEntityLink + "\" cannot be found, the node str is: " + node.getStr());
+                    // Not found in node.getstr ()
+                    System.out.println("[DEBUG] entity mention: \"" + nodeEntityLink
+                            + "\" cannot be found, the node str is: " + node.getStr());
                 }
                 ++entityIdx;
             }
 
         } else {
-            //No entity link result 
+            // No entity link result
             System.out.println("\t[DEBUG] node " + node.getNodeID() + " entity link is empty");
         }
         return entityIndexMap;

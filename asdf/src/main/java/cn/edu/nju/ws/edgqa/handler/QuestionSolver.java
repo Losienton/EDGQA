@@ -195,9 +195,18 @@ public class QuestionSolver {
                 // System.out.println("In judge type question");
                 // sysout8-1
                 System.out.println("==Sysout8-1== JUDGE type question");
+                System.out.println(">> EDG:\n" + edg);
 
                 sparqlList = judgeQuestionSolver(edg, 0); // judgeQuestionSolver
+                // sysout8-10J
+                System.out.println("\n==Sysout8-10J== Generate sparql");
+                System.out.println(">> sparql list :" + sparqlList);
+
                 EvaluateLinking(sparqlList);
+                // sysout8-10JJ
+                System.out.println(">> After EvaluateLinking(sparqlList); >>");
+                System.out.println(">> sparql list :" + sparqlList);
+
                 for (SparqlGenerator spg : sparqlList) {
                     result.addAll(spg.solve());
                 }
@@ -211,6 +220,8 @@ public class QuestionSolver {
                     result.add("false");
                 }
 
+                System.out.println("\n>> Finish JUDGE type question");
+
             } else { // not boolean question, all other types of questions
 
                 // sysout8-2
@@ -218,20 +229,20 @@ public class QuestionSolver {
 
                 if (QAArgs.isQuestionDecomposition()) { // with question decomposition
                     // sysout8-2-1
-                    System.out.println("==Sysout8-2-1== With question decomposition, run compoundQuestionSolver()");
+                    System.out.println("==Sysout8-2-1== 使用EDG拆解問題, run compoundQuestionSolver()");
                     System.out.println(">> EDG:\n" + edg);
-                    //System.out.println("compound " + edg);
+                    // System.out.println("compound " + edg);
 
                     sparqlList = compoundQuestionSolver(edg, 0);
 
-                    System.out.println(">> Finish compound question");
+                    System.out.println("\n>> Finish compound question");
                 } else { // without question decomposition
                     // sysout8-2-1
                     System.out.println(
-                            "==Sysout8-2-2== Without question decomposition, run edg.flattenEDG() & atomicQuestionSolver()");
+                            "==Sysout8-2-2== 不使用EDG拆解問題, run edg.flattenEDG() & atomicQuestionSolver()");
                     edg = edg.flattenEDG();
                     System.out.println(">> EDG:\n" + edg);
-                    //System.out.println("Atomic " + edg);
+                    // System.out.println("Atomic " + edg);
 
                     sparqlList = atomicQuestionSolver(edg, 0);
                     subQuerySparqlMap.put(0, sparqlList);
@@ -285,9 +296,10 @@ public class QuestionSolver {
         } else { // if it has referred entity, deal with a composed question
             // sysout8-3-2
             System.out.println(">> 有referred entity(composed question), 使用 Compound QS");
-            
+
             // all entityID referred from this entity
             List<Integer> referredEntity = edg.getReferredEntity(entityID);
+            // System.out.println(">> ReferredEntity: " + referredEntity);
 
             // Iterate all sub entities
             for (Integer subEntityID : referredEntity) {
@@ -598,13 +610,20 @@ public class QuestionSolver {
      * @return sparqls for
      */
     public List<SparqlGenerator> atomicQuestionSolver(EDG edg, int entityID) {
-        System.out.println("[DEBUG] (AQS) Processing EntityID: " + entityID);
+        // System.out.println("[DEBUG] (AQS) Processing EntityID: " + entityID);
+        System.out.println(">> Atomic QS Processing EntityID: " + entityID);
 
         // Description nodes in current block
         List<Node> relatedDes = edg.getRelatedDescription(entityID);
+        System.out.println(">> Nodes in current block: " + relatedDes);
+
         Set<Integer> relatedDesIDs = relatedDes.stream().map(Node::getNodeID).collect(Collectors.toSet());
 
         // Entity Detection Part
+        // sysout8-4
+        System.out.println("\n-----------------------------------");
+        System.out.println("==Sysout8-4== Entity Detection Part");
+        System.out.println("-----------------------------------");
         for (Node node : relatedDes) {// Entity detection of the node one by one
             initialEntityDetection(node, edg); // shallowEntityDetection£¬Determine nodeemap
         }
@@ -617,14 +636,23 @@ public class QuestionSolver {
         // System.out.println("NodeEListMap after entity reduce:" + nodeEntityListMap);
 
         // Relation Detection Part
+        // sysout8-5
+        System.out.println("\n-------------------------------------");
+        System.out.println("==Sysout8-5== Relation Detection Part");
+        System.out.println("-------------------------------------");
         for (Node node : relatedDes) {// Starting a node Relation detection
             initialRelationDetection(node);
         }
+        System.out.println("---------------------------------------");
 
+        // sysout8-6
+        System.out.println("\n==Sysout8-6== ERListMap");
         System.out.println("nodeEListMap:" + nodeEntityListMap);
         System.out.println("nodeRListMap:" + nodeRelationListMap);
 
         // Type Detection Part
+        // sysout8-7
+        System.out.println("\n\n==Sysout8-7== Type Detection Part");
         if (QAArgs.isUsingTypeConstraints()) {
             for (Node node : relatedDes) { // descriptive nodes in this block
                 if (nodeIdsWithNoEntity.contains(node.getNodeID())) { // no entity, just relation
@@ -644,6 +672,8 @@ public class QuestionSolver {
                 nodeERTupleListMap.put(node.getNodeID(), tupleList);
         }
 
+        // sysout8-8
+        System.out.println("\n==Sysout8-8== ERTupleList");
         System.out.println("nodeERTupleList:" + nodeERTupleListMap);
 
         // Generate Candidate Tuple of Block
@@ -651,6 +681,7 @@ public class QuestionSolver {
 
         // generate sparql for this atomic block, sorted DESC
         List<SparqlGenerator> sparqlList = blockSparqlGeneration(entityID, edg, relatedDesIDs);
+
         sparqlList.sort(Collections.reverseOrder());
 
         // distinct the sparqlList
@@ -665,6 +696,7 @@ public class QuestionSolver {
         if (QAArgs.isReRanking()) {
             reRankSparql(entityID, sparqlList);
         }
+
         // System.out.println("sparql list 2 : "+sparqlList);
         // for QALD, the system needs to judge whether the question can be answered
         if (QAArgs.getDataset() == DatasetEnum.QALD_9) {
@@ -920,7 +952,15 @@ public class QuestionSolver {
         if (!edg.entityNodeHasRefer(entityID)) {// simple edg block
 
             List<Node> relatedDesNodes = edg.getRelatedDescription(entityID);
+            // sysout8-3J
+            System.out.println("\n==Sysout8-3J== Referred entity偵測 (getRelatedDescription)");
+            System.out.println(">> Nodes in current block: " + relatedDesNodes);
             Set<Integer> relatedDesIDs = relatedDesNodes.stream().map(Node::getNodeID).collect(Collectors.toSet());
+
+            // sysout8-4J
+            System.out.println("\n-------------------------------------");
+            System.out.println("==Sysout8-4J== Entity Detection Part");
+            System.out.println("-------------------------------------");
 
             for (Node node : relatedDesNodes) {
                 initialEntityDetection(node, edg);
@@ -928,6 +968,11 @@ public class QuestionSolver {
             if (!QAArgs.isGoldenEntity()) {
                 entityReduce(relatedDesIDs);
             }
+            // sysout8-5J
+            System.out.println("\n---------------------------------------");
+            System.out.println("==Sysout8-5J== Relation Detection Part");
+            System.out.println("---------------------------------------");
+
             for (Node node : relatedDesNodes) {
                 initialRelationDetection(node);
             }
@@ -939,7 +984,8 @@ public class QuestionSolver {
             rLinkList = globalRelationLinkMap.getData().values().stream().flatMap(Collection::stream)
                     .collect(Collectors.toList());
         }
-        System.out.println("nodeRlistMap in judge question: " + rLinkList);
+        // System.out.println("nodeRlistMap in judge question: " + rLinkList);
+        // System.out.println("---------------------------------------");
 
         // default judge sparql
         SparqlGenerator spg = new SparqlGenerator();
@@ -1088,11 +1134,15 @@ public class QuestionSolver {
         Map<String, List<Link>> entityLinkingMap = Detector.entityDetection(node.getStr(),
                 globalEntityLinkMap.getData(),
                 QAArgs.getGoldenLinkingMode(), GoldenLinkingUtil.getGoldenEntityLinkBySerialNumber(serialNumber));
-        // System.out.println("entity linking map: " + entityLinkingMap);
+        // System.out.println("\nEntity detection resultMap: " + entityLinkingMap +
+        // "\n");
+
         if (!entityLinkingMap.isEmpty()) {
 
             // if more than one entity mention is recognized, reduce them
             if (entityLinkingMap.keySet().size() > 1) {
+                // System.out.println("\nMore than one entity mention\n");
+
                 List<TwoTuple<String, Double>> scoreList = new ArrayList<>(); // pair (mention, score)
 
                 List<Link> candidateUriList = entityLinkingMap.values().stream().flatMap(Collection::stream)
@@ -1113,7 +1163,7 @@ public class QuestionSolver {
                         }
                     }
                     scoreList.add(new TwoTuple<>(key, score));
-
+                    // System.out.println("\nScoreList: " + scoreList + "\n");
                 }
 
                 // in descending order of confidence
@@ -1127,24 +1177,47 @@ public class QuestionSolver {
                     }
                 });
 
+                System.out.println("Mention ScoreList: " + scoreList);
+
                 String topicMention = scoreList.get(0).getFirst(); // choose the top-1 node as the topic entity
+                System.out.println(">> Choosed Mention: " + topicMention + "\n");
+
                 List<Link> eLinkList = entityLinkingMap.get(topicMention);
+
+                // 0816
+                System.out.println("Uri candidate & Score: ");
+                for (int i = 0; i < eLinkList.size(); i++) {
+                    System.out.println(eLinkList.get(i).getUri() + " \t" + eLinkList.get(i).getScore());
+                }
+
                 nodeEntityListMap.put(nodeID, eLinkList);
                 // System.out.println("Add: " + nodeID + eLinkList);
+                System.out.println("\nnodeElistMap: " + nodeEntityListMap);
+
                 // Clear other entities identified in EMAP Mention
                 for (int i = 1; i < scoreList.size(); i++) {
                     entityLinkingMap.remove(scoreList.get(i).getFirst());
                 }
                 // System.out.println("Add: " + nodeID + eLinkList);
             } else {
+                System.out.println("Just one entity mention, no ScoreList");
                 List<Link> eLinkList = entityLinkingMap.values().stream().flatMap(Collection::stream)
                         .collect(Collectors.toList());
+
+                // 0816
+                System.out.println(">> Choosed Mention: " + eLinkList.get(0).getMention());
+                System.out.println("\nUri candidate & Score: ");
+                for (int i = 0; i < eLinkList.size(); i++) {
+                    System.out.println(eLinkList.get(i).getUri() + " \t" + eLinkList.get(i).getScore());
+                }
+
                 nodeEntityListMap.put(nodeID, eLinkList);
+                System.out.println("\nnodeElistMap: " + nodeEntityListMap);
             }
         } else { // if entity linking is empty
             nodeIdsWithNoEntity.add(nodeID); // No Entity, join noentityNodeID
         }
-        System.out.println("nodeElistMap in judge question: " + nodeEntityListMap);
+        // System.out.println("nodeElistMap in judge question: " + nodeEntityListMap);
     }
 
     /**
@@ -1251,18 +1324,26 @@ public class QuestionSolver {
             trigger = edg.getTrigger();
         }
         // System.out.println("B: "+nodeEntityListMap);
+
+        // RelationDetection
         Map<String, List<Link>> rMap = Detector.relationDetection(node.getStr(), entityIndexMap,
                 eLinkList, trigger, QAArgs.getGoldenLinkingMode(),
                 GoldenLinkingUtil.getGoldenRelationLinkBySerialNumber(serialNumber), this.globalRelationLinkMap);
 
         // System.out.println("C: "+nodeEntityListMap);
         List<Link> rLinkList = rMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
-        System.out.println("rLinkList: " + rLinkList);
+        // System.out.println("\nrLinkList: " + rLinkList);
+        // System.out.println("\nRelation Uri candidate & Score: ");
+        // for (int i = 0; i < rLinkList.size(); i++) {
+        // System.out.println(rLinkList.get(i).getUri() + " \t" +
+        // rLinkList.get(i).getScore());
+        // }
 
         if (!rLinkList.isEmpty()) {
             nodeRelationListMap.put(nodeID, rLinkList);
         }
-
+        System.out.println("\nnodeRlistMap: " + nodeRelationListMap);
+        System.out.println("---------------------------------------");
     }
 
     /**
@@ -1498,7 +1579,10 @@ public class QuestionSolver {
 
         List<TwoTuple<List<ThreeTuple<String, String, Double>>, Double>> candidateTuples = blockCandidateMap
                 .get(entityID);
-        System.out.println("blockCandidateMap: " + blockCandidateMap);
+
+        // sysout8-9
+        System.out.println("\n==Sysout8-9== Candidate Tuple of Block");
+        System.out.println(">> blockCandidateMap: " + blockCandidateMap);
         SparqlGenerator tmpSparqlGen = new SparqlGenerator();
         String finalVarName = "e" + entityID;
         tmpSparqlGen.setFinalVarName(finalVarName);
@@ -1553,7 +1637,9 @@ public class QuestionSolver {
             }
         }
 
-        System.out.println("sparql list :" + sparqlList);
+        // sysout8-10
+        System.out.println("\n==Sysout8-10== Generate sparql");
+        System.out.println(">> sparql list :" + sparqlList);
 
         return sparqlList;
     }
